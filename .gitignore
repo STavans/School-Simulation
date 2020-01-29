@@ -1,88 +1,64 @@
-# Compiled class file
-*.class
 
-# Log file
-*.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-
-# Created by https://www.gitignore.io/api/intellij
-# Edit at https://www.gitignore.io/?templates=intellij
+# Created by httpswww.gitignore.ioapiintellij
+# Edit at httpswww.gitignore.iotemplates=intellij
 
 ### Intellij ###
-# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
-# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+# Covers JetBrains IDEs IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
+# Reference httpsintellij-support.jetbrains.comhcen-usarticles206544839
 
 # User-specific stuff
-.idea/**/workspace.xml
-.idea/**/tasks.xml
-.idea/**/usage.statistics.xml
-.idea/**/dictionaries
-.idea/**/shelf
+.ideaworkspace.xml
+.ideatasks.xml
+.ideausage.statistics.xml
+.ideadictionaries
+.ideashelf
 
 # Generated files
-.idea/**/contentModel.xml
+.ideacontentModel.xml
 
 # Sensitive or high-churn files
-.idea/**/dataSources/
-.idea/**/dataSources.ids
-.idea/**/dataSources.local.xml
-.idea/**/sqlDataSources.xml
-.idea/**/dynamic.xml
-.idea/**/uiDesigner.xml
-.idea/**/dbnavigator.xml
+.ideadataSources
+.ideadataSources.ids
+.ideadataSources.local.xml
+.ideasqlDataSources.xml
+.ideadynamic.xml
+.ideauiDesigner.xml
+.ideadbnavigator.xml
 
 # Gradle
-.idea/**/gradle.xml
-.idea/**/libraries
+.ideagradle.xml
+.idealibraries
 
 # Gradle and Maven with auto-import
 # When using Gradle or Maven with auto-import, you should exclude module files,
 # since they will be recreated, and may cause churn.  Uncomment if using
 # auto-import.
-# .idea/modules.xml
-# .idea/*.iml
-# .idea/modules
-# *.iml
-# *.ipr
+# .ideamodules.xml
+# .idea.iml
+# .ideamodules
+# .iml
+# .ipr
 
 # CMake
-cmake-build-*/
+cmake-build-
 
 # Mongo Explorer plugin
-.idea/**/mongoSettings.xml
+.ideamongoSettings.xml
 
 # File-based project format
-*.iws
+.iws
 
 # IntelliJ
-out/
-.idea/
+out
 
-# mpeltonen/sbt-idea plugin
-.idea_modules/
+# mpeltonensbt-idea plugin
+.idea_modules
 
 # JIRA plugin
 atlassian-ide-plugin.xml
 
 # Cursive Clojure plugin
-.idea/replstate.xml
+.ideareplstate.xml
 
 # Crashlytics plugin (for Android Studio and IntelliJ)
 com_crashlytics_export_strings.xml
@@ -91,27 +67,27 @@ crashlytics-build.properties
 fabric.properties
 
 # Editor-based Rest Client
-.idea/httpRequests
+.ideahttpRequests
 
 # Android studio 3.1+ serialized cache file
-.idea/caches/build_file_checksums.ser
+.ideacachesbuild_file_checksums.ser
 
 ### Intellij Patch ###
-# Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
+# Comment Reason httpsgithub.comjoeblaugitignore.ioissues186#issuecomment-215987721
 
-# *.iml
+# .iml
 # modules.xml
-# .idea/misc.xml
-# *.ipr
+# .ideamisc.xml
+# .ipr
 
 # Sonarlint plugin
-.idea/**/sonarlint/
+.ideasonarlint
 
 # SonarQube Plugin
-.idea/**/sonarIssues.xml
+.ideasonarIssues.xml
 
 # Markdown Navigator plugin
-.idea/**/markdown-navigator.xml
-.idea/**/markdown-navigator/
+.ideamarkdown-navigator.xml
+.ideamarkdown-navigator
 
-# End of https://www.gitignore.io/api/intellij
+# End of httpswww.gitignore.ioapiintellij
