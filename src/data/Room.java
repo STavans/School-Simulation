@@ -6,7 +6,7 @@ public class Room {
 
     public Room () {
         this.name=name;
-        this.name=number;
+        this.number=number;
 
     }
 
