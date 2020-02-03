@@ -1,5 +1,5 @@
 package data;
 
-public class Person {
-
+public abstract class Person {
+    //test
 }
