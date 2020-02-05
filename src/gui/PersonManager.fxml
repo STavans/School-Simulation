@@ -7,103 +7,107 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button mnemonicParsing="false" text="Back" />
-            <HBox alignment="CENTER_LEFT" prefHeight="350.0" prefWidth="651.0" spacing="5.0">
+<TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" text="Person Manager" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+   <content>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0">
+         <center>
+            <VBox prefHeight="335.0" prefWidth="781.0" translateY="20.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox prefHeight="375.0" prefWidth="348.0" translateX="10.0">
+                  <Button mnemonicParsing="false" text="Back" translateX="8.0" translateY="-5.0" />
+                  <HBox alignment="CENTER_LEFT" prefHeight="350.0" prefWidth="651.0" spacing="5.0">
                      <children>
-                        <Label text="Teachers">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Label>
-                        <TableView prefHeight="208.0" prefWidth="300.0">
-                          <columns>
-                            <TableColumn prefWidth="174.0" text="Name" />
-                            <TableColumn prefWidth="86.0" text="Subject" />
-                              <TableColumn prefWidth="87.0" text="Gender" />
-                          </columns>
-                        </TableView>
-                        <HBox prefHeight="26.0" prefWidth="231.0" spacing="5.0">
+                        <VBox prefHeight="375.0" prefWidth="348.0" translateX="10.0">
                            <children>
-                              <TextField promptText="Name" />
-                              <ComboBox prefWidth="150.0" promptText="Subject" />
-                              <ComboBox prefWidth="150.0" promptText="Gender" />
+                              <Label text="Teachers">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                              <TableView prefHeight="208.0" prefWidth="300.0">
+                                 <columns>
+                                    <TableColumn prefWidth="174.0" text="Name" />
+                                    <TableColumn prefWidth="86.0" text="Subject" />
+                                    <TableColumn prefWidth="87.0" text="Gender" />
+                                 </columns>
+                              </TableView>
+                              <HBox prefHeight="26.0" prefWidth="231.0" spacing="5.0">
+                                 <children>
+                                    <TextField promptText="Name" />
+                                    <ComboBox prefWidth="150.0" promptText="Subject" />
+                                    <ComboBox prefWidth="150.0" promptText="Gender" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <Button mnemonicParsing="false" text="Generate Random">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" text="Add" />
+                                    <Button mnemonicParsing="false" text="Delete" />
+                                    <Button mnemonicParsing="false" text="Edit" />
+                                    <Button mnemonicParsing="false" text="Save" />
+                                 </children>
+                              </HBox>
                            </children>
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <Button mnemonicParsing="false" text="Generate Random">
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </Button>
-                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox prefHeight="375.0" prefWidth="348.0" translateX="75.0">
                            <children>
-                              <Button mnemonicParsing="false" text="Add" />
-                              <Button mnemonicParsing="false" text="Delete" />
-                              <Button mnemonicParsing="false" text="Edit" />
-                              <Button mnemonicParsing="false" text="Save" />
+                              <Label text="Students">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                              <TableView prefHeight="208.0" prefWidth="300.0">
+                                 <columns>
+                                    <TableColumn prefWidth="174.0" text="Name" />
+                                    <TableColumn prefWidth="86.0" text="Group" />
+                                    <TableColumn prefWidth="87.0" text="Gender" />
+                                 </columns>
+                              </TableView>
+                              <HBox prefHeight="26.0" prefWidth="231.0" spacing="5.0">
+                                 <children>
+                                    <TextField promptText="Name" />
+                                    <ComboBox prefWidth="150.0" promptText="Group" />
+                                    <ComboBox prefWidth="150.0" promptText="Gender" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <Button mnemonicParsing="false" text="Generate Random">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" text="Add" />
+                                    <Button mnemonicParsing="false" text="Delete" />
+                                    <Button mnemonicParsing="false" text="Edit" />
+                                    <Button mnemonicParsing="false" text="Save" />
+                                 </children>
+                              </HBox>
                            </children>
-                        </HBox>
+                        </VBox>
                      </children>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </VBox>
-                  <VBox prefHeight="375.0" prefWidth="348.0" translateX="75.0">
-                     <children>
-                        <Label text="Students">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Label>
-                        <TableView prefHeight="208.0" prefWidth="300.0">
-                           <columns>
-                              <TableColumn prefWidth="174.0" text="Name" />
-                              <TableColumn prefWidth="86.0" text="Group" />
-                              <TableColumn prefWidth="87.0" text="Gender" />
-                           </columns>
-                        </TableView>
-                        <HBox prefHeight="26.0" prefWidth="231.0" spacing="5.0">
-                           <children>
-                              <TextField promptText="Name" />
-                              <ComboBox prefWidth="150.0" promptText="Group" />
-                              <ComboBox prefWidth="150.0" promptText="Gender" />
-                           </children>
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <Button mnemonicParsing="false" text="Generate Random">
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </Button>
-                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
-                           <children>
-                              <Button mnemonicParsing="false" text="Add" />
-                              <Button mnemonicParsing="false" text="Delete" />
-                              <Button mnemonicParsing="false" text="Edit" />
-                              <Button mnemonicParsing="false" text="Save" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
+                  </HBox>
                </children>
-            </HBox>
-         </children>
-      </VBox>
-   </center>
-</BorderPane>
+            </VBox>
+         </center>
+      </BorderPane>
+   </content>
+</TitledPane>
