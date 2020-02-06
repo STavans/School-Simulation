@@ -4,11 +4,14 @@ public class Lesson {
     private int beginLesson;
     private int endLesson;
     private String subject;
+    private Group code;
+    private Room name;
+    private Room number;
 
     public Lesson (String subject, int beginLesson,int endLesson) {
-        this.subject=subject;
-        this.beginLesson=beginLesson;
-        this.endLesson=endLesson;
+        this.subject = subject;
+        this.beginLesson = beginLesson;
+        this.endLesson = endLesson;
     }
     public String getSubject() {
         return subject;

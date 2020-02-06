@@ -1,27 +1,18 @@
 package data;
 
 public class Group {
-    private int code;
-    private int amount;
+    private String code;
 
-    public Group(int code,int amount) {
+    public Group(String code) {
         this.code=code;
-        this.amount=amount;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
 }
