@@ -4,6 +4,11 @@ public class Lesson {
     private int beginLesson;
     private int endLesson;
     private String subject;
+    private Room name;
+    private Room number;
+    private Group code;
+    private Group amount;
+
 
     public Lesson (String subject, int beginLesson,int endLesson) {
         this.subject=subject;
