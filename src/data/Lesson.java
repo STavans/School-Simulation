@@ -5,9 +5,10 @@ public class Lesson {
     private int endLesson;
     private String subject;
     private Room name;
-    private Room number;
+    private Room classRoom;
     private Group code;
     private Group amount;
+    private Teacher subject;
 
 
     public Lesson (String subject, int beginLesson,int endLesson) {
