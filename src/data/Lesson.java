@@ -8,8 +8,7 @@ public class Lesson {
     private Room classRoom;
     private Group code;
     private Group amount;
-   // private Teacher subject;
-
+    private Teacher TeacherSubject;
 
     public Lesson (String subject, int beginLesson,int endLesson) {
         this.subject=subject;
