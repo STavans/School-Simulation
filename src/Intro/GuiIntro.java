@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -21,6 +22,7 @@ public class GuiIntro extends Application {
 
         // 1.1 creating the components to be used
         Label loginLabel = new Label("Enter a password and press enter");
+        TextField textField=new TextField();
         PasswordField passwordText = new PasswordField();
         Button loginButton = new Button("Login");
         Label errorLabel = new Label("");
@@ -29,9 +31,10 @@ public class GuiIntro extends Application {
         GridPane gridPane = new GridPane();
 
         gridPane.add(loginLabel, 0, 0);
-        gridPane.add(passwordText, 0, 1);
-        gridPane.add(loginButton, 0, 2);
-        gridPane.add(errorLabel, 0, 3);
+        gridPane.add(textField,0,1);
+        gridPane.add(passwordText, 0, 2);
+        gridPane.add(loginButton, 0, 3);
+        gridPane.add(errorLabel, 0, 4);
 
         // 1.3 Style the layout
         gridPane.setPrefSize(300, 180);
@@ -57,7 +60,7 @@ public class GuiIntro extends Application {
         // 3. The event handler is added to the password bar button
         // the view is changed if the password is correct
         loginButton.setOnAction((event) -> {
-            if (!passwordText.getText().trim().equals("password")) {
+            if (!passwordText.getText().trim().equals("password") ||!textField.getText().trim().equals("David")) {
                 errorLabel.setText("Unkown password!");
                 return;
             }
