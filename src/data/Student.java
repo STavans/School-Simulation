@@ -4,7 +4,7 @@ public class Student extends Person {
     private String firstName;
 
 
-    public Student(String gender,String lastName) {
+    public Student(Boolean gender,String lastName) {
         super(gender,lastName);
         this.firstName = firstName;
     }

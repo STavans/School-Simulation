@@ -1,19 +1,22 @@
 package data;
 
 public abstract class Person {
-    private String gender;
+    private Boolean gender;
     private String lastName;
 
-    public Person(String gender,String lastName) {
+    public Person(Boolean gender,String lastName) {
         this.gender = gender;
         this.lastName = lastName;
     }
 
-    public String getGender() {
-        return gender;
-    }
+//    public Boolean getGender() {
+//        if(this.gender.equals()) {
+//            return true;
+//        }
+//            return false;
+//    }
 
-    public void setGender(String gender) {
+    public void setGender(Boolean gender) {
         this.gender = gender;
     }
     public String getLastName() {

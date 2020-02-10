@@ -3,7 +3,7 @@ package data;
 public class Teacher extends Person {
     private String subject;
 
-    public Teacher (String TeacherSubject,String gender,String lastName) {
+    public Teacher (String TeacherSubject,Boolean gender,String lastName) {
         super(gender, lastName);
         this.subject = TeacherSubject;
 
