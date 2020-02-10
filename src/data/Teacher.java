@@ -3,16 +3,15 @@ package data;
 public class Teacher extends Person {
     private String subject;
 
-    public Teacher (String TeacherSubject,Boolean gender,String lastName) {
-        super(gender, lastName);
-        this.subject = TeacherSubject;
-
-    }
-    public void setTeacherSubject(String subject) {
+    public Teacher (String name, boolean gender, String subject) {
+        super(name, gender);
         this.subject = subject;
     }
 
-    public String getTeacherSubject() {
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+    public String getSubject() {
         return subject;
     }
 }

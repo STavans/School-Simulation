@@ -3,20 +3,20 @@ package data;
 import java.util.ArrayList;
 
 public class Group {
-    private String code;
+    private String name;
     private ArrayList<Student> group;
 
-    public Group(String code) {
-        this.code = code;
+    public Group(String name) {
+        this.name = name;
         this.group = new ArrayList<>();
     }
 
     public String getCode() {
-        return code;
+        return name;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setCode(String name) {
+        this.name = name;
     }
 
 }

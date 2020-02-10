@@ -1,3 +1,5 @@
+import data.Person;
+import data.Student;
 import gui.Gui;
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -29,8 +31,8 @@ public class Main extends Application {
             e.printStackTrace();
         }
 
+        Person jan = new Student("Jan");
 
 
-//        System.out.println("done");
     }
 }
