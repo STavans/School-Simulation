@@ -6,19 +6,28 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
-public class Gui {
+
+public class Gui implements Initializable {
     //ComboBox
-    @FXML private ComboBox teacherSubjectBox;//1
-    @FXML private ComboBox teacherGenderBox;//2
-    @FXML private ComboBox studentGroupBox;//3
-    @FXML private ComboBox studentGenderBox;//4
+    @FXML private ComboBox<String> teacherSubjectBox;//1
+    @FXML private ComboBox<String> teacherGenderBox;//2
+    @FXML private ComboBox<String> studentGroupBox;//3
+    @FXML private ComboBox<String> studentGenderBox;//4
 
-    ObservableList<String> comboTeacherSubject= FXCollections.observableArrayList("OGP","Math");//1
-    ObservableList<String> comboTeacherGender= FXCollections.observableArrayList("Male","Female");//2
-    ObservableList<String> comboStudentGroup= FXCollections.observableArrayList("A3","C3");//3
-    ObservableList<String> comboStudentGender= FXCollections.observableArrayList("Male","Female");//4
+    ObservableList<String> comboTeacherSubject = FXCollections.observableArrayList("OGP","Math","OOM","2D Graphics","P&OC");
+    ObservableList<String> comboTeacherGender  = FXCollections.observableArrayList("Male","Female");
+    ObservableList<String> comboStudentGroup   = FXCollections.observableArrayList("A1","A2","A3","B1","B2","B3");
+    ObservableList<String> comboStudentGender  = FXCollections.observableArrayList("Male","Female");
 
     //Buttons
     @FXML void teacherAddButton(){
@@ -55,21 +64,13 @@ public class Gui {
         System.out.println("GenerateMax");
     }
     //Making ComboBox working
-    public void initialize(){
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         teacherSubjectBox.setItems(comboTeacherSubject);
-        System.out.println("TeacherSubject");
-    }
-    public void initialize2(){
         teacherGenderBox.setItems(comboTeacherGender);
-        System.out.println("TeacherGender");
-    }
-    public void initialize3(){
         studentGroupBox.setItems(comboStudentGroup);
-        System.out.println("StudentGroup");
-    }
-    public void initialize4(){
         studentGenderBox.setItems(comboStudentGender);
-        System.out.println("StudentGender");
+        System.out.println("Combobox Initialised");
     }
     //TextFields names
     public void teacherName(){
