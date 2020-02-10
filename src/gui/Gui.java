@@ -9,6 +9,7 @@ import javafx.scene.control.ComboBox;
 
 
 public class Gui {
+    //ComboBox
     @FXML private ComboBox teacherSubjectBox;//1
     @FXML private ComboBox teacherGenderBox;//2
     @FXML private ComboBox studentGroupBox;//3
@@ -19,7 +20,7 @@ public class Gui {
     ObservableList<String> comboStudentGroup= FXCollections.observableArrayList("A3","C3");//3
     ObservableList<String> comboStudentGender= FXCollections.observableArrayList("Male","Female");//4
 
-
+    //Buttons
     @FXML void teacherAddButton(){
         System.out.println("TeacherAdd");
     }
@@ -53,6 +54,7 @@ public class Gui {
     @FXML void generateMaxButton(){
         System.out.println("GenerateMax");
     }
+    //Making ComboBox working
     public void initialize(){
         teacherSubjectBox.setItems(comboTeacherSubject);
         System.out.println("TeacherSubject");
@@ -69,6 +71,7 @@ public class Gui {
         studentGenderBox.setItems(comboStudentGender);
         System.out.println("StudentGender");
     }
+    //TextFields names
     public void teacherName(){
         System.out.println("TeacherName");
     }
