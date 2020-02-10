@@ -2,11 +2,11 @@ package data;
 
 public class Room {
     private String name;
-    private int number;
+    private int classRoom;
 
     public Room () {
-        this.name=name;
-        this.number=number;
+        this.name = name;
+        this.classRoom = classRoom;
 
     }
 
@@ -19,9 +19,9 @@ public class Room {
     }
 
     public int getNumber() {
-        return number;
+        return classRoom;
     }
-    public void setNumber(int number) {
-        this.number=number;
+    public void setNumber(int classRoom) {
+        this.classRoom = classRoom;
     }
 }

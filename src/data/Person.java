@@ -1,23 +1,29 @@
 package data;
 
-import java.util.ArrayList;
-
 public abstract class Person {
-    private ArrayList<Student> students;
-    private ArrayList<Teacher> teachers;
+    private Boolean gender;
+    private String lastName;
 
-
-    public Person() {
-        this.students = new ArrayList<>();
-        this.teachers = new ArrayList<>();
+    public Person(Boolean gender,String lastName) {
+        this.gender = gender;
+        this.lastName = lastName;
     }
 
-    public void addStudents(Student student){
-       this.students.add(student);
-    }
+//    public Boolean getGender() {
+//        if(this.gender.equals()) {
+//            return true;
+//        }
+//            return false;
+//    }
 
-    public void addTeachers(Teacher teacher){
-        this.teachers.add(teacher);
+    public void setGender(Boolean gender) {
+        this.gender = gender;
+    }
+    public String getLastName() {
+        return lastName;
+    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }
 
