@@ -1,18 +1,20 @@
 package gui;
 
-import data.Student;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class Gui {
-    @FXML private ComboBox teacherSubjectBox;//1
-    @FXML private ComboBox teacherGenderBox;//2
-    @FXML private ComboBox studentGroupBox;//3
-    @FXML private ComboBox studentGenderBox;//4
+
+public class Gui implements Initializable {
+    @FXML private ComboBox<String> teacherSubjectBox;//1
+    @FXML private ComboBox<String> teacherGenderBox;//2
+    @FXML private ComboBox<String> studentGroupBox;//3
+    @FXML private ComboBox<String> studentGenderBox;//4
 
     ObservableList<String> comboTeacherSubject= FXCollections.observableArrayList("OGP","Math");//1
     ObservableList<String> comboTeacherGender= FXCollections.observableArrayList("Male","Female");//2
@@ -53,23 +55,14 @@ public class Gui {
     @FXML void generateMaxButton(){
         System.out.println("GenerateMax");
     }
-    public void initialize2(){
-        teacherGenderBox.setItems(comboTeacherGender);
-        System.out.println("test2");
-    }
-    public void initialize(){
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         teacherSubjectBox.setItems(comboTeacherSubject);
-        System.out.println("test");
-    }
-    public void initialize3(){
+        teacherGenderBox.setItems(comboTeacherGender);
         studentGroupBox.setItems(comboStudentGroup);
-        System.out.println("test3");
-    }
-    public void initialize4(){
         studentGenderBox.setItems(comboStudentGender);
-        System.out.println("test4");
+
+        System.out.println("Combobox Initialised");
     }
-
-
-
 }

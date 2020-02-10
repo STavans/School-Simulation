@@ -78,10 +78,10 @@
                                     <TextField fx:id="teacherNameField" promptText="Name" />
                                     <VBox>
                                        <children>
-                                          <ComboBox fx:id="teacherSubjectBox" onAction="#initialize" prefWidth="150.0" promptText="Subject" />
+                                          <ComboBox fx:id="teacherSubjectBox" prefWidth="150.0" promptText="Subject" />
                                        </children>
                                     </VBox>
-                                    <ComboBox fx:id="teacherGenderBox" onAction="#initialize2" prefWidth="150.0" promptText="Gender" />
+                                    <ComboBox fx:id="teacherGenderBox" prefWidth="150.0" promptText="Gender" />
                                     <!--<ComboBox fx:id="teacherGenderBox" onAction="#teacherGenderBox" prefWidth="150.0" promptText="Gender" />-->
                                  </children>
                                  <VBox.margin>
@@ -123,8 +123,8 @@
                               <HBox prefHeight="26.0" prefWidth="231.0" spacing="5.0">
                                  <children>
                                     <TextField fx:id="studentNameField" promptText="Name" />
-                                    <ComboBox fx:id="studentGroupBox" onAction="#initialize3" prefWidth="150.0" promptText="Group" />
-                                    <ComboBox fx:id="studentGenderBox" onAction="#initialize4" prefWidth="150.0" promptText="Gender" />
+                                    <ComboBox fx:id="studentGroupBox" prefWidth="150.0" promptText="Group" />
+                                    <ComboBox fx:id="studentGenderBox" prefWidth="150.0" promptText="Gender" />
                                     <!--<ComboBox fx:id="studentGenderBox" onAction="#studentGenderBox" prefWidth="150.0" promptText="Gender" />-->
                                  </children>
                                  <VBox.margin>
