@@ -9,7 +9,6 @@ public class Gui {
 //    @FXML private Button teacherAddButton;
 
     @FXML void teacherAddButton(){
-        Student.test();
     }
 
 
