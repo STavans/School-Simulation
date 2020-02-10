@@ -9,11 +9,12 @@ public class Lesson {
     private Group code;
     private Group amount;
     private Teacher TeacherSubject;
+    private Student firstName;
 
     public Lesson (String subject, int beginLesson,int endLesson) {
-        this.subject=subject;
-        this.beginLesson=beginLesson;
-        this.endLesson=endLesson;
+        this.subject = subject;
+        this.beginLesson = beginLesson;
+        this.endLesson = endLesson;
     }
     public String getSubject() {
         return subject;
