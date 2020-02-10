@@ -53,21 +53,27 @@ public class Gui {
     @FXML void generateMaxButton(){
         System.out.println("GenerateMax");
     }
-    public void initialize2(){
-        teacherGenderBox.setItems(comboTeacherGender);
-        System.out.println("test2");
-    }
     public void initialize(){
         teacherSubjectBox.setItems(comboTeacherSubject);
-        System.out.println("test");
+        System.out.println("TeacherSubject");
+    }
+    public void initialize2(){
+        teacherGenderBox.setItems(comboTeacherGender);
+        System.out.println("TeacherGender");
     }
     public void initialize3(){
         studentGroupBox.setItems(comboStudentGroup);
-        System.out.println("test3");
+        System.out.println("StudentGroup");
     }
     public void initialize4(){
         studentGenderBox.setItems(comboStudentGender);
-        System.out.println("test4");
+        System.out.println("StudentGender");
+    }
+    public void teacherName(){
+        System.out.println("TeacherName");
+    }
+    public void studentName(){
+        System.out.println("StudentName");
     }
 
 

@@ -75,7 +75,7 @@
                               </TableView>
                               <HBox prefHeight="26.0" prefWidth="231.0" spacing="5.0">
                                  <children>
-                                    <TextField fx:id="teacherNameField" promptText="Name" />
+                                    <TextField fx:id="teacherNameField" onAction="#teacherName" promptText="Name" />
                                     <VBox>
                                        <children>
                                           <ComboBox fx:id="teacherSubjectBox" onAction="#initialize" prefWidth="150.0" promptText="Subject" />
@@ -122,7 +122,7 @@
                               </TableView>
                               <HBox prefHeight="26.0" prefWidth="231.0" spacing="5.0">
                                  <children>
-                                    <TextField fx:id="studentNameField" promptText="Name" />
+                                    <TextField fx:id="studentNameField" onAction="#studentName" promptText="Name" />
                                     <ComboBox fx:id="studentGroupBox" onAction="#initialize3" prefWidth="150.0" promptText="Group" />
                                     <ComboBox fx:id="studentGenderBox" onAction="#initialize4" prefWidth="150.0" promptText="Gender" />
                                     <!--<ComboBox fx:id="studentGenderBox" onAction="#studentGenderBox" prefWidth="150.0" promptText="Gender" />-->
