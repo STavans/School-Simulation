@@ -4,22 +4,59 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" text="Person Manager" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
-   <content>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0">
-         <center>
-            <VBox prefHeight="335.0" prefWidth="781.0" translateY="20.0" BorderPane.alignment="CENTER">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <tabs>
+    <Tab text="Roster">
+         <content>
+            <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Button mnemonicParsing="false" text="Back" translateX="8.0" translateY="-5.0" />
+                  <VBox prefHeight="341.0" prefWidth="816.0">
+                     <children>
+                        <TableView prefHeight="351.0" prefWidth="816.0">
+                          <columns>
+                            <TableColumn prefWidth="157.0" text="Name" />
+                            <TableColumn prefWidth="156.0" text="Subject" />
+                              <TableColumn prefWidth="99.0" text="Group" />
+                              <TableColumn prefWidth="133.0" text="Classroom" />
+                              <TableColumn prefWidth="145.0" text="Begin time" />
+                              <TableColumn prefWidth="125.0" text="End time" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ComboBox prefWidth="150.0" promptText="Teacher" />
+                        <ComboBox prefWidth="150.0" promptText="Group" />
+                        <ComboBox prefWidth="150.0" promptText="Classroom" />
+                        <TextField promptText="Begin time" />
+                        <TextField promptText="End time" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button mnemonicParsing="false" text="Add" />
+                        <Button mnemonicParsing="false" text="Edit" />
+                        <Button mnemonicParsing="false" text="Delete" />
+                        <Button mnemonicParsing="false" text="Save" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </content></Tab>
+    <Tab text="PersonManager">
+         <content>
+            <VBox prefHeight="460.0" prefWidth="643.0">
+               <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="350.0" prefWidth="651.0" spacing="5.0">
                      <children>
                         <VBox prefHeight="375.0" prefWidth="348.0" translateX="10.0">
@@ -46,7 +83,7 @@
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </HBox>
-                              <Button mnemonicParsing="false" text="Generate Random">
+                              <Button fx:id="Ge" mnemonicParsing="false" text="Generate Random">
                                  <VBox.margin>
                                     <Insets top="10.0" />
                                  </VBox.margin>
@@ -105,9 +142,13 @@
                         </VBox>
                      </children>
                   </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button mnemonicParsing="false" text="Generate To Max" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
-         </center>
-      </BorderPane>
-   </content>
-</TitledPane>
+         </content></Tab>
+  </tabs>
+</TabPane>
