@@ -21,7 +21,7 @@
                <children>
                   <VBox prefHeight="341.0" prefWidth="816.0">
                      <children>
-                        <TableView prefHeight="351.0" prefWidth="816.0">
+                        <TableView id="rosterTable" prefHeight="351.0" prefWidth="816.0">
                           <columns>
                             <TableColumn prefWidth="157.0" text="Name" />
                             <TableColumn prefWidth="156.0" text="Subject" />
@@ -35,19 +35,19 @@
                   </VBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ComboBox prefWidth="150.0" promptText="Teacher" />
-                        <ComboBox prefWidth="150.0" promptText="Group" />
-                        <ComboBox prefWidth="150.0" promptText="Classroom" />
-                        <TextField promptText="Begin time" />
-                        <TextField promptText="End time" />
+                        <ComboBox id="teacherBox" prefWidth="150.0" promptText="Teacher" />
+                        <ComboBox id="groupBox" prefWidth="150.0" promptText="Group" />
+                        <ComboBox id="classroomBox" prefWidth="150.0" promptText="Classroom" />
+                        <TextField id="beginTimeField" promptText="Begin time" />
+                        <TextField id="endTimeField" promptText="End time" />
                      </children>
                   </HBox>
                   <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Add" />
-                        <Button mnemonicParsing="false" text="Edit" />
-                        <Button mnemonicParsing="false" text="Delete" />
-                        <Button mnemonicParsing="false" text="Save" />
+                        <Button id="rosterAddButton" mnemonicParsing="false" text="Add" />
+                        <Button id="rosterEditButton" mnemonicParsing="false" text="Edit" />
+                        <Button id="rosterDeleteButton" mnemonicParsing="false" text="Delete" />
+                        <Button id="rosterSaveButton" mnemonicParsing="false" text="Save" />
                      </children>
                   </HBox>
                </children>
@@ -66,34 +66,34 @@
                                     <Font name="System Bold" size="24.0" />
                                  </font>
                               </Label>
-                              <TableView prefHeight="208.0" prefWidth="300.0">
+                              <TableView id="teachersTable" prefHeight="208.0" prefWidth="300.0">
                                  <columns>
-                                    <TableColumn prefWidth="174.0" text="Name" />
+                                    <TableColumn id="teacherNameColumn" prefWidth="174.0" text="Name" />
                                     <TableColumn prefWidth="86.0" text="Subject" />
                                     <TableColumn prefWidth="87.0" text="Gender" />
                                  </columns>
                               </TableView>
                               <HBox prefHeight="26.0" prefWidth="231.0" spacing="5.0">
                                  <children>
-                                    <TextField promptText="Name" />
-                                    <ComboBox prefWidth="150.0" promptText="Subject" />
-                                    <ComboBox prefWidth="150.0" promptText="Gender" />
+                                    <TextField id="teacherNameField" promptText="Name" />
+                                    <ComboBox id="teacherSubjectBox" prefWidth="150.0" promptText="Subject" />
+                                    <ComboBox id="teacherGenderBox" prefWidth="150.0" promptText="Gender" />
                                  </children>
                                  <VBox.margin>
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </HBox>
-                              <Button fx:id="Ge" mnemonicParsing="false" text="Generate Random">
+                              <Button id="teacherGenerateButton" fx:id="Ge" mnemonicParsing="false" text="Generate Random">
                                  <VBox.margin>
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </Button>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                                  <children>
-                                    <Button mnemonicParsing="false" text="Add" />
-                                    <Button mnemonicParsing="false" text="Delete" />
-                                    <Button mnemonicParsing="false" text="Edit" />
-                                    <Button mnemonicParsing="false" text="Save" />
+                                    <Button id="teacherAddButton" mnemonicParsing="false" text="Add" />
+                                    <Button id="teacherDeleteButton" mnemonicParsing="false" text="Delete" />
+                                    <Button id="teacherEditButton" mnemonicParsing="false" text="Edit" />
+                                    <Button id="teacherSaveButton" mnemonicParsing="false" text="Save" />
                                  </children>
                               </HBox>
                            </children>
@@ -108,7 +108,7 @@
                                     <Font name="System Bold" size="24.0" />
                                  </font>
                               </Label>
-                              <TableView prefHeight="208.0" prefWidth="300.0">
+                              <TableView id="studentsTable" prefHeight="208.0" prefWidth="300.0">
                                  <columns>
                                     <TableColumn prefWidth="174.0" text="Name" />
                                     <TableColumn prefWidth="86.0" text="Group" />
@@ -117,25 +117,25 @@
                               </TableView>
                               <HBox prefHeight="26.0" prefWidth="231.0" spacing="5.0">
                                  <children>
-                                    <TextField promptText="Name" />
-                                    <ComboBox prefWidth="150.0" promptText="Group" />
-                                    <ComboBox prefWidth="150.0" promptText="Gender" />
+                                    <TextField id="studentNameField" promptText="Name" />
+                                    <ComboBox id="studentGroupBox" prefWidth="150.0" promptText="Group" />
+                                    <ComboBox id="studentGenderBox" prefWidth="150.0" promptText="Gender" />
                                  </children>
                                  <VBox.margin>
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </HBox>
-                              <Button mnemonicParsing="false" text="Generate Random">
+                              <Button id="studentGenerateButton" mnemonicParsing="false" text="Generate Random">
                                  <VBox.margin>
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </Button>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                                  <children>
-                                    <Button mnemonicParsing="false" text="Add" />
-                                    <Button mnemonicParsing="false" text="Delete" />
-                                    <Button mnemonicParsing="false" text="Edit" />
-                                    <Button mnemonicParsing="false" text="Save" />
+                                    <Button id="studentAddButton" mnemonicParsing="false" text="Add" />
+                                    <Button id="studentDeleteButton" mnemonicParsing="false" text="Delete" />
+                                    <Button id="studentEditButton" mnemonicParsing="false" text="Edit" />
+                                    <Button id="studentSaveButton" mnemonicParsing="false" text="Save" />
                                  </children>
                               </HBox>
                            </children>
@@ -144,7 +144,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Generate To Max" />
+                        <Button id="generateMaxButton" mnemonicParsing="false" text="Generate To Max" />
                      </children>
                   </HBox>
                </children>
