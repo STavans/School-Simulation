@@ -1,11 +1,20 @@
 package data;
 
-public class Student extends Person {
-    private String name;
-    private String gender;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 
-    public Student(String name, String gender) {
-        this.name = name;
-        this.gender = gender;
+public class Student extends Person {
+    private String firstName;
+
+
+    public Student(Boolean gender,String lastName) {
+        super(gender,lastName);
+        this.firstName = firstName;
     }
+    public String getFirstName() {
+        return firstName;
+    }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
 }
