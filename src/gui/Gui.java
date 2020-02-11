@@ -23,7 +23,7 @@ public class Gui implements Initializable {
     @FXML private ComboBox<String> teacherGenderBox;//2
     @FXML private ComboBox<String> studentGroupBox;//3
     @FXML private ComboBox<String> studentGenderBox;//4
-    //new privates
+    //new privates colums
     @FXML private TableColumn<Teacher, String> teacherNameColumn;
     @FXML private TableColumn<Teacher, String> teacherSubjectColumn;
     @FXML private TableColumn<Teacher, String> teacherGenderColumn;
@@ -33,12 +33,12 @@ public class Gui implements Initializable {
     //textfield
     @FXML private TextField teacherNameField;
     @FXML private TextField studentNameField;
-
+    //list gender,subject,group
     ObservableList<String> comboTeacherSubject = FXCollections.observableArrayList("OGP","Math","OOM","2D Graphics","P&OC");
     ObservableList<String> comboTeacherGender  = FXCollections.observableArrayList("Male","Female");
     ObservableList<String> comboStudentGroup   = FXCollections.observableArrayList("A1","A2","A3","B1","B2","B3");
     ObservableList<String> comboStudentGender  = FXCollections.observableArrayList("Male","Female");
-
+     //to get something out the combobox
     private String TeacherSubject="";
     public void setTeacherSubjectBox() {
         teacherSubjectBox.valueProperty().addListener(new ChangeListener<String>() {
@@ -119,10 +119,10 @@ public class Gui implements Initializable {
     @FXML void generateMaxButton(){
         System.out.println("GenerateMax");
     }
-
+     //for a test
     //    ObservableList<Teacher> testlist = FXCollections.observableArrayList(new Teacher("test","test","test"));
 
-    //Making ComboBox working
+    //Making ComboBox working and for tableView
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         teacherSubjectBox.setItems(comboTeacherSubject);
