@@ -11,12 +11,18 @@ public class Group {
         this.group = new ArrayList<>();
     }
 
-    public String getCode() {
+    public String getGroupName() {
         return name;
     }
-
-    public void setCode(String name) {
+    public void setGroupName(String name) {
         this.name = name;
     }
 
+    public ArrayList<Student> getGroup() {
+        return group;
+    }
+
+    public void setGroup(ArrayList<Student> group) {
+        this.group = group;
+    }
 }

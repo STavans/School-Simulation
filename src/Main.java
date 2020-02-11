@@ -31,7 +31,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
 
-        Person jan = new Student("Jan");
+       
 
 
     }

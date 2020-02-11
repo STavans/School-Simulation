@@ -5,12 +5,12 @@ import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import java.util.ArrayList;
 
 public class Student extends Person {
-    private enum groups{A, B, C, D, E, F}
+
     private String name;
-    private Group group;
+    private String group;
 
 
-    public Student(String name, Boolean gender, Group group) {
+    public Student(String name, Boolean gender, String group) {
         super(name, gender);
         this.group = group;
     }
@@ -24,11 +24,11 @@ public class Student extends Person {
         this.name = name;
     }
 
-    public Group getGroup() {
+    public String getGroup() {
         return group;
     }
 
-    public void setGroup(Group group) {
+    public void setGroup(String group) {
         this.group = group;
     }
 }
