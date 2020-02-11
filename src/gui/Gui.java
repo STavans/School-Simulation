@@ -88,6 +88,10 @@ public class Gui implements Initializable {
         teachersTable.getItems().addAll(list);
    }
     @FXML void teacherDeleteButton(){
+        ObservableList<Teacher> list ,list2;
+        list=teachersTable.getItems();
+        list2=teachersTable.getSelectionModel().getSelectedItems();
+        list2.forEach(list::remove);
         System.out.println("TeacherDelete");
     }
     @FXML void teacherEditButton(){
@@ -107,6 +111,10 @@ public class Gui implements Initializable {
         studentsTable.getItems().addAll(list1);
     }
     @FXML void studentDeleteButton(){
+        ObservableList<Teacher> list ,list2;
+        list=studentsTable.getItems();
+        list2=studentsTable.getSelectionModel().getSelectedItems();
+        list2.forEach(list::remove);
         System.out.println("StudentDelete");
     }
     @FXML void studentEditButton(){
