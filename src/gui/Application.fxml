@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TabPane id="applicationScene" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Gui">
+<TabPane id="applicationScene" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="501.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Gui">
   <tabs>
     <Tab text="Roster">
          <content>
@@ -25,8 +25,8 @@
                           <columns>
                             <TableColumn fx:id="rosterNameColumn" prefWidth="157.0" text="Name" />
                             <TableColumn fx:id="rosterSubjectColumn" prefWidth="156.0" text="Subject" />
-                              <TableColumn fx:id="rosterGroupColumn" prefWidth="99.0" text="Group" />
-                              <TableColumn fx:id="rosterClassroomColumn" prefWidth="133.0" text="Classroom" />
+                              <!--<TableColumn fx:id="rosterGroupColumn" prefWidth="99.0" text="Group" />-->
+                              <!--<TableColumn fx:id="rosterGroupColumn" prefWidth="133.0" text="Classroom" />-->
                               <TableColumn fx:id="rosterBeginTimeColumn" prefWidth="145.0" text="Begin time" />
                               <TableColumn fx:id="rosterEndTimeColumn" prefWidth="125.0" text="End time" />
                           </columns>
@@ -78,10 +78,10 @@
                                     <TextField fx:id="teacherNameField" onAction="#teacherName" promptText="Name" />
                                     <VBox>
                                        <children>
-                                          <ComboBox fx:id="teacherSubjectBox" prefWidth="150.0" promptText="Subject" />
+                                          <ComboBox fx:id="teacherSubjectBox" onAction="#setTeacherSubjectBox" prefWidth="150.0" promptText="Subject" />
                                        </children>
                                     </VBox>
-                                    <ComboBox fx:id="teacherGenderBox" prefWidth="150.0" promptText="Gender" />
+                                    <ComboBox fx:id="teacherGenderBox" onAction="#setTeacherGenderBox" prefWidth="150.0" promptText="Gender" />
                                  </children>
                                  <VBox.margin>
                                     <Insets top="10.0" />
@@ -122,8 +122,9 @@
                               <HBox prefHeight="26.0" prefWidth="231.0" spacing="5.0">
                                  <children>
                                     <TextField fx:id="studentNameField" onAction="#studentName" promptText="Name" />
-                                    <ComboBox fx:id="studentGroupBox" prefWidth="150.0" promptText="Group" />
-                                    <ComboBox fx:id="studentGenderBox" prefWidth="150.0" promptText="Gender" />
+                                    <ComboBox fx:id="studentGroupBox" onAction="#setStudentGroupBox" prefWidth="150.0" promptText="Group" />
+                                    <ComboBox fx:id="studentGenderBox" onAction="#setStudentGenderBox" prefWidth="150.0" promptText="Gender" />
+
                                  </children>
                                  <VBox.margin>
                                     <Insets top="10.0" />
