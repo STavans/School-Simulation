@@ -20,10 +20,20 @@ public class Main extends Application {
 
 
         try {
-            Parent root = FXMLLoader.load(Gui.class.getResource("Application.fxml"));
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Gui.class.getResource("Application.fxml"));
+
+            Parent root = loader.load();
+            Gui gui = loader.getController();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.show();
+
+            gui.setTeacherSubjectBox();
+            gui.setTeacherGenderBox();
+            gui.setStudentGroupBox();
+            gui.setStudentGenderBox();
+
 
         } catch (IOException e) {
             e.printStackTrace();

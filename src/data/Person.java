@@ -1,22 +1,22 @@
 package data;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public abstract class Person {
-    private Boolean gender;
+    private String gender;
     private String lastName;
 
-    public Person(Boolean gender,String lastName) {
+
+    public Person(String gender,String lastName) {
         this.gender = gender;
         this.lastName = lastName;
     }
 
-//    public Boolean getGender() {
-//        if(this.gender.equals()) {
-//            return true;
-//        }
-//            return false;
-//    }
+    public String getGender() {
+       return gender;
+    }
 
-    public void setGender(Boolean gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
     public String getLastName() {
@@ -25,5 +25,6 @@ public abstract class Person {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
 }
 
