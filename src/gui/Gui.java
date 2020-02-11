@@ -80,6 +80,7 @@ public class Gui implements Initializable {
         });
     }
     //Buttons
+    //Teacher
     @FXML void teacherAddButton(){
         ObservableList<Teacher> list = FXCollections.observableArrayList(new data.Teacher(teacherNameField.getText(),TeacherGender,TeacherSubject));
        data.Teacher TeacherTotal = new data.Teacher(teacherNameField.getText(),TeacherGender,TeacherSubject);
@@ -98,6 +99,7 @@ public class Gui implements Initializable {
     @FXML void teacherGenerateButton(){
         System.out.println("TeacherGenerate");
     }
+    //Student
     @FXML void studentAddButton(){
         ObservableList<Student> list1 = FXCollections.observableArrayList(new data.Student(studentNameField.getText(),StudentGroup,StudentGender));
         data.Student StudentTotal = new data.Student(studentNameField.getText(),StudentGender,StudentGroup);
@@ -119,10 +121,10 @@ public class Gui implements Initializable {
     @FXML void generateMaxButton(){
         System.out.println("GenerateMax");
     }
-     //for a test
+     //for test if tableview works
     //    ObservableList<Teacher> testlist = FXCollections.observableArrayList(new Teacher("test","test","test"));
 
-    //Making ComboBox working and for tableView
+    //Making ComboBox working
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         teacherSubjectBox.setItems(comboTeacherSubject);
@@ -131,7 +133,7 @@ public class Gui implements Initializable {
         studentGenderBox.setItems(comboStudentGender);
 
         System.out.println("Combobox Initialised");
-
+        //Table view working TB=tableview  ST=student
         teacherGenderColumn.setCellValueFactory(new PropertyValueFactory("genderTB"));
         teacherSubjectColumn.setCellValueFactory(new PropertyValueFactory("subjectTB"));
         teacherNameColumn.setCellValueFactory(new PropertyValueFactory("lastNameTB"));
