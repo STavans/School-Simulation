@@ -1,8 +1,11 @@
 package data;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public abstract class Person {
     private String gender;
     private String lastName;
+
 
     public Person(String gender,String lastName) {
         this.gender = gender;
@@ -22,5 +25,6 @@ public abstract class Person {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
 }
 

@@ -7,7 +7,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 
-public class newGui {
+public class EXTRA {
 
     @FXML private TableColumn<?, ?> rosterNameColumn;
     @FXML private TableColumn<?, ?> rosterSubjectColumn;

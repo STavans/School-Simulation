@@ -8,49 +8,31 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-
+import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-
-
 public class Gui implements Initializable {
+    //tableView
+    @FXML private TableView teachersTable;
+    @FXML private TableView studentsTable;
     //ComboBox
     @FXML private ComboBox<String> teacherSubjectBox;//1
     @FXML private ComboBox<String> teacherGenderBox;//2
     @FXML private ComboBox<String> studentGroupBox;//3
     @FXML private ComboBox<String> studentGenderBox;//4
     //new privates
-    @FXML private TableColumn<?, ?> rosterNameColumn;
-    @FXML private TableColumn<?, ?> rosterSubjectColumn;
-    @FXML private ComboBox<?> rosterGroupColumn;
-    @FXML private ComboBox<?> rosterClassroomColumn;
-    @FXML private TableColumn<?, ?> rosterBeginTimeColumn;
-    @FXML private TableColumn<?, ?> rosterEndTimeColumn;
-    @FXML private ComboBox<?> rosterTeacherColumn;
-    @FXML private TextField beginTimeField;
-    @FXML private TextField endTimeField;
-    @FXML private Button rosterAddButton;
-    @FXML private Button rosterEditButton;
-    @FXML private Button rosterDeleteButton;
-    @FXML private Button rosterSaveButton;
-    @FXML private TableColumn<?, ?> teacherNameColumn;
-    @FXML private TableColumn<?, ?> teacherSubjectColumn;
-    @FXML private TableColumn<?, ?> teacherGenderColumn;
+    @FXML private TableColumn<Teacher, String> teacherNameColumn;
+    @FXML private TableColumn<Teacher, String> teacherSubjectColumn;
+    @FXML private TableColumn<Teacher, String> teacherGenderColumn;
+    @FXML private TableColumn<Student, String> studentNameColumn;
+    @FXML private TableColumn<Student, String> studentGroupColumn;
+    @FXML private TableColumn<Student, String> studentGenderColumn;
+    //textfield
     @FXML private TextField teacherNameField;
     @FXML private TextField studentNameField;
-    @FXML private ComboBox teacherGender;
-    @FXML private Button teacherGenerateButton;
-    @FXML private Button teacherAddButton;
-    @FXML private Button teacherDeleteButton;
-    @FXML private Button teacherEditButton;
-    @FXML private Button teacherSaveButton;
 
     ObservableList<String> comboTeacherSubject = FXCollections.observableArrayList("OGP","Math","OOM","2D Graphics","P&OC");
     ObservableList<String> comboTeacherGender  = FXCollections.observableArrayList("Male","Female");
@@ -97,11 +79,12 @@ public class Gui implements Initializable {
             }
         });
     }
-
     //Buttons
     @FXML void teacherAddButton(){
+        ObservableList<Teacher> list = FXCollections.observableArrayList(new data.Teacher(teacherNameField.getText(),TeacherGender,TeacherSubject));
        data.Teacher TeacherTotal = new data.Teacher(teacherNameField.getText(),TeacherGender,TeacherSubject);
         System.out.println("TeacherAdd: " +TeacherTotal.getLastName()+" "+TeacherTotal.getGender()+" "+ TeacherTotal.getTeacherSubject());
+        teachersTable.getItems().addAll(list);
    }
     @FXML void teacherDeleteButton(){
         System.out.println("TeacherDelete");
@@ -116,8 +99,10 @@ public class Gui implements Initializable {
         System.out.println("TeacherGenerate");
     }
     @FXML void studentAddButton(){
+        ObservableList<Student> list1 = FXCollections.observableArrayList(new data.Student(studentNameField.getText(),StudentGroup,StudentGender));
         data.Student StudentTotal = new data.Student(studentNameField.getText(),StudentGender,StudentGroup);
         System.out.println("StudentAdd: " + StudentTotal.getLastName()+" "+ StudentTotal.getGender()+" "+  StudentTotal.getStudentGroup());
+        studentsTable.getItems().addAll(list1);
     }
     @FXML void studentDeleteButton(){
         System.out.println("StudentDelete");
@@ -134,6 +119,9 @@ public class Gui implements Initializable {
     @FXML void generateMaxButton(){
         System.out.println("GenerateMax");
     }
+
+    //    ObservableList<Teacher> testlist = FXCollections.observableArrayList(new Teacher("test","test","test"));
+
     //Making ComboBox working
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -141,7 +129,16 @@ public class Gui implements Initializable {
         teacherGenderBox.setItems(comboTeacherGender);
         studentGroupBox.setItems(comboStudentGroup);
         studentGenderBox.setItems(comboStudentGender);
+
         System.out.println("Combobox Initialised");
+
+        teacherGenderColumn.setCellValueFactory(new PropertyValueFactory("genderTB"));
+        teacherSubjectColumn.setCellValueFactory(new PropertyValueFactory("subjectTB"));
+        teacherNameColumn.setCellValueFactory(new PropertyValueFactory("lastNameTB"));
+
+        studentGenderColumn.setCellValueFactory(new PropertyValueFactory("genderTBST"));
+        studentGroupColumn.setCellValueFactory(new PropertyValueFactory("GroupTBST"));
+        studentNameColumn.setCellValueFactory(new PropertyValueFactory("lastNameTBST"));
     }
     //TextFields names
     public void teacherName(){

@@ -66,7 +66,7 @@
                                     <Font name="System Bold" size="24.0" />
                                  </font>
                               </Label>
-                              <TableView id="teachersTable" prefHeight="208.0" prefWidth="300.0">
+                              <TableView id="teachersTable" fx:id="teachersTable" prefHeight="208.0" prefWidth="300.0">
                                  <columns>
                                     <TableColumn fx:id="teacherNameColumn" prefWidth="174.0" text="Name" />
                                     <TableColumn fx:id="teacherSubjectColumn" prefWidth="86.0" text="Subject" />
@@ -112,7 +112,7 @@
                                     <Font name="System Bold" size="24.0" />
                                  </font>
                               </Label>
-                              <TableView id="studentsTable" prefHeight="208.0" prefWidth="300.0">
+                              <TableView id="studentsTable" fx:id="studentsTable" prefHeight="208.0" prefWidth="300.0">
                                  <columns>
                                     <TableColumn fx:id="studentNameColumn" prefWidth="174.0" text="Name" />
                                     <TableColumn fx:id="studentGroupColumn" prefWidth="86.0" text="Group" />
