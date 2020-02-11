@@ -11,6 +11,8 @@ import javafx.scene.control.*;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -95,6 +97,10 @@ public class Gui implements Initializable {
         System.out.println("TeacherDelete");
     }
     @FXML void teacherEditButton(){
+        teachersTable.setEditable(true);
+        teacherNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        teacherSubjectColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        teacherGenderColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         System.out.println("TeacherEdit");
     }
     @FXML void teacherSaveButton(){
@@ -118,6 +124,10 @@ public class Gui implements Initializable {
         System.out.println("StudentDelete");
     }
     @FXML void studentEditButton(){
+        studentsTable.setEditable(true);
+        studentNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        studentGroupColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        studentGenderColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         System.out.println("StudentEdit");
     }
     @FXML void studentSaveButton(){
@@ -141,11 +151,11 @@ public class Gui implements Initializable {
         studentGenderBox.setItems(comboStudentGender);
 
         System.out.println("Combobox Initialised");
-        //Table view working TB=tableview  ST=student
+        //Table view working TB=tableview
         teacherGenderColumn.setCellValueFactory(new PropertyValueFactory("genderTB"));
         teacherSubjectColumn.setCellValueFactory(new PropertyValueFactory("subjectTB"));
         teacherNameColumn.setCellValueFactory(new PropertyValueFactory("lastNameTB"));
-
+         //student
         studentGenderColumn.setCellValueFactory(new PropertyValueFactory("genderTBST"));
         studentGroupColumn.setCellValueFactory(new PropertyValueFactory("GroupTBST"));
         studentNameColumn.setCellValueFactory(new PropertyValueFactory("lastNameTBST"));
@@ -158,4 +168,5 @@ public class Gui implements Initializable {
         System.out.println("StudentName");
     }
 
+    
 }
