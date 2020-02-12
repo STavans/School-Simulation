@@ -5,7 +5,7 @@
 //import javafx.fxml.Initializable;
 //
 //public class GUIROSTER implements Initializable {
-//data.Teacher(teacherNameField.getText()
+//gui.Gui(teacherNameField.getText()
 //    ObservableList<String> comboTeacherSubject = FXCollections.observableArrayList(data.Teacher(teacherNameField.getText());
 //     teacherSubjectBox.setItems(comboTeacherSubject);
 //}

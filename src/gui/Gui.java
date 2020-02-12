@@ -13,6 +13,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Gui implements Initializable {
@@ -34,11 +35,19 @@ public class Gui implements Initializable {
     //textfield
     @FXML private TextField teacherNameField;
     @FXML private TextField studentNameField;
+    //ArrayList test
+   // private ArrayList<String>nameTeachers;
     //list gender,subject,group
     ObservableList<String> comboTeacherSubject = FXCollections.observableArrayList("OGP","Math","OOM","2D Graphics","P&OC");
     ObservableList<String> comboTeacherGender  = FXCollections.observableArrayList("Male","Female");
     ObservableList<String> comboStudentGroup   = FXCollections.observableArrayList("A1","A2","A3","B1","B2","B3");
     ObservableList<String> comboStudentGender  = FXCollections.observableArrayList("Male","Female");
+//    ArrayList<String> nameTeachers=new ArrayList<String>();
+//        nameTeachers.add(studentNameField.getText());
+//
+//    for (String allTeachers:nameTeachers) {
+//        ObservableList<String> comboTeacherList= FXCollections.observableArrayList(allTeachers);
+//    }
      //to get something out the combobox
     private String TeacherSubject="";
     public void setTeacherSubjectBox() {
@@ -111,12 +120,12 @@ public class Gui implements Initializable {
     //Student
     @FXML void studentAddButton(){
         ObservableList<Student> list1 = FXCollections.observableArrayList(new data.Student(studentNameField.getText(),StudentGroup,StudentGender));
-        data.Student StudentTotal = new data.Student(studentNameField.getText(),StudentGender,StudentGroup);
+        data.Student StudentTotal = new data.Student(studentNameField.getText(),StudentGroup,StudentGender);
         System.out.println("StudentAdd: " + StudentTotal.getLastName()+" "+ StudentTotal.getGender()+" "+  StudentTotal.getStudentGroup());
         studentsTable.getItems().addAll(list1);
     }
     @FXML void studentDeleteButton(){
-        ObservableList<Teacher> list ,list2;
+        ObservableList<Student> list ,list2;
         list=studentsTable.getItems();
         list2=studentsTable.getSelectionModel().getSelectedItems();
         list2.forEach(list::remove);
@@ -165,4 +174,5 @@ public class Gui implements Initializable {
     public void studentName(){
         System.out.println("StudentName");
     }
+
 }
