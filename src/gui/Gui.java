@@ -93,14 +93,14 @@ public class Gui implements Initializable {
         list=teachersTable.getItems();
         list2=teachersTable.getSelectionModel().getSelectedItems();
         list2.forEach(list::remove);
-        System.out.println("TeacherDelete"+teacherNameField.getText()+" "+TeacherGender+" "+ TeacherSubject);
+        System.out.println("TeacherDelete: "+teacherNameField.getText()+" "+TeacherGender+" "+ TeacherSubject);
     }
     @FXML void teacherEditButton(){
         teachersTable.setEditable(true);
         teacherNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         teacherSubjectColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         teacherGenderColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        System.out.println("TeacherEdit" +teacherNameField.getText()+" "+TeacherGender+" "+ TeacherSubject);
+        System.out.println("TeacherEdit: " +teacherNameField.getText()+" "+TeacherGender+" "+ TeacherSubject);
     }
     @FXML void teacherSaveButton(){
         System.out.println("TeacherSave");
@@ -135,6 +135,7 @@ public class Gui implements Initializable {
     @FXML void studentGenerateButton(){
         System.out.println("StudentGenerate");
     }
+    //generate
     @FXML void generateMaxButton(){
         System.out.println("GenerateMax");
     }

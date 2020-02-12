@@ -11,6 +11,7 @@ public class Teacher extends Person {
     public Teacher (String lastName,String gender,String TeacherSubject) {
         super(gender, lastName);
         this.subject = TeacherSubject;
+
         subjectTB = new SimpleStringProperty(TeacherSubject);
         genderTB = new SimpleStringProperty(gender);
         lastNameTB = new SimpleStringProperty(lastName);
@@ -23,7 +24,6 @@ public class Teacher extends Person {
     public String getTeacherSubject() {
         return subject;
     }
-
 
     public String getSubject() {
         return subject;

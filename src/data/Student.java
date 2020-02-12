@@ -18,6 +18,7 @@ public class Student extends Person {
 
     }
     public String getStudentGroup() { return Group;}
+
     public void setStudentGroup(String Group) {this.Group=Group;}
 
     public String getGroupTBST() {
@@ -48,9 +49,7 @@ public class Student extends Person {
         return lastNameTBST.get();
     }
 
-    public SimpleStringProperty lastNameTBPSTroperty() {
-        return lastNameTBST;
-    }
+    public SimpleStringProperty lastNameTBPSTroperty() { return lastNameTBST; }
 
     public void setLastNameTBST(String lastNameTBST) {
         this.lastNameTBST.set(lastNameTBST);
