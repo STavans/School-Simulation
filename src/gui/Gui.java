@@ -35,12 +35,13 @@ public class Gui implements Initializable {
     @FXML private TextField teacherNameField;
     @FXML private TextField studentNameField;
     //list gender,subject,group
-    ObservableList<String> comboTeacherSubject = FXCollections.observableArrayList("OGP","Math","OOM","2D Graphics","P&OC");
-    ObservableList<String> comboTeacherGender  = FXCollections.observableArrayList("Male","Female");
-    ObservableList<String> comboStudentGroup   = FXCollections.observableArrayList("A1","A2","A3","B1","B2","B3");
-    ObservableList<String> comboStudentGender  = FXCollections.observableArrayList("Male","Female");
+    ObservableList<String> comboTeacherSubject = FXCollections.observableArrayList("OGP", "Math", "OOM", "2D Graphics", "P&OC");
+    ObservableList<String> comboTeacherGender  = FXCollections.observableArrayList("Male", "Female");
+    ObservableList<String> comboStudentGroup   = FXCollections.observableArrayList("A", "B", "C", "D", "E", "F");
+    ObservableList<String> comboStudentGender  = FXCollections.observableArrayList("Male", "Female");
+
      //to get something out the combobox
-    private String TeacherSubject="";
+    private String TeacherSubject = "";
     public void setTeacherSubjectBox() {
         teacherSubjectBox.valueProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -60,7 +61,7 @@ public class Gui implements Initializable {
             }
         });
     }
-    private String StudentGroup="";
+    private String StudentGroup = "";
     public void setStudentGroupBox() {
         studentGroupBox.valueProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -83,9 +84,9 @@ public class Gui implements Initializable {
     //Buttons
     //Teacher
     @FXML void teacherAddButton(){
-        ObservableList<Teacher> list = FXCollections.observableArrayList(new data.Teacher(teacherNameField.getText(),TeacherGender,TeacherSubject));
-       data.Teacher TeacherTotal = new data.Teacher(teacherNameField.getText(),TeacherGender,TeacherSubject);
-        System.out.println("TeacherAdd: " +TeacherTotal.getLastName()+" "+TeacherTotal.getGender()+" "+ TeacherTotal.getTeacherSubject());
+        ObservableList<Teacher> list = FXCollections.observableArrayList(new data.Teacher(teacherNameField.getText(), TeacherGender, TeacherSubject));
+       data.Teacher TeacherTotal = new data.Teacher(teacherNameField.getText(), TeacherGender, TeacherSubject);
+        System.out.println("TeacherAdd: " + TeacherTotal.getLastName() + " " + TeacherTotal.getGender() + " " + TeacherTotal.getTeacherSubject());
         teachersTable.getItems().addAll(list);
    }
     @FXML void teacherDeleteButton(){
@@ -93,14 +94,14 @@ public class Gui implements Initializable {
         list=teachersTable.getItems();
         list2=teachersTable.getSelectionModel().getSelectedItems();
         list2.forEach(list::remove);
-        System.out.println("TeacherDelete"+teacherNameField.getText()+" "+TeacherGender+" "+ TeacherSubject);
+        System.out.println("TeacherDelete" + teacherNameField.getText() + " " + TeacherGender + " " + TeacherSubject);
     }
     @FXML void teacherEditButton(){
         teachersTable.setEditable(true);
         teacherNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         teacherSubjectColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         teacherGenderColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        System.out.println("TeacherEdit" +teacherNameField.getText()+" "+TeacherGender+" "+ TeacherSubject);
+        System.out.println("TeacherEdit" + teacherNameField.getText() + " " + TeacherGender + " " + TeacherSubject);
     }
     @FXML void teacherSaveButton(){
         System.out.println("TeacherSave");
@@ -110,9 +111,9 @@ public class Gui implements Initializable {
     }
     //Student
     @FXML void studentAddButton(){
-        ObservableList<Student> list1 = FXCollections.observableArrayList(new data.Student(studentNameField.getText(),StudentGroup,StudentGender));
-        data.Student StudentTotal = new data.Student(studentNameField.getText(),StudentGender,StudentGroup);
-        System.out.println("StudentAdd: " + StudentTotal.getLastName()+" "+ StudentTotal.getGender()+" "+  StudentTotal.getStudentGroup());
+        ObservableList<Student> list1 = FXCollections.observableArrayList(new data.Student(studentNameField.getText(), StudentGroup, StudentGender));
+        data.Student StudentTotal = new data.Student(studentNameField.getText(), StudentGender, StudentGroup);
+        System.out.println("StudentAdd: " + StudentTotal.getLastName() + " " +  StudentTotal.getGender() + " " +  StudentTotal.getStudentGroup());
         studentsTable.getItems().addAll(list1);
     }
     @FXML void studentDeleteButton(){
@@ -120,14 +121,14 @@ public class Gui implements Initializable {
         list=studentsTable.getItems();
         list2=studentsTable.getSelectionModel().getSelectedItems();
         list2.forEach(list::remove);
-        System.out.println("StudentDelete: "+ studentNameField.getText()+" "+ StudentGroup+" "+  StudentGender);
+        System.out.println("StudentDelete: " + studentNameField.getText() + " " + StudentGroup + " " +  StudentGender);
     }
     @FXML void studentEditButton(){
         studentsTable.setEditable(true);
         studentNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         studentGroupColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         studentGenderColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        System.out.println("StudentEdit: "+ studentNameField.getText()+" "+ StudentGroup+" "+  StudentGender);
+        System.out.println("StudentEdit: " + studentNameField.getText() + " " + StudentGroup + " " +  StudentGender);
     }
     @FXML void studentSaveButton(){
         System.out.println("StudentSave");
@@ -148,7 +149,7 @@ public class Gui implements Initializable {
         studentGroupBox.setItems(comboStudentGroup);
         studentGenderBox.setItems(comboStudentGender);
         System.out.println("Combobox Initialised");
-        //Table view working TB=tableview
+        //Table view working TB = tableview
         teacherGenderColumn.setCellValueFactory(new PropertyValueFactory("genderTB"));
         teacherSubjectColumn.setCellValueFactory(new PropertyValueFactory("subjectTB"));
         teacherNameColumn.setCellValueFactory(new PropertyValueFactory("lastNameTB"));
