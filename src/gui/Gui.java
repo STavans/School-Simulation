@@ -13,14 +13,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 public class Gui implements Initializable {
     //tableView
-    @FXML private TableView teachersTable;
-    @FXML private TableView studentsTable;
+    @FXML private TableView<Teacher> teachersTable;
+    @FXML private TableView<Student> studentsTable;
     //ComboBox
     @FXML private ComboBox<String> teacherSubjectBox;//1
     @FXML private ComboBox<String> teacherGenderBox;//2
@@ -46,15 +44,15 @@ public class Gui implements Initializable {
 
     private StudentList studentList = new StudentList();
     //list PersonManager
-    ObservableList<String> comboTeacherSubject = FXCollections.observableArrayList("OGP", "Math", "OOM", "2D Graphics", "P&OC");
-    ObservableList<String> comboTeacherGender  = FXCollections.observableArrayList("Male", "Female");
-    ObservableList<String> comboStudentGroup   = FXCollections.observableArrayList("A", "B", "C", "D", "E", "F");
-    ObservableList<String> comboStudentGender  = FXCollections.observableArrayList("Male", "Female");
+    private ObservableList<String> comboTeacherSubject = FXCollections.observableArrayList("OGP", "Math", "OOM", "2D Graphics", "P&OC");
+    private ObservableList<String> comboTeacherGender  = FXCollections.observableArrayList("Male", "Female");
+    private ObservableList<String> comboStudentGroup   = FXCollections.observableArrayList("A", "B", "C", "D", "E", "F");
+    private ObservableList<String> comboStudentGender  = FXCollections.observableArrayList("Male", "Female");
     //Roster
-    ObservableList<String> comboTeacherNameList  = FXCollections.observableArrayList();
-    ObservableList<String> comboClassRoom  = FXCollections.observableArrayList("001","101","202","220");
-    ObservableList<String> comboBeginTime  = FXCollections.observableArrayList("9:00","10:00","11:00","12:00","13:00","14:00","15:00");
-    ObservableList<String> comboEndTime  = FXCollections.observableArrayList("9:50","10:50","11:50","12:50","13:50","14:50","15:50");
+    private ObservableList<String> comboTeacherNameList  = FXCollections.observableArrayList();
+    private ObservableList<String> comboClassRoom  = FXCollections.observableArrayList("001","101","202","220");
+    private ObservableList<String> comboBeginTime  = FXCollections.observableArrayList("9:00","10:00","11:00","12:00","13:00","14:00","15:00");
+    private ObservableList<String> comboEndTime  = FXCollections.observableArrayList("9:50","10:50","11:50","12:50","13:50","14:50","15:50");
 
 
      //to get something out the combobox PersonManager
@@ -182,7 +180,6 @@ public class Gui implements Initializable {
         ObservableList<Student> list1 = FXCollections.observableArrayList(new data.Student(studentNameField.getText(), StudentGroup, StudentGender));
         data.Student student = new data.Student(studentNameField.getText(), StudentGroup, StudentGender);
         studentList.addStudent(student);
-//        System.out.println("StudentAdd: " + student.getLastName() + " " +  student.getGender() + " " +  student.getStudentGroup());
         studentsTable.getItems().addAll(list1);
         studentList.print();
     }
@@ -223,15 +220,15 @@ public class Gui implements Initializable {
         classRoomBox.setItems(comboClassRoom);
         beginTimeBox.setItems(comboBeginTime);
         endTimeBox.setItems(comboEndTime);
-        System.out.println("Combobox Initialised");
+        System.out.println("Comboboxes Initialised");
         //Table view working TB = tableview
-        teacherGenderColumn.setCellValueFactory(new PropertyValueFactory("genderTB"));
-        teacherSubjectColumn.setCellValueFactory(new PropertyValueFactory("subjectTB"));
-        teacherNameColumn.setCellValueFactory(new PropertyValueFactory("lastNameTB"));
+        teacherGenderColumn.setCellValueFactory(new PropertyValueFactory<>("genderTB"));
+        teacherSubjectColumn.setCellValueFactory(new PropertyValueFactory<>("subjectTB"));
+        teacherNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastNameTB"));
          //student
-        studentGenderColumn.setCellValueFactory(new PropertyValueFactory("genderTBST"));
-        studentGroupColumn.setCellValueFactory(new PropertyValueFactory("GroupTBST"));
-        studentNameColumn.setCellValueFactory(new PropertyValueFactory("lastNameTBST"));
+        studentGenderColumn.setCellValueFactory(new PropertyValueFactory<>("genderTBST"));
+        studentGroupColumn.setCellValueFactory(new PropertyValueFactory<>("GroupTBST"));
+        studentNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastNameTBST"));
     }
     //TextFields names
     public void teacherName(){
