@@ -180,7 +180,7 @@ public class Gui implements Initializable {
     //Student
     @FXML void studentAddButton(){
         ObservableList<Student> list1 = FXCollections.observableArrayList(new data.Student(studentNameField.getText(), StudentGroup, StudentGender));
-        data.Student student = new data.Student(studentNameField.getText(), StudentGender, StudentGroup);
+        data.Student student = new data.Student(studentNameField.getText(), StudentGroup, StudentGender);
         studentList.addStudent(student);
 //        System.out.println("StudentAdd: " + student.getLastName() + " " +  student.getGender() + " " +  student.getStudentGroup());
         studentsTable.getItems().addAll(list1);
