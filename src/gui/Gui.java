@@ -27,6 +27,11 @@ public class Gui implements Initializable {
     @FXML private ComboBox<String> teacherGenderBox;//2
     @FXML private ComboBox<String> studentGroupBox;//3
     @FXML private ComboBox<String> studentGenderBox;//4
+    @FXML private ComboBox<String> teacherAllNameBox;//5
+    @FXML private ComboBox<String> studentGroupBoxs;//6
+    @FXML private ComboBox<String> beginTimeBox;//7
+    @FXML private ComboBox<String> endTimeBox;//8
+    @FXML private ComboBox<String> classRoomBox;//8
     //new privates colums
     @FXML private TableColumn<Teacher, String> teacherNameColumn;
     @FXML private TableColumn<Teacher, String> teacherSubjectColumn;
@@ -40,12 +45,27 @@ public class Gui implements Initializable {
     //ArrayList test
     @FXML private ArrayList<String> RandomTeacher;
 
+    //list gender,subject,group
+    // private ArrayList<String>nameTeachers;
+//    ArrayList<String> nameTeachers=new ArrayList<String>();
+//        nameTeachers.add(studentNameField.getText());
+//
+//    for (String allTeachers:nameTeachers) {
+//        ObservableList<String> comboTeacherList= FXCollections.observableArrayList(allTeachers);
+//    }
+    //list PersonManager
     ObservableList<String> comboTeacherSubject = FXCollections.observableArrayList("OGP", "Math", "OOM", "2D Graphics", "P&OC");
     ObservableList<String> comboTeacherGender  = FXCollections.observableArrayList("Male", "Female");
     ObservableList<String> comboStudentGroup   = FXCollections.observableArrayList("A", "B", "C", "D", "E", "F");
     ObservableList<String> comboStudentGender  = FXCollections.observableArrayList("Male", "Female");
+    //Roster
+    ObservableList<String> comboTeacherNameList  = FXCollections.observableArrayList("david");
+    ObservableList<String> comboClassRoom  = FXCollections.observableArrayList("001","101","202","220");
+    ObservableList<String> comboBeginTime  = FXCollections.observableArrayList("9:00","10:00","11:00","12:00","13:00","14:00","15:00");
+    ObservableList<String> comboEndTime  = FXCollections.observableArrayList("9:50","10:50","11:50","12:50","13:50","14:50","15:50");
 
-     //to get something out the combobox
+
+     //to get something out the combobox PersonManager
     private String TeacherSubject = "";
     public void setTeacherSubjectBox() {
         teacherSubjectBox.valueProperty().addListener(new ChangeListener<String>() {
@@ -86,6 +106,57 @@ public class Gui implements Initializable {
             }
         });
     }
+    //Roster
+    private String rosterTeacherColumn1 = "";
+    public void setrosterTeacherColumn1() {
+        teacherAllNameBox.valueProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                rosterTeacherColumn1 = observable.getValue().toString();
+                System.out.println(rosterTeacherColumn1);
+            }
+        });
+    }
+    private String StudentGroups = "";
+    public void setStudentGroupBoxs() {
+        studentGroupBoxs.valueProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                StudentGroups = observable.getValue().toString();
+                System.out.println(StudentGroups);
+            }
+        });
+    }
+    private String ClassRoom = "";
+    public void setClassRoomBox() {
+        classRoomBox.valueProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                ClassRoom = observable.getValue().toString();
+                System.out.println(ClassRoom);
+            }
+        });
+    }
+    private String BeginTime = "";
+    public void setBeginTimeBox() {
+        beginTimeBox.valueProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                BeginTime = observable.getValue().toString();
+                System.out.println(BeginTime);
+            }
+        });
+    }
+    private String EndTime = "";
+    public void setEndTimeBox() {
+        endTimeBox.valueProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                EndTime = observable.getValue().toString();
+                System.out.println(EndTime);
+            }
+        });
+    }
     //Buttons Teacher
     @FXML void teacherAddButton(){
         ObservableList<Teacher> list = FXCollections.observableArrayList(new data.Teacher(teacherNameField.getText(), TeacherGender, TeacherSubject));
@@ -111,9 +182,7 @@ public class Gui implements Initializable {
         System.out.println("TeacherSave");
     }
     @FXML void teacherGenerateButton(){
-        ObservableList<Teacher> list = FXCollections.observableArrayList(new data.Teacher(RandomTeacher.get(0),TeacherGender,TeacherSubject));
         System.out.println("TeacherGenerate");
-        teachersTable.getItems().addAll(list);
     }
     //Student
     @FXML void studentAddButton(){
@@ -149,10 +218,17 @@ public class Gui implements Initializable {
     //Making ComboBox working
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //PersonManager
         teacherSubjectBox.setItems(comboTeacherSubject);
         teacherGenderBox.setItems(comboTeacherGender);
         studentGroupBox.setItems(comboStudentGroup);
         studentGenderBox.setItems(comboStudentGender);
+        teacherAllNameBox.setItems(comboTeacherNameList);
+        //Roster
+        studentGroupBoxs.setItems(comboStudentGroup);
+        classRoomBox.setItems(comboClassRoom);
+        beginTimeBox.setItems(comboBeginTime);
+        endTimeBox.setItems(comboEndTime);
         System.out.println("Combobox Initialised");
         //Table view working TB = tableview
         teacherGenderColumn.setCellValueFactory(new PropertyValueFactory("genderTB"));
