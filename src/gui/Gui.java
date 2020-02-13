@@ -1,8 +1,6 @@
 package gui;
 
-import data.Student;
-import data.StudentList;
-import data.Teacher;
+import data.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
