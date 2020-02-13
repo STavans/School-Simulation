@@ -36,7 +36,7 @@
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <ComboBox id="teacherBox" fx:id="rosterTeacherColumn" prefWidth="150.0" promptText="Teacher" />
-                        <ComboBox id="groupBox" fx:id="rosterGroupColumn" prefWidth="150.0" promptText="Group" />
+                        <ComboBox id="groupBox" fx:id="studentGroupBox" onAction="#setStudentGroupBox" prefWidth="150.0" promptText="Group" />
                         <ComboBox id="classroomBox" fx:id="rosterClassroomColumn" prefWidth="150.0" promptText="Classroom" />
                         <TextField id="beginTimeField" fx:id="beginTimeField" promptText="Begin time" />
                         <TextField id="endTimeField" fx:id="endTimeField" promptText="End time" />
