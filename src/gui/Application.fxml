@@ -15,44 +15,45 @@
 
 <TabPane id="applicationScene" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="501.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Gui">
   <tabs>
-    <Tab text="Roster">
+      <Tab text="Roster">
          <content>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
                   <VBox prefHeight="341.0" prefWidth="816.0">
                      <children>
                         <TableView id="rosterTable" prefHeight="351.0" prefWidth="816.0">
-                          <columns>
-                            <TableColumn fx:id="rosterNameColumn" prefWidth="157.0" text="Name" />
-                            <TableColumn fx:id="rosterSubjectColumn" prefWidth="156.0" text="Subject" />
-                              <!--<TableColumn fx:id="rosterGroupColumn" prefWidth="99.0" text="Group" />-->
-                              <!--<TableColumn fx:id="rosterGroupColumn" prefWidth="133.0" text="Classroom" />-->
-                              <TableColumn fx:id="rosterBeginTimeColumn" prefWidth="145.0" text="Begin time" />
-                              <TableColumn fx:id="rosterEndTimeColumn" prefWidth="125.0" text="End time" />
-                          </columns>
+                           <columns>
+                              <TableColumn fx:id="rosterNameColumn1" prefWidth="157.0" text="Name" />
+                              <TableColumn fx:id="rosterSubjectColumn1" prefWidth="156.0" text="Subject" />
+                              <TableColumn fx:id="rosterGroupColumn" prefWidth="99.0" text="Group" />
+                              <TableColumn fx:id="rosterClassroomColumn" prefWidth="133.0" text="Classroom" />
+                              <TableColumn fx:id="rosterBeginTimeColumn1" prefWidth="145.0" text="Begin time" />
+                              <TableColumn fx:id="rosterEndTimeColumn1" prefWidth="125.0" text="End time" />
+                           </columns>
                         </TableView>
                      </children>
                   </VBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" translateX="5.0" translateY="10.0">
                      <children>
-                        <ComboBox id="teacherBox" fx:id="rosterTeacherColumn" prefWidth="150.0" promptText="Teacher" />
+                        <ComboBox id="teacherBox" fx:id="rosterTeacherColumn1" prefWidth="150.0" promptText="Teacher" />
                         <ComboBox id="groupBox" fx:id="rosterGroupColumn" prefWidth="150.0" promptText="Group" />
-                        <ComboBox id="classroomBox" fx:id="rosterClassroomColumn" prefWidth="150.0" promptText="Classroom" />
-                        <TextField id="beginTimeField" fx:id="beginTimeField" promptText="Begin time" />
-                        <TextField id="endTimeField" fx:id="endTimeField" promptText="End time" />
+                        <ComboBox id="classroomBox" fx:id="rosterClassroomColumn1" prefWidth="150.0" promptText="Classroom" />
+                        <TextField id="beginTimeField" fx:id="beginTimeField1" promptText="Begin time" />
+                        <TextField id="endTimeField" fx:id="endTimeField1" promptText="End time" />
                      </children>
                   </HBox>
-                  <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0">
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" translateX="5.0">
                      <children>
-                        <Button id="rosterAddButton" fx:id="rosterAddButton" mnemonicParsing="false" text="Add" />
-                        <Button id="rosterEditButton" fx:id="rosterEditButton" mnemonicParsing="false" text="Edit" />
-                        <Button id="rosterDeleteButton" fx:id="rosterDeleteButton" mnemonicParsing="false" text="Delete" />
-                        <Button id="rosterSaveButton" fx:id="rosterSaveButton" mnemonicParsing="false" text="Save" />
+                        <Button id="rosterAddButton" fx:id="rosterAddButton1" mnemonicParsing="false" text="Add" />
+                        <Button id="rosterEditButton" fx:id="rosterEditButton1" mnemonicParsing="false" text="Edit" />
+                        <Button id="rosterDeleteButton" fx:id="rosterDeleteButton1" mnemonicParsing="false" text="Delete" />
+                        <Button id="rosterSaveButton" fx:id="rosterSaveButton1" mnemonicParsing="false" text="Save" />
                      </children>
                   </HBox>
                </children>
             </VBox>
-         </content></Tab>
+         </content>
+      </Tab>
     <Tab text="PersonManager">
          <content>
             <VBox prefHeight="460.0" prefWidth="643.0">

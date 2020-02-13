@@ -13,6 +13,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class Gui implements Initializable {
@@ -34,7 +37,26 @@ public class Gui implements Initializable {
     //textfield
     @FXML private TextField teacherNameField;
     @FXML private TextField studentNameField;
+    //ArrayList test
+    @FXML private ArrayList<String> RandomTeacher;
+    public ArrayList<String> RandomTeacher() {
+        RandomTeacher.add("Pieter");
+        RandomTeacher.add("David");
+        RandomTeacher.add("Jan");
+        return RandomTeacher;
+    }
+//    Random rand = new Random();
+//    int random = rand.nextInt(RandomTeacher.size());
+//    String note = RandomTeacher.get(random);
+
     //list gender,subject,group
+    // private ArrayList<String>nameTeachers;
+//    ArrayList<String> nameTeachers=new ArrayList<String>();
+//        nameTeachers.add(studentNameField.getText());
+//
+//    for (String allTeachers:nameTeachers) {
+//        ObservableList<String> comboTeacherList= FXCollections.observableArrayList(allTeachers);
+//    }
     ObservableList<String> comboTeacherSubject = FXCollections.observableArrayList("OGP", "Math", "OOM", "2D Graphics", "P&OC");
     ObservableList<String> comboTeacherGender  = FXCollections.observableArrayList("Male", "Female");
     ObservableList<String> comboStudentGroup   = FXCollections.observableArrayList("A", "B", "C", "D", "E", "F");
@@ -81,8 +103,7 @@ public class Gui implements Initializable {
             }
         });
     }
-    //Buttons
-    //Teacher
+    //Buttons Teacher
     @FXML void teacherAddButton(){
         ObservableList<Teacher> list = FXCollections.observableArrayList(new data.Teacher(teacherNameField.getText(), TeacherGender, TeacherSubject));
        data.Teacher TeacherTotal = new data.Teacher(teacherNameField.getText(), TeacherGender, TeacherSubject);
@@ -107,7 +128,9 @@ public class Gui implements Initializable {
         System.out.println("TeacherSave");
     }
     @FXML void teacherGenerateButton(){
+        ObservableList<Teacher> list = FXCollections.observableArrayList(new data.Teacher(RandomTeacher.get(0),TeacherGender,TeacherSubject));
         System.out.println("TeacherGenerate");
+        teachersTable.getItems().addAll(list);
     }
     //Student
     @FXML void studentAddButton(){
@@ -117,7 +140,7 @@ public class Gui implements Initializable {
         studentsTable.getItems().addAll(list1);
     }
     @FXML void studentDeleteButton(){
-        ObservableList<Teacher> list ,list2;
+        ObservableList<Student> list ,list2;
         list=studentsTable.getItems();
         list2=studentsTable.getSelectionModel().getSelectedItems();
         list2.forEach(list::remove);
@@ -136,11 +159,10 @@ public class Gui implements Initializable {
     @FXML void studentGenerateButton(){
         System.out.println("StudentGenerate");
     }
+    //generate
     @FXML void generateMaxButton(){
         System.out.println("GenerateMax");
     }
-     //for test if tableview works
-        ObservableList<Teacher> testlist = FXCollections.observableArrayList(new Teacher("test","test","test"));
     //Making ComboBox working
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -160,9 +182,7 @@ public class Gui implements Initializable {
     }
     //TextFields names
     public void teacherName(){
-        System.out.println("TeacherName");
-    }
+        System.out.println("TeacherName"); }
     public void studentName(){
-        System.out.println("StudentName");
-    }
+        System.out.println("StudentName"); }
 }
