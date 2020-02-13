@@ -39,24 +39,7 @@ public class Gui implements Initializable {
     @FXML private TextField studentNameField;
     //ArrayList test
     @FXML private ArrayList<String> RandomTeacher;
-    public ArrayList<String> RandomTeacher() {
-        RandomTeacher.add("Pieter");
-        RandomTeacher.add("David");
-        RandomTeacher.add("Jan");
-        return RandomTeacher;
-    }
-//    Random rand = new Random();
-//    int random = rand.nextInt(RandomTeacher.size());
-//    String note = RandomTeacher.get(random);
 
-    //list gender,subject,group
-    // private ArrayList<String>nameTeachers;
-//    ArrayList<String> nameTeachers=new ArrayList<String>();
-//        nameTeachers.add(studentNameField.getText());
-//
-//    for (String allTeachers:nameTeachers) {
-//        ObservableList<String> comboTeacherList= FXCollections.observableArrayList(allTeachers);
-//    }
     ObservableList<String> comboTeacherSubject = FXCollections.observableArrayList("OGP", "Math", "OOM", "2D Graphics", "P&OC");
     ObservableList<String> comboTeacherGender  = FXCollections.observableArrayList("Male", "Female");
     ObservableList<String> comboStudentGroup   = FXCollections.observableArrayList("A", "B", "C", "D", "E", "F");
