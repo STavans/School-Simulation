@@ -9,7 +9,7 @@ public class Student extends Person {
     private SimpleStringProperty genderTBST;
     private SimpleStringProperty lastNameTBST;
 
-    public Student(String lastName,String gender,String Group) {
+    public Student(String lastName,String Group,String gender) {
         super(gender,lastName);
         this.Group=Group;
         groupTBST=new SimpleStringProperty(Group);
