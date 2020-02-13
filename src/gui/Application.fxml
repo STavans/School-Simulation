@@ -35,8 +35,8 @@
                   </VBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" translateX="5.0" translateY="10.0">
                      <children>
-                        <ComboBox id="teacherBox" fx:id="rosterTeacherColumn1" prefWidth="150.0" promptText="Teacher" />
-                        <ComboBox id="groupBox" fx:id="rosterGroupColumn" prefWidth="150.0" promptText="Group" />
+                        <ComboBox id="teacherBox" fx:id="teacherAllNameBox" onAction="#setrosterTeacherColumn1" prefWidth="150.0" promptText="Teacher" />
+                        <ComboBox id="groupBox" fx:id="studentGroupBoxs" onAction="#setStudentGroupBoxs" prefWidth="150.0" promptText="Group" />
                         <ComboBox id="classroomBox" fx:id="rosterClassroomColumn1" prefWidth="150.0" promptText="Classroom" />
                         <TextField id="beginTimeField" fx:id="beginTimeField1" promptText="Begin time" />
                         <TextField id="endTimeField" fx:id="endTimeField1" promptText="End time" />

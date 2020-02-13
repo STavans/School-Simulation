@@ -33,6 +33,8 @@ public class Main extends Application {
             gui.setTeacherGenderBox();
             gui.setStudentGroupBox();
             gui.setStudentGenderBox();
+            gui.setrosterTeacherColumn1();
+            gui.setStudentGroupBoxs();
 
 
         } catch (IOException e) {

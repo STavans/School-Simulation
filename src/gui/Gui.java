@@ -27,6 +27,8 @@ public class Gui implements Initializable {
     @FXML private ComboBox<String> teacherGenderBox;//2
     @FXML private ComboBox<String> studentGroupBox;//3
     @FXML private ComboBox<String> studentGenderBox;//4
+    @FXML private ComboBox<String> teacherAllNameBox;//5
+    @FXML private ComboBox<String> studentGroupBoxs;//5
     //new privates colums
     @FXML private TableColumn<Teacher, String> teacherNameColumn;
     @FXML private TableColumn<Teacher, String> teacherSubjectColumn;
@@ -61,8 +63,10 @@ public class Gui implements Initializable {
     ObservableList<String> comboTeacherGender  = FXCollections.observableArrayList("Male", "Female");
     ObservableList<String> comboStudentGroup   = FXCollections.observableArrayList("A", "B", "C", "D", "E", "F");
     ObservableList<String> comboStudentGender  = FXCollections.observableArrayList("Male", "Female");
+    ObservableList<String> comboTeacherNameList  = FXCollections.observableArrayList(teacherNameColumn);
 
-     //to get something out the combobox
+
+     //to get something out the combobox PersonManager
     private String TeacherSubject = "";
     public void setTeacherSubjectBox() {
         teacherSubjectBox.valueProperty().addListener(new ChangeListener<String>() {
@@ -103,6 +107,27 @@ public class Gui implements Initializable {
             }
         });
     }
+    //Roster
+    private String rosterTeacherColumn1 = "";
+    public void setrosterTeacherColumn1() {
+        teacherAllNameBox.valueProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                rosterTeacherColumn1 = observable.getValue().toString();
+                System.out.println(rosterTeacherColumn1);
+            }
+        });
+    }
+    private String StudentGroups = "";
+    public void setStudentGroupBoxs() {
+        studentGroupBoxs.valueProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                StudentGroups = observable.getValue().toString();
+                System.out.println(StudentGroups);
+            }
+        });
+    }
     //Buttons Teacher
     @FXML void teacherAddButton(){
         ObservableList<Teacher> list = FXCollections.observableArrayList(new data.Teacher(teacherNameField.getText(), TeacherGender, TeacherSubject));
@@ -128,9 +153,7 @@ public class Gui implements Initializable {
         System.out.println("TeacherSave");
     }
     @FXML void teacherGenerateButton(){
-        ObservableList<Teacher> list = FXCollections.observableArrayList(new data.Teacher(RandomTeacher.get(0),TeacherGender,TeacherSubject));
         System.out.println("TeacherGenerate");
-        teachersTable.getItems().addAll(list);
     }
     //Student
     @FXML void studentAddButton(){
@@ -166,10 +189,14 @@ public class Gui implements Initializable {
     //Making ComboBox working
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //PersonManager
         teacherSubjectBox.setItems(comboTeacherSubject);
         teacherGenderBox.setItems(comboTeacherGender);
         studentGroupBox.setItems(comboStudentGroup);
         studentGenderBox.setItems(comboStudentGender);
+        teacherAllNameBox.setItems(comboTeacherNameList);
+        //Roster
+        studentGroupBoxs.setItems(comboStudentGroup);
         System.out.println("Combobox Initialised");
         //Table view working TB = tableview
         teacherGenderColumn.setCellValueFactory(new PropertyValueFactory("genderTB"));
