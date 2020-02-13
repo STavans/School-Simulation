@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import java.net.URL;
@@ -42,7 +43,6 @@ public class Gui implements Initializable {
     //ArrayList test
     @FXML private ArrayList<String> RandomTeacher;
 
-    private StudentList studentList = new StudentList();
     //list PersonManager
     private ObservableList<String> comboTeacherSubject = FXCollections.observableArrayList("OGP", "Math", "OOM", "2D Graphics", "P&OC");
     private ObservableList<String> comboTeacherGender  = FXCollections.observableArrayList("Male", "Female");
@@ -165,8 +165,8 @@ public class Gui implements Initializable {
     @FXML void teacherEditButton(){
         teachersTable.setEditable(true);
         teacherNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        teacherSubjectColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        teacherGenderColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        teacherSubjectColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboTeacherSubject));
+        teacherGenderColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboStudentGender));
         System.out.println("TeacherEdit" + teacherNameField.getText() + " " + TeacherGender + " " + TeacherSubject);
     }
     @FXML void teacherSaveButton(){
@@ -179,9 +179,8 @@ public class Gui implements Initializable {
     @FXML void studentAddButton(){
         ObservableList<Student> list1 = FXCollections.observableArrayList(new data.Student(studentNameField.getText(), StudentGroup, StudentGender));
         data.Student student = new data.Student(studentNameField.getText(), StudentGroup, StudentGender);
-        studentList.addStudent(student);
         studentsTable.getItems().addAll(list1);
-        studentList.print();
+
     }
     @FXML void studentDeleteButton(){
         ObservableList<Student> list ,list2;
@@ -192,8 +191,8 @@ public class Gui implements Initializable {
     @FXML void studentEditButton(){
         studentsTable.setEditable(true);
         studentNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        studentGroupColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        studentGenderColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        studentGroupColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboTeacherSubject));
+        studentGenderColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboStudentGender));
         System.out.println("StudentEdit: " + studentNameField.getText() + " " + StudentGroup + " " +  StudentGender);
     }
     @FXML void studentSaveButton(){
