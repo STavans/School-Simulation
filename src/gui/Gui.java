@@ -1,6 +1,7 @@
 package gui;
 
 import data.Student;
+import data.StudentList;
 import data.Teacher;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -45,13 +46,14 @@ public class Gui implements Initializable {
     //ArrayList test
     @FXML private ArrayList<String> RandomTeacher;
 
+    private StudentList studentList = new StudentList();
     //list PersonManager
     ObservableList<String> comboTeacherSubject = FXCollections.observableArrayList("OGP", "Math", "OOM", "2D Graphics", "P&OC");
     ObservableList<String> comboTeacherGender  = FXCollections.observableArrayList("Male", "Female");
     ObservableList<String> comboStudentGroup   = FXCollections.observableArrayList("A", "B", "C", "D", "E", "F");
     ObservableList<String> comboStudentGender  = FXCollections.observableArrayList("Male", "Female");
     //Roster
-    ObservableList<String> comboTeacherNameList  = FXCollections.observableArrayList("david");
+    ObservableList<String> comboTeacherNameList  = FXCollections.observableArrayList();
     ObservableList<String> comboClassRoom  = FXCollections.observableArrayList("001","101","202","220");
     ObservableList<String> comboBeginTime  = FXCollections.observableArrayList("9:00","10:00","11:00","12:00","13:00","14:00","15:00");
     ObservableList<String> comboEndTime  = FXCollections.observableArrayList("9:50","10:50","11:50","12:50","13:50","14:50","15:50");
@@ -153,6 +155,7 @@ public class Gui implements Initializable {
     @FXML void teacherAddButton(){
         ObservableList<Teacher> list = FXCollections.observableArrayList(new data.Teacher(teacherNameField.getText(), TeacherGender, TeacherSubject));
        data.Teacher TeacherTotal = new data.Teacher(teacherNameField.getText(), TeacherGender, TeacherSubject);
+
         System.out.println("TeacherAdd: " + TeacherTotal.getLastName() + " " + TeacherTotal.getGender() + " " + TeacherTotal.getTeacherSubject());
         teachersTable.getItems().addAll(list);
    }
@@ -179,16 +182,17 @@ public class Gui implements Initializable {
     //Student
     @FXML void studentAddButton(){
         ObservableList<Student> list1 = FXCollections.observableArrayList(new data.Student(studentNameField.getText(), StudentGroup, StudentGender));
-        data.Student StudentTotal = new data.Student(studentNameField.getText(), StudentGender, StudentGroup);
-        System.out.println("StudentAdd: " + StudentTotal.getLastName() + " " +  StudentTotal.getGender() + " " +  StudentTotal.getStudentGroup());
+        data.Student student = new data.Student(studentNameField.getText(), StudentGender, StudentGroup);
+        studentList.addStudent(student);
+//        System.out.println("StudentAdd: " + student.getLastName() + " " +  student.getGender() + " " +  student.getStudentGroup());
         studentsTable.getItems().addAll(list1);
+        studentList.print();
     }
     @FXML void studentDeleteButton(){
         ObservableList<Student> list ,list2;
         list=studentsTable.getItems();
         list2=studentsTable.getSelectionModel().getSelectedItems();
         list2.forEach(list::remove);
-        System.out.println("StudentDelete: " + studentNameField.getText() + " " + StudentGroup + " " +  StudentGender);
     }
     @FXML void studentEditButton(){
         studentsTable.setEditable(true);
