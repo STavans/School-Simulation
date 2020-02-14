@@ -171,7 +171,7 @@ public class Gui implements Initializable {
             File teacherAdd = new File("Student.txt");
             FileWriter teacherAddFr = new FileWriter(teacherAdd, true);
             BufferedWriter teacherAddBr = new BufferedWriter(teacherAddFr);
-            teacherAddBr.write(studentNameField.getText() + "," + StudentGender + "," + StudentGroup + ":" + "\n");
+            teacherAddBr.write(studentNameField.getText() + "," + StudentGender + "," + StudentGroup + "\n");
 
             teacherAddBr.close();
             teacherAddFr.close();
@@ -237,7 +237,7 @@ public class Gui implements Initializable {
             File studentAdd = new File("Student.txt");
             FileWriter studentAddFr = new FileWriter(studentAdd, true);
             BufferedWriter studentAddBr = new BufferedWriter(studentAddFr);
-            studentAddBr.write("name: " + studentNameField.getText() + "," + "group: " + StudentGroup + "," + "gender: " + StudentGender + ":" + "\n");
+            studentAddBr.write("name: " + studentNameField.getText() + "," + "group: " + StudentGroup + "," + "gender: " + StudentGender + "\n");
 
             studentAddBr.close();
             studentAddFr.close();
@@ -299,12 +299,19 @@ public class Gui implements Initializable {
     //Button Roster
     @FXML void rosterAddButton(){
         ObservableList<Lesson> list = FXCollections.observableArrayList(new data.Lesson(rosterTeacherColumn1, StudentGroups, ClassRoom,BeginTime,EndTime));
-       // data.Lesson RosterTotal = new data.Lesson(rosterTeacherColumn1, StudentGroups, ClassRoom,BeginTime,EndTime);
-        // System.out.println("TeacherAdd: " + TeacherTotal.getLastName() + " " + TeacherTotal.getGender() + " " + TeacherTotal.getTeacherSubject());
+        rosterTable.getItems().addAll((data.Student)list);
 
-            rosterTable.getItems().addAll((data.Student)list);
+        try {
+            File RosterAdd = new File("Roster.txt");
+            FileWriter rosterAddFr = new FileWriter(RosterAdd, true);
+            BufferedWriter rosterAddBr = new BufferedWriter(rosterAddFr);
+            rosterAddBr.write("name: " + rosterTeacherColumn1 + "," + "group: " + StudentGroups + "," + "classroom: " + ClassRoom + "," + "begin time: " + BeginTime + "," + "end time: " + EndTime + "\n");
 
+            rosterAddBr.close();
+            rosterAddFr.close();
+        }catch (IOException e){
 
+        }
     }
 
     //Making ComboBox working
