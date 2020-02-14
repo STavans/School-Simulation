@@ -6,12 +6,12 @@ public class Lesson {
     private String beginLesson;
     private String endLesson;
     private String subject;
-    private Room name;
-    private Room classRoom;
-    private Group code;
-    private Group amount;
-    private Teacher TeacherName;
-    private Student firstName;
+    //private Room name;
+    private String classRoom;
+    private String code;
+   // private Group amount;
+    private String lastName;
+   //private Student firstName;
     private Group group;
 
     private SimpleStringProperty teacherTB;
@@ -22,15 +22,15 @@ public class Lesson {
 
 
     public Lesson (Teacher teacher,Group group,Room classRoom , String beginLesson,String endLesson) {
-        this.TeacherName=teacher;
-        this.group=group;
-        this.classRoom=classRoom;
+        this.lastName = teacher.getLastName();
+        this.code=group.getCode();
+        this.classRoom=classRoom.getName();
         this.beginLesson = beginLesson;
         this.endLesson = endLesson;
 
-        teacherTB = new SimpleStringProperty(teacher);
-        groupTB = new SimpleStringProperty(group);
-        classRoomTB = new SimpleStringProperty(classRoom);
+        teacherTB = new SimpleStringProperty(teacher.getLastNameTB());
+        groupTB = new SimpleStringProperty(group.getCode());
+        classRoomTB = new SimpleStringProperty(classRoom.getName());
         beginLessonTB = new SimpleStringProperty(beginLesson);
         endLessonTB = new SimpleStringProperty(endLesson);
 
@@ -59,20 +59,20 @@ public class Lesson {
         this.endLesson = endLesson;
     }
 
-    public Room getClassRoom() {
+    public String getClassRoom() {
         return classRoom;
     }
 
-    public void setClassRoom(Room classRoom) {
+    public void setClassRoom(String classRoom) {
         this.classRoom = classRoom;
     }
 
-    public Teacher getTeacherName() {
-        return TeacherName;
+    public String getTeacherName() {
+        return lastName;
     }
 
-    public void setTeacherName(Teacher teacherName) {
-        TeacherName = teacherName;
+    public void setTeacherName(String teacherName) {
+        lastName = teacherName;
     }
 
     public Group getGroup() {
@@ -143,4 +143,11 @@ public class Lesson {
         this.teacherTB.set(teacherTB);
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 }
