@@ -45,9 +45,9 @@
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" translateX="5.0">
                      <children>
                         <Button id="rosterAddButton" fx:id="rosterAddButtonBox" mnemonicParsing="false" onAction="#rosterAddButton" text="Add" />
-                        <Button id="rosterEditButton" fx:id="rosterEditButton1" mnemonicParsing="false" text="Edit" />
-                        <Button id="rosterDeleteButton" fx:id="rosterDeleteButton1" mnemonicParsing="false" text="Delete" />
-                        <Button id="rosterSaveButton" fx:id="rosterSaveButton1" mnemonicParsing="false" text="Save" />
+                        <Button id="rosterEditButton" fx:id="rosterEditButton" mnemonicParsing="false" onAction="#rosterEditButton" text="Edit" />
+                        <Button id="rosterDeleteButton" fx:id="rosterDeleteButton" mnemonicParsing="false" onAction="#rosterDeleteButton" text="Delete" />
+                        <Button id="rosterSaveButton" fx:id="rosterSaveButton" mnemonicParsing="false" onAction="#rosterSaveButton" text="Save" />
                      </children>
                   </HBox>
                </children>

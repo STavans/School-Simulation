@@ -311,6 +311,17 @@ public class Gui implements Initializable {
 
         }
     }
+    @FXML void rosterDeleteButton(){
+        System.out.println("doet het");
+    }
+
+        @FXML void rosterEditButton(){
+            System.out.println("doet het");
+        }
+
+            @FXML void rosterSaveButton(){
+                System.out.println("doet het");
+            }
 
     //Making ComboBox working
     @Override
