@@ -23,7 +23,7 @@ public class Gui implements Initializable {
     //tableView
     @FXML private TableView<Teacher> teachersTable;
     @FXML private TableView<Student> studentsTable;
-    @FXML private TableView<Student> rosterTable;
+    @FXML private TableView<Lesson> rosterTable;
 
     //ComboBox
     @FXML private ComboBox<String> teacherSubjectBox;//1
@@ -46,7 +46,7 @@ public class Gui implements Initializable {
     //Roster
     @FXML private TableColumn<Lesson, String> rosterTeacherColumn;
     @FXML private TableColumn<Lesson, String> rosterGroupColumn;
-    @FXML private TableColumn<Lesson, String> rosterClassRoomColumn;
+    @FXML private TableColumn<Lesson, String> rosterClassroomColumn;
     @FXML private TableColumn<Lesson, String> rosterBeginTimeColumn;
     @FXML private TableColumn<Lesson, String> rosterEndTimeColumn;
     //textfield
@@ -299,7 +299,7 @@ public class Gui implements Initializable {
     //Button Roster
     @FXML void rosterAddButton(){
         ObservableList<Lesson> list = FXCollections.observableArrayList(new data.Lesson(rosterTeacherColumn1, StudentGroups, ClassRoom,BeginTime,EndTime));
-        rosterTable.getItems().addAll((data.Student)list);
+        rosterTable.getItems().addAll(list);
 
         try {
             File RosterAdd = new File("Roster.txt");
@@ -345,7 +345,7 @@ public class Gui implements Initializable {
         //roster
         rosterTeacherColumn.setCellValueFactory(new PropertyValueFactory<>("teacherTB"));
         rosterGroupColumn.setCellValueFactory(new PropertyValueFactory<>("groupTB"));
-        rosterClassRoomColumn.setCellValueFactory(new PropertyValueFactory<>("classRoomTB"));
+        rosterClassroomColumn.setCellValueFactory(new PropertyValueFactory<>("classRoomTB"));
         rosterBeginTimeColumn.setCellValueFactory(new PropertyValueFactory<>("beginTimeTB"));
         rosterEndTimeColumn.setCellValueFactory(new PropertyValueFactory<>("endTimeTB"));
 
