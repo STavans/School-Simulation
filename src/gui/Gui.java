@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Gui implements Initializable {
+
     //tableView
     @FXML private TableView<Teacher> teachersTable;
     @FXML private TableView<Student> studentsTable;
@@ -35,23 +36,28 @@ public class Gui implements Initializable {
     @FXML private ComboBox<String> beginTimeBox;//7
     @FXML private ComboBox<String> endTimeBox;//8
     @FXML private ComboBox<String> classRoomBox;//8
+
     //new privates colums Teacher
     @FXML private TableColumn<Teacher, String> teacherNameColumn;
     @FXML private TableColumn<Teacher, String> teacherSubjectColumn;
     @FXML private TableColumn<Teacher, String> teacherGenderColumn;
+
     //Student
     @FXML private TableColumn<Student, String> studentNameColumn;
     @FXML private TableColumn<Student, String> studentGroupColumn;
     @FXML private TableColumn<Student, String> studentGenderColumn;
+
     //Roster
     @FXML private TableColumn<Lesson, String> rosterTeacherColumn;
     @FXML private TableColumn<Lesson, String> rosterGroupColumn;
     @FXML private TableColumn<Lesson, String> rosterClassroomColumn;
     @FXML private TableColumn<Lesson, String> rosterBeginTimeColumn;
     @FXML private TableColumn<Lesson, String> rosterEndTimeColumn;
+
     //textfield
     @FXML private TextField teacherNameField;
     @FXML private TextField studentNameField;
+
     //ArrayList test
     @FXML private ArrayList<String> RandomTeacher;
 
@@ -60,6 +66,7 @@ public class Gui implements Initializable {
     private ObservableList<String> comboTeacherGender  = FXCollections.observableArrayList("Male", "Female");
     private ObservableList<String> comboStudentGroup   = FXCollections.observableArrayList("A", "B", "C", "D", "E", "F");
     private ObservableList<String> comboStudentGender  = FXCollections.observableArrayList("Male", "Female");
+
     //Roster
     private ObservableList<String> comboTeacherNameList  = FXCollections.observableArrayList("ddddd");
     private ObservableList<String> comboClassRoom  = FXCollections.observableArrayList("001","101","202","220");
@@ -70,95 +77,77 @@ public class Gui implements Initializable {
      //to get something out the combobox PersonManager
     private String TeacherSubject = "";
     public void setTeacherSubjectBox() {
-        teacherSubjectBox.valueProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                TeacherSubject = observable.getValue().toString();
-                System.out.println(TeacherSubject);
-            }
+        teacherSubjectBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            TeacherSubject = observable.getValue();
+            System.out.println(TeacherSubject);
         });
     }
+
     private String TeacherGender = "";
     public void setTeacherGenderBox() {
-        teacherGenderBox.valueProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                TeacherGender = observable.getValue().toString();
-                System.out.println(TeacherGender);
-            }
+        teacherGenderBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            TeacherGender = observable.getValue();
+            System.out.println(TeacherGender);
         });
     }
+
     private String StudentGroup = "";
     public void setStudentGroupBox() {
-        studentGroupBox.valueProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                StudentGroup = observable.getValue().toString();
-                System.out.println(StudentGroup);
-            }
+        studentGroupBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            StudentGroup = observable.getValue();
+            System.out.println(StudentGroup);
         });
     }
+
     private String StudentGender = "";
     public void setStudentGenderBox() {
-        studentGenderBox.valueProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                StudentGender = observable.getValue().toString();
-                System.out.println(StudentGender);
-            }
+        studentGenderBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            StudentGender = observable.getValue();
+            System.out.println(StudentGender);
         });
     }
+
     //Roster
     private data.Teacher rosterTeacherColumn1;
     public void setrosterTeacherColumn1() {
-        teacherAllNameBox.valueProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-               String rosterTeacherColumn1 = observable.getValue().toString();
-                System.out.println(rosterTeacherColumn1);
-            }
+        teacherAllNameBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+           String rosterTeacherColumn1 = observable.getValue();
+            System.out.println(rosterTeacherColumn1);
         });
     }
+
     private data.Group StudentGroups;
     public void setStudentGroupBoxs() {
-        studentGroupBoxs.valueProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-               String StudentGroups = observable.getValue().toString();
-                System.out.println(StudentGroups);
-            }
+        studentGroupBoxs.valueProperty().addListener((observable, oldValue, newValue) -> {
+           String StudentGroups = observable.getValue();
+            System.out.println(StudentGroups);
         });
     }
+
     private data.Room ClassRoom;
     public void setClassRoomBox() {
-        classRoomBox.valueProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                String ClassRoom = observable.getValue().toString();
-                System.out.println(ClassRoom);
-            }
+        classRoomBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            String ClassRoom = observable.getValue();
+            System.out.println(ClassRoom);
         });
     }
+
     private String BeginTime = "";
     public void setBeginTimeBox() {
-        beginTimeBox.valueProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                BeginTime = observable.getValue().toString();
-                System.out.println(BeginTime);
-            }
+        beginTimeBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            BeginTime = observable.getValue();
+            System.out.println(BeginTime);
         });
     }
+
     private String EndTime = "";
     public void setEndTimeBox() {
-        endTimeBox.valueProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                EndTime = observable.getValue().toString();
-                System.out.println(EndTime);
-            }
+        endTimeBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            EndTime = observable.getValue();
+            System.out.println(EndTime);
         });
     }
+
     //Buttons Teacher
     @FXML void teacherAddButton(){
         ObservableList<Teacher> list = FXCollections.observableArrayList(new data.Teacher(teacherNameField.getText(), TeacherGender, TeacherSubject));
@@ -179,6 +168,7 @@ public class Gui implements Initializable {
 
         }
    }
+
     @FXML void teacherDeleteButton(){
         ObservableList<Teacher> list ,list2;
         list=teachersTable.getItems();
@@ -207,6 +197,7 @@ public class Gui implements Initializable {
 
         System.out.println("TeacherDelete" + teacherNameField.getText() + " " + TeacherGender + " " + TeacherSubject);
     }
+
     @FXML void teacherEditButton(){
         teachersTable.setEditable(true);
         teacherNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -220,15 +211,16 @@ public class Gui implements Initializable {
         teacherGenderColumn.setOnEditCommit(event ->
                 teachersTable.getItems().get(event.getTablePosition().getRow()).setGender(event.getNewValue()));
     }
-    
 
     @FXML void teacherSaveButton(){
         System.out.println("TeacherSave");
         comboTeacherNameList.add("Bartinos");
     }
+
     @FXML void teacherGenerateButton(){
         System.out.println("TeacherGenerate");
     }
+
     //Student
     @FXML void studentAddButton(){
         ObservableList<Student> list1 = FXCollections.observableArrayList(new data.Student(studentNameField.getText(), StudentGroup, StudentGender));
@@ -245,8 +237,8 @@ public class Gui implements Initializable {
         }catch (IOException e){
 
         }
-
     }
+
     @FXML void studentDeleteButton(){
         ObservableList<Student> list ,list2;
         list = studentsTable.getItems();
@@ -273,6 +265,7 @@ public class Gui implements Initializable {
 
         }
     }
+
     @FXML void studentEditButton(){
         studentsTable.setEditable(true);
         studentNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -286,17 +279,21 @@ public class Gui implements Initializable {
         studentGenderColumn.setOnEditCommit(event ->
                 studentsTable.getItems().get(event.getTablePosition().getRow()).setGender(event.getNewValue()));
     }
+
     @FXML void studentSaveButton(){
 
         System.out.println(studentsTable.getItems());
     }
+
     @FXML void studentGenerateButton(){
         System.out.println("StudentGenerate");
     }
+
     //generate
     @FXML void generateMaxButton(){
         System.out.println("GenerateMax");
     }
+
     //Button Roster
     @FXML void rosterAddButton(){
         ObservableList<Lesson> list = FXCollections.observableArrayList(new data.Lesson(rosterTeacherColumn1, StudentGroups, ClassRoom,BeginTime,EndTime));
@@ -349,12 +346,12 @@ public class Gui implements Initializable {
         rosterClassroomColumn.setCellValueFactory(new PropertyValueFactory<>("classRoomTB"));
         rosterBeginTimeColumn.setCellValueFactory(new PropertyValueFactory<>("beginTimeTB"));
         rosterEndTimeColumn.setCellValueFactory(new PropertyValueFactory<>("endTimeTB"));
-
     }
 
     //TextFields names
     public void teacherName(){
         System.out.println("TeacherName"); }
+
     public void studentName(){
         System.out.println("StudentName"); }
 }

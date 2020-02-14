@@ -1,13 +1,13 @@
 package data;
 
 public class Room {
+
     private String name;
     private int classRoom;
 
     public Room () {
         this.name = name;
         this.classRoom = classRoom;
-
     }
 
     public String getName() {
@@ -21,6 +21,7 @@ public class Room {
     public int getNumber() {
         return classRoom;
     }
+
     public void setNumber(int classRoom) {
         this.classRoom = classRoom;
     }

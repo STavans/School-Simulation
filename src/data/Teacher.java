@@ -3,6 +3,7 @@ package data;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Teacher extends Person {
+
     private String subject;
     private SimpleStringProperty subjectTB;
     private SimpleStringProperty genderTB;
@@ -15,8 +16,8 @@ public class Teacher extends Person {
         subjectTB = new SimpleStringProperty(TeacherSubject);
         genderTB = new SimpleStringProperty(gender);
         lastNameTB = new SimpleStringProperty(lastName);
-
     }
+
     public void setTeacherSubject(String subject) {
         this.subject = subject;
     }

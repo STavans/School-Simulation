@@ -3,6 +3,7 @@ package data;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Student extends Person {
+
    // private String firstName;
     private String Group;
     private SimpleStringProperty groupTBST;
@@ -17,6 +18,7 @@ public class Student extends Person {
         lastNameTBST = new SimpleStringProperty(lastName);
 
     }
+
     public String getStudentGroup() { return Group;}
 
     public void setStudentGroup(String Group) {this.Group=Group;}

@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Main extends Application {
+
     public static void main(String[] args) {
         launch(args);
 
@@ -39,13 +40,8 @@ public class Main extends Application {
             gui.setEndTimeBox();
             gui.setClassRoomBox();
 
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
-//        System.out.println("done");
     }
 }
