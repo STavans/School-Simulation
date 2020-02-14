@@ -315,13 +315,13 @@ public class Gui implements Initializable {
         System.out.println("doet het");
     }
 
-        @FXML void rosterEditButton(){
-            System.out.println("doet het");
-        }
+    @FXML void rosterEditButton(){
+        System.out.println("doet het");
+    }
 
-            @FXML void rosterSaveButton(){
-                System.out.println("doet het");
-            }
+    @FXML void rosterSaveButton(){
+        System.out.println("doet het");
+    }
 
     //Making ComboBox working
     @Override
@@ -352,7 +352,7 @@ public class Gui implements Initializable {
         studentNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastNameTBST"));
 
         //roster
-//        rosterTeacherColumn.setCellValueFactory(new PropertyValueFactory<>("teacherTB"));
+       // rosterTeacherColumn.setCellValueFactory(new PropertyValueFactory<>("teacherTB"));
         rosterGroupColumn.setCellValueFactory(new PropertyValueFactory<>("groupTB"));
         rosterClassroomColumn.setCellValueFactory(new PropertyValueFactory<>("classRoomTB"));
         rosterBeginTimeColumn.setCellValueFactory(new PropertyValueFactory<>("beginTimeTB"));
