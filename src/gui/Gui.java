@@ -61,7 +61,7 @@ public class Gui implements Initializable {
     private ObservableList<String> comboStudentGroup   = FXCollections.observableArrayList("A", "B", "C", "D", "E", "F");
     private ObservableList<String> comboStudentGender  = FXCollections.observableArrayList("Male", "Female");
     //Roster
-    private ObservableList<String> comboTeacherNameList  = FXCollections.observableArrayList();
+    private ObservableList<String> comboTeacherNameList  = FXCollections.observableArrayList("ddddd");
     private ObservableList<String> comboClassRoom  = FXCollections.observableArrayList("001","101","202","220");
     private ObservableList<String> comboBeginTime  = FXCollections.observableArrayList("9:00","10:00","11:00","12:00","13:00","14:00","15:00");
     private ObservableList<String> comboEndTime  = FXCollections.observableArrayList("9:50","10:50","11:50","12:50","13:50","14:50","15:50");
@@ -224,6 +224,7 @@ public class Gui implements Initializable {
 
     @FXML void teacherSaveButton(){
         System.out.println("TeacherSave");
+        comboTeacherNameList.add("Bartinos");
     }
     @FXML void teacherGenerateButton(){
         System.out.println("TeacherGenerate");
@@ -343,7 +344,7 @@ public class Gui implements Initializable {
         studentNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastNameTBST"));
 
         //roster
-        rosterTeacherColumn.setCellValueFactory(new PropertyValueFactory<>("teacherTB"));
+//        rosterTeacherColumn.setCellValueFactory(new PropertyValueFactory<>("teacherTB"));
         rosterGroupColumn.setCellValueFactory(new PropertyValueFactory<>("groupTB"));
         rosterClassroomColumn.setCellValueFactory(new PropertyValueFactory<>("classRoomTB"));
         rosterBeginTimeColumn.setCellValueFactory(new PropertyValueFactory<>("beginTimeTB"));
