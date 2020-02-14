@@ -69,4 +69,9 @@ public class Teacher extends Person {
     public void setLastNameTB(String lastNameTB) {
         this.lastNameTB.set(lastNameTB);
     }
+
+    @Override
+    public String toString() {
+        return getLastName();
+    }
 }

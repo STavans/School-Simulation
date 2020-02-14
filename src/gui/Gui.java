@@ -4,6 +4,7 @@ import data.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -31,7 +32,7 @@ public class Gui implements Initializable {
     @FXML private ComboBox<String> teacherGenderBox;//2
     @FXML private ComboBox<String> studentGroupBox;//3
     @FXML private ComboBox<String> studentGenderBox;//4
-    @FXML private ComboBox<String> teacherAllNameBox;//5
+    @FXML private ComboBox<Teacher> teacherAllNameBox;//5
     @FXML private ComboBox<String> studentGroupBoxs;//6
     @FXML private ComboBox<String> beginTimeBox;//7
     @FXML private ComboBox<String> endTimeBox;//8
@@ -57,10 +58,7 @@ public class Gui implements Initializable {
     //textfield
     @FXML private TextField teacherNameField;
     @FXML private TextField studentNameField;
-
-    //ArrayList test
-    @FXML private ArrayList<String> RandomTeacher;
-
+    
     //list PersonManager
     private ObservableList<String> comboTeacherSubject = FXCollections.observableArrayList("OGP", "Math", "OOM", "2D Graphics", "P&OC");
     private ObservableList<String> comboTeacherGender  = FXCollections.observableArrayList("Male", "Female");
@@ -68,7 +66,7 @@ public class Gui implements Initializable {
     private ObservableList<String> comboStudentGender  = FXCollections.observableArrayList("Male", "Female");
 
     //Roster
-    private ObservableList<String> comboTeacherNameList  = FXCollections.observableArrayList("ddddd");
+    private ObservableList<Teacher> comboTeacherNameList  = FXCollections.observableArrayList();
     private ObservableList<String> comboClassRoom  = FXCollections.observableArrayList("001","101","202","220");
     private ObservableList<String> comboBeginTime  = FXCollections.observableArrayList("9:00","10:00","11:00","12:00","13:00","14:00","15:00");
     private ObservableList<String> comboEndTime  = FXCollections.observableArrayList("9:50","10:50","11:50","12:50","13:50","14:50","15:50");
@@ -111,7 +109,7 @@ public class Gui implements Initializable {
     private data.Teacher rosterTeacherColumn1;
     public void setrosterTeacherColumn1() {
         teacherAllNameBox.valueProperty().addListener((observable, oldValue, newValue) -> {
-           String rosterTeacherColumn1 = observable.getValue();
+           Teacher rosterTeacherColumn1 = observable.getValue();
             System.out.println(rosterTeacherColumn1);
         });
     }
@@ -214,7 +212,7 @@ public class Gui implements Initializable {
 
     @FXML void teacherSaveButton(){
         System.out.println("TeacherSave");
-        comboTeacherNameList.add("Bartinos");
+
     }
 
     @FXML void teacherGenerateButton(){
@@ -357,6 +355,15 @@ public class Gui implements Initializable {
         rosterClassroomColumn.setCellValueFactory(new PropertyValueFactory<>("classRoomTB"));
         rosterBeginTimeColumn.setCellValueFactory(new PropertyValueFactory<>("beginTimeTB"));
         rosterEndTimeColumn.setCellValueFactory(new PropertyValueFactory<>("endTimeTB"));
+
+        teachersTable.getItems().addListener(new ListChangeListener<Teacher>() {
+            @Override
+            public void onChanged(Change<? extends Teacher> c) {
+                comboTeacherNameList = teachersTable.getItems();
+                System.out.println("Teacher added to combobox");
+                teacherAllNameBox.setItems(comboTeacherNameList);
+            }
+        });
     }
 
     //TextFields names
