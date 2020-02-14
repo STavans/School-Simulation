@@ -21,7 +21,7 @@
                <children>
                   <VBox prefHeight="341.0" prefWidth="816.0">
                      <children>
-                        <TableView id="rosterTable" prefHeight="351.0" prefWidth="816.0">
+                        <TableView id="rosterTable" fx:id="rosterTable" prefHeight="351.0" prefWidth="816.0">
                            <columns>
                               <TableColumn fx:id="rosterNameColumn1" prefWidth="157.0" text="Name" />
                               <TableColumn fx:id="rosterSubjectColumn1" prefWidth="156.0" text="Subject" />
@@ -44,7 +44,7 @@
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" translateX="5.0">
                      <children>
-                        <Button id="rosterAddButton" fx:id="rosterAddButton1" mnemonicParsing="false" text="Add" />
+                        <Button id="rosterAddButton" fx:id="rosterAddButtonBox" mnemonicParsing="false" onAction="#rosterAddButton" text="Add" />
                         <Button id="rosterEditButton" fx:id="rosterEditButton1" mnemonicParsing="false" text="Edit" />
                         <Button id="rosterDeleteButton" fx:id="rosterDeleteButton1" mnemonicParsing="false" text="Delete" />
                         <Button id="rosterSaveButton" fx:id="rosterSaveButton1" mnemonicParsing="false" text="Save" />

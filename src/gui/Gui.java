@@ -21,6 +21,8 @@ public class Gui implements Initializable {
     //tableView
     @FXML private TableView<Teacher> teachersTable;
     @FXML private TableView<Student> studentsTable;
+    @FXML private TableView<Student> rosterTable;
+
     //ComboBox
     @FXML private ComboBox<String> teacherSubjectBox;//1
     @FXML private ComboBox<String> teacherGenderBox;//2
@@ -31,13 +33,20 @@ public class Gui implements Initializable {
     @FXML private ComboBox<String> beginTimeBox;//7
     @FXML private ComboBox<String> endTimeBox;//8
     @FXML private ComboBox<String> classRoomBox;//8
-    //new privates colums
+    //new privates colums Teacher
     @FXML private TableColumn<Teacher, String> teacherNameColumn;
     @FXML private TableColumn<Teacher, String> teacherSubjectColumn;
     @FXML private TableColumn<Teacher, String> teacherGenderColumn;
+    //Student
     @FXML private TableColumn<Student, String> studentNameColumn;
     @FXML private TableColumn<Student, String> studentGroupColumn;
     @FXML private TableColumn<Student, String> studentGenderColumn;
+    //Roster
+    @FXML private TableColumn<Lesson, String> rosterTeacherColumn;
+    @FXML private TableColumn<Lesson, String> rosterGroupColumn;
+    @FXML private TableColumn<Lesson, String> rosterClassRoomColumn;
+    @FXML private TableColumn<Lesson, String> rosterBeginTimeColumn;
+    @FXML private TableColumn<Lesson, String> rosterEndTimeColumn;
     //textfield
     @FXML private TextField teacherNameField;
     @FXML private TextField studentNameField;
@@ -222,30 +231,51 @@ public class Gui implements Initializable {
     @FXML void generateMaxButton(){
         System.out.println("GenerateMax");
     }
+    //Button Roster
+    @FXML void rosterAddButton(){
+        ObservableList<Lesson> list = FXCollections.observableArrayList(new data.Lesson(rosterTeacherColumn1, StudentGroups, ClassRoom,BeginTime,EndTime));
+       // data.Lesson RosterTotal = new data.Lesson(rosterTeacherColumn1, StudentGroups, ClassRoom,BeginTime,EndTime);
+       // System.out.println("TeacherAdd: " + TeacherTotal.getLastName() + " " + TeacherTotal.getGender() + " " + TeacherTotal.getTeacherSubject());
+        rosterTable.getItems().addAll(list);
+    }
+
     //Making ComboBox working
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         //PersonManager
         teacherSubjectBox.setItems(comboTeacherSubject);
         teacherGenderBox.setItems(comboTeacherGender);
         studentGroupBox.setItems(comboStudentGroup);
         studentGenderBox.setItems(comboStudentGender);
         teacherAllNameBox.setItems(comboTeacherNameList);
+
         //Roster
         studentGroupBoxs.setItems(comboStudentGroup);
         classRoomBox.setItems(comboClassRoom);
         beginTimeBox.setItems(comboBeginTime);
         endTimeBox.setItems(comboEndTime);
         System.out.println("Comboboxes Initialised");
+
         //Table view working TB = tableview
         teacherGenderColumn.setCellValueFactory(new PropertyValueFactory<>("genderTB"));
         teacherSubjectColumn.setCellValueFactory(new PropertyValueFactory<>("subjectTB"));
         teacherNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastNameTB"));
+
          //student
         studentGenderColumn.setCellValueFactory(new PropertyValueFactory<>("genderTBST"));
         studentGroupColumn.setCellValueFactory(new PropertyValueFactory<>("GroupTBST"));
         studentNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastNameTBST"));
+
+        //roster
+        rosterTeacherColumn.setCellValueFactory(new PropertyValueFactory<>("teacherTB"));
+        rosterGroupColumn.setCellValueFactory(new PropertyValueFactory<>("groupTB"));
+        rosterClassRoomColumn.setCellValueFactory(new PropertyValueFactory<>("classRoomTB"));
+        rosterBeginTimeColumn.setCellValueFactory(new PropertyValueFactory<>("beginTimeTB"));
+        rosterEndTimeColumn.setCellValueFactory(new PropertyValueFactory<>("endTimeTB"));
+
     }
+
     //TextFields names
     public void teacherName(){
         System.out.println("TeacherName"); }
