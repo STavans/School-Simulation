@@ -1,3 +1,4 @@
+import gui.ErrorHandler;
 import gui.Gui;
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -12,6 +13,7 @@ import java.io.IOException;
 public class Main extends Application {
 
     public static void main(String[] args) {
+        launch(gui.ErrorHandler.class);
         launch(args);
 
     }
