@@ -134,7 +134,7 @@ public class Gui implements Initializable {
         classRoomBox.valueProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                ClassRoom = observable.getValue().toString();
+                String ClassRoom = observable.getValue().toString();
                 System.out.println(ClassRoom);
             }
         });
