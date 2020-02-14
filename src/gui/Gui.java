@@ -20,6 +20,8 @@ public class Gui implements Initializable {
     //tableView
     @FXML private TableView<Teacher> teachersTable;
     @FXML private TableView<Student> studentsTable;
+    @FXML private TableView<Student> rosterTable;
+
     //ComboBox
     @FXML private ComboBox<String> teacherSubjectBox;//1
     @FXML private ComboBox<String> teacherGenderBox;//2
@@ -205,6 +207,15 @@ public class Gui implements Initializable {
     @FXML void generateMaxButton(){
         System.out.println("GenerateMax");
     }
+    //Button Roster
+    @FXML void rosterAddButton(){
+        ObservableList<Lesson> list = FXCollections.observableArrayList(new data.Lesson(rosterTeacherColumn1, StudentGroups, ClassRoom,BeginTime,EndTime));
+        data.Lesson RosterTotal = new data.Lesson(rosterTeacherColumn1, StudentGroups, ClassRoom,BeginTime,EndTime);
+
+       // System.out.println("TeacherAdd: " + TeacherTotal.getLastName() + " " + TeacherTotal.getGender() + " " + TeacherTotal.getTeacherSubject());
+        rosterTable.getItems().addAll(list);
+    }
+
     //Making ComboBox working
     @Override
     public void initialize(URL location, ResourceBundle resources) {
