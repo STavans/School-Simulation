@@ -12,6 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -163,6 +165,18 @@ public class Gui implements Initializable {
        data.Teacher TeacherTotal = new data.Teacher(teacherNameField.getText(), TeacherGender, TeacherSubject);
         System.out.println("TeacherAdd: " + TeacherTotal.getLastName() + " " + TeacherTotal.getGender() + " " + TeacherTotal.getTeacherSubject());
         teachersTable.getItems().addAll(list);
+
+        try {
+            File teacherAdd = new File("Teacher.txt");
+            FileWriter teacherAddFr = new FileWriter(teacherAdd, true);
+            BufferedWriter teacherAddBr = new BufferedWriter(teacherAddFr);
+            teacherAddBr.write(teacherNameField.getText() + "," + TeacherGender + "," + TeacherSubject + ":" + "\n");
+
+            teacherAddBr.close();
+            teacherAddFr.close();
+        }catch (IOException e){
+
+        }
    }
     @FXML void teacherDeleteButton(){
         ObservableList<Teacher> list ,list2;
@@ -190,12 +204,44 @@ public class Gui implements Initializable {
         data.Student StudentTotal = new data.Student(studentNameField.getText(), StudentGender, StudentGroup);
         System.out.println("StudentAdd: " + StudentTotal.getLastName() + " " +  StudentTotal.getGender() + " " +  StudentTotal.getStudentGroup());
         studentsTable.getItems().addAll(list1);
+
+        try {
+            File studentAdd = new File("Student.txt");
+            FileWriter studentAddFr = new FileWriter(studentAdd, true);
+            BufferedWriter studentAddBr = new BufferedWriter(studentAddFr);
+            studentAddBr.write(studentNameField.getText() + "," + StudentGender + "," + StudentGroup + ":" + "\n");
+
+            studentAddBr.close();
+            studentAddFr.close();
+        }catch (IOException e){
+
+        }
     }
     @FXML void studentDeleteButton(){
         ObservableList<Student> list ,list2;
         list=studentsTable.getItems();
         list2=studentsTable.getSelectionModel().getSelectedItems();
         list2.forEach(list::remove);
+
+        try {
+            File inputFile = new File("Student.txt");
+            File tempFile = new File("StudentTemp.txt");
+
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+            for (int i = 0; i < studentsTable.getItems().size(); i++){
+                writer.write(studentsTable.getItems().get(i).toString());
+            }
+
+            writer.close();
+            reader.close();
+
+            tempFile.renameTo(inputFile);
+        }catch (IOException e) {
+
+        }
+
         System.out.println("StudentDelete: " + studentNameField.getText() + " " + StudentGroup + " " +  StudentGender);
     }
     @FXML void studentEditButton(){
