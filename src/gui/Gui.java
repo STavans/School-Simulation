@@ -13,6 +13,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -164,12 +166,45 @@ public class Gui implements Initializable {
 
         System.out.println("TeacherAdd: " + TeacherTotal.getLastName() + " " + TeacherTotal.getGender() + " " + TeacherTotal.getTeacherSubject());
         teachersTable.getItems().addAll(list);
+
+        try {
+            File teacherAdd = new File("Student.txt");
+            FileWriter teacherAddFr = new FileWriter(teacherAdd, true);
+            BufferedWriter teacherAddBr = new BufferedWriter(teacherAddFr);
+            teacherAddBr.write(studentNameField.getText() + "," + StudentGender + "," + StudentGroup + ":" + "\n");
+
+            teacherAddBr.close();
+            teacherAddFr.close();
+        }catch (IOException e){
+
+        }
    }
     @FXML void teacherDeleteButton(){
         ObservableList<Teacher> list ,list2;
         list=teachersTable.getItems();
         list2=teachersTable.getSelectionModel().getSelectedItems();
         list2.forEach(list::remove);
+
+        try {
+            File inputFile = new File("Teacher.txt");
+            File tempFile = new File("TeacherTemp.txt");
+
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+            for (int i = 0; i < teachersTable.getItems().size(); i++){
+                writer.write(teachersTable.getItems().get(i).toString());
+            }
+
+            writer.close();
+            reader.close();
+
+            inputFile.delete();
+            tempFile.renameTo(new File("Teacher.txt"));
+        }catch (IOException e) {
+
+        }
+
         System.out.println("TeacherDelete" + teacherNameField.getText() + " " + TeacherGender + " " + TeacherSubject);
     }
     @FXML void teacherEditButton(){
@@ -198,6 +233,17 @@ public class Gui implements Initializable {
         ObservableList<Student> list1 = FXCollections.observableArrayList(new data.Student(studentNameField.getText(), StudentGroup, StudentGender));
         studentsTable.getItems().addAll(list1);
 
+        try {
+            File studentAdd = new File("Student.txt");
+            FileWriter studentAddFr = new FileWriter(studentAdd, true);
+            BufferedWriter studentAddBr = new BufferedWriter(studentAddFr);
+            studentAddBr.write("name: " + studentNameField.getText() + "," + "group: " + StudentGroup + "," + "gender: " + StudentGender + ":" + "\n");
+
+            studentAddBr.close();
+            studentAddFr.close();
+        }catch (IOException e){
+
+        }
 
     }
     @FXML void studentDeleteButton(){
@@ -205,7 +251,26 @@ public class Gui implements Initializable {
         list = studentsTable.getItems();
         list2 = studentsTable.getSelectionModel().getSelectedItems();
         list2.forEach(list::remove);
-        
+
+        try {
+            File inputFile = new File("Student.txt");
+            File tempFile = new File("StudentTemp.txt");
+
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+            for (int i = 0; i < studentsTable.getItems().size(); i++){
+                writer.write(studentsTable.getItems().get(i).toString());
+            }
+
+            writer.close();
+            reader.close();
+
+            inputFile.delete();
+            tempFile.renameTo(new File("Student.txt"));
+        }catch (IOException e) {
+
+        }
     }
     @FXML void studentEditButton(){
         studentsTable.setEditable(true);
@@ -234,8 +299,8 @@ public class Gui implements Initializable {
     //Button Roster
     @FXML void rosterAddButton(){
         ObservableList<Lesson> list = FXCollections.observableArrayList(new data.Lesson(rosterTeacherColumn1, StudentGroups, ClassRoom,BeginTime,EndTime));
-       // data.Lesson RosterTotal = new data.Lesson(rosterTeacherColumn1, StudentGroups, ClassRoom,BeginTime,EndTime);
-       // System.out.println("TeacherAdd: " + TeacherTotal.getLastName() + " " + TeacherTotal.getGender() + " " + TeacherTotal.getTeacherSubject());
+//        data.Lesson RosterTotal = new data.Lesson(rosterTeacherColumn1, StudentGroups, ClassRoom,BeginTime,EndTime);
+//        System.out.println("TeacherAdd: " + TeacherTotal.getLastName() + " " + TeacherTotal.getGender() + " " + TeacherTotal.getTeacherSubject());
         rosterTable.getItems().addAll(list);
     }
 
