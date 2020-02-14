@@ -19,7 +19,9 @@ public class Student extends Person {
     }
     public String getStudentGroup() { return Group;}
 
-    public void setStudentGroup(String Group) {this.Group=Group;}
+    public void setStudentGroup(String Group) {
+        this.Group=Group;
+    }
 
     public String getGroupTBST() {
         return groupTBST.get();

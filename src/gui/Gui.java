@@ -54,6 +54,14 @@ public class Gui implements Initializable {
     private ObservableList<String> comboBeginTime  = FXCollections.observableArrayList("9:00","10:00","11:00","12:00","13:00","14:00","15:00");
     private ObservableList<String> comboEndTime  = FXCollections.observableArrayList("9:50","10:50","11:50","12:50","13:50","14:50","15:50");
 
+    //groups
+    Group groupA = new Group("groupA");
+    Group groupB = new Group("groupB");
+    Group groupC = new Group("groupC");
+    Group groupD = new Group("groupD");
+    Group groupE = new Group("groupE");
+    Group groupF = new Group("groupF");
+
 
      //to get something out the combobox PersonManager
     private String TeacherSubject = "";
@@ -177,9 +185,10 @@ public class Gui implements Initializable {
     }
     //Student
     @FXML void studentAddButton(){
-        ObservableList<Student> list1 = FXCollections.observableArrayList(new data.Student(studentNameField.getText(), StudentGroup, StudentGender));
-        data.Student student = new data.Student(studentNameField.getText(), StudentGroup, StudentGender);
+        Student student = new Student(studentNameField.getText(), StudentGroup, StudentGender);
+        ObservableList<Student> list1 = FXCollections.observableArrayList(student);
         studentsTable.getItems().addAll(list1);
+
 
     }
     @FXML void studentDeleteButton(){
