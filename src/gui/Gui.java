@@ -5,6 +5,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.fxml.Initializable;
@@ -167,8 +168,16 @@ public class Gui implements Initializable {
         teacherNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         teacherSubjectColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboTeacherSubject));
         teacherGenderColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboStudentGender));
-        System.out.println("TeacherEdit" + teacherNameField.getText() + " " + TeacherGender + " " + TeacherSubject);
+
+        teacherNameColumn.setOnEditCommit(event ->
+                teachersTable.getItems().get(event.getTablePosition().getRow()).setLastName(event.getNewValue()));
+        teacherSubjectColumn.setOnEditCommit(event ->
+                teachersTable.getItems().get(event.getTablePosition().getRow()).setSubject(event.getNewValue()));
+        teacherGenderColumn.setOnEditCommit(event ->
+                teachersTable.getItems().get(event.getTablePosition().getRow()).setGender(event.getNewValue()));
     }
+    
+
     @FXML void teacherSaveButton(){
         System.out.println("TeacherSave");
     }
@@ -178,25 +187,33 @@ public class Gui implements Initializable {
     //Student
     @FXML void studentAddButton(){
         ObservableList<Student> list1 = FXCollections.observableArrayList(new data.Student(studentNameField.getText(), StudentGroup, StudentGender));
-        data.Student student = new data.Student(studentNameField.getText(), StudentGroup, StudentGender);
         studentsTable.getItems().addAll(list1);
+
 
     }
     @FXML void studentDeleteButton(){
         ObservableList<Student> list ,list2;
-        list=studentsTable.getItems();
-        list2=studentsTable.getSelectionModel().getSelectedItems();
+        list = studentsTable.getItems();
+        list2 = studentsTable.getSelectionModel().getSelectedItems();
         list2.forEach(list::remove);
+        
     }
     @FXML void studentEditButton(){
         studentsTable.setEditable(true);
         studentNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        studentGroupColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboTeacherSubject));
+        studentGroupColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboStudentGroup));
         studentGenderColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboStudentGender));
-        System.out.println("StudentEdit: " + studentNameField.getText() + " " + StudentGroup + " " +  StudentGender);
+
+        studentNameColumn.setOnEditCommit((TableColumn.CellEditEvent<Student, String> event) ->
+                studentsTable.getItems().get(event.getTablePosition().getRow()).setLastName(event.getNewValue()));
+        studentGroupColumn.setOnEditCommit(event ->
+                studentsTable.getItems().get(event.getTablePosition().getRow()).setStudentGroup(event.getNewValue()));
+        studentGenderColumn.setOnEditCommit(event ->
+                studentsTable.getItems().get(event.getTablePosition().getRow()).setGender(event.getNewValue()));
     }
     @FXML void studentSaveButton(){
-        System.out.println("StudentSave");
+
+        System.out.println(studentsTable.getItems());
     }
     @FXML void studentGenerateButton(){
         System.out.println("StudentGenerate");
