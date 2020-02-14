@@ -9,12 +9,12 @@ public class Student extends Person {
     private SimpleStringProperty genderTBST;
     private SimpleStringProperty lastNameTBST;
 
-    public Student(String lastName,String Group,String gender) {
+    public Student(String lastName, String Group, String gender) {
         super(gender,lastName);
-        this.Group=Group;
-        groupTBST=new SimpleStringProperty(Group);
-        genderTBST=new SimpleStringProperty(gender);
-        lastNameTBST=new SimpleStringProperty(lastName);
+        this.Group = Group;
+        groupTBST = new SimpleStringProperty(Group);
+        genderTBST = new SimpleStringProperty(gender);
+        lastNameTBST = new SimpleStringProperty(lastName);
 
     }
     public String getStudentGroup() { return Group;}
@@ -53,5 +53,10 @@ public class Student extends Person {
 
     public void setLastNameTBST(String lastNameTBST) {
         this.lastNameTBST.set(lastNameTBST);
+    }
+
+    @Override
+    public String toString() {
+        return "name: " + this.getLastName() + ", group: " + this.getStudentGroup()+ ", gender: " + this.getGender();
     }
 }
