@@ -109,27 +109,27 @@ public class Gui implements Initializable {
         });
     }
     //Roster
-    private String rosterTeacherColumn1 = "";
+    private data.Teacher rosterTeacherColumn1;
     public void setrosterTeacherColumn1() {
         teacherAllNameBox.valueProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                rosterTeacherColumn1 = observable.getValue().toString();
+               String rosterTeacherColumn1 = observable.getValue().toString();
                 System.out.println(rosterTeacherColumn1);
             }
         });
     }
-    private String StudentGroups = "";
+    private data.Group StudentGroups;
     public void setStudentGroupBoxs() {
         studentGroupBoxs.valueProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                StudentGroups = observable.getValue().toString();
+               String StudentGroups = observable.getValue().toString();
                 System.out.println(StudentGroups);
             }
         });
     }
-    private String ClassRoom = "";
+    private data.Room ClassRoom;
     public void setClassRoomBox() {
         classRoomBox.valueProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -162,7 +162,7 @@ public class Gui implements Initializable {
     //Buttons Teacher
     @FXML void teacherAddButton(){
         ObservableList<Teacher> list = FXCollections.observableArrayList(new data.Teacher(teacherNameField.getText(), TeacherGender, TeacherSubject));
-       data.Teacher TeacherTotal = new data.Teacher(teacherNameField.getText(), TeacherGender, TeacherSubject);
+        data.Teacher TeacherTotal = new data.Teacher(teacherNameField.getText(), TeacherGender, TeacherSubject);
 
         System.out.println("TeacherAdd: " + TeacherTotal.getLastName() + " " + TeacherTotal.getGender() + " " + TeacherTotal.getTeacherSubject());
         teachersTable.getItems().addAll(list);
@@ -299,9 +299,12 @@ public class Gui implements Initializable {
     //Button Roster
     @FXML void rosterAddButton(){
         ObservableList<Lesson> list = FXCollections.observableArrayList(new data.Lesson(rosterTeacherColumn1, StudentGroups, ClassRoom,BeginTime,EndTime));
-//        data.Lesson RosterTotal = new data.Lesson(rosterTeacherColumn1, StudentGroups, ClassRoom,BeginTime,EndTime);
-//        System.out.println("TeacherAdd: " + TeacherTotal.getLastName() + " " + TeacherTotal.getGender() + " " + TeacherTotal.getTeacherSubject());
-        rosterTable.getItems().addAll(list);
+       // data.Lesson RosterTotal = new data.Lesson(rosterTeacherColumn1, StudentGroups, ClassRoom,BeginTime,EndTime);
+        // System.out.println("TeacherAdd: " + TeacherTotal.getLastName() + " " + TeacherTotal.getGender() + " " + TeacherTotal.getTeacherSubject());
+
+            rosterTable.getItems().addAll((data.Student)list);
+
+
     }
 
     //Making ComboBox working
