@@ -21,10 +21,10 @@ public class Lesson {
     private SimpleStringProperty endLessonTB;
 
 
-    public Lesson (Teacher teacher,Group group,Room classRoom , String beginLesson,String endLesson) {
+    public Lesson (Teacher teacher, Group group, Room classRoom ,String beginLesson, String endLesson) {
         this.lastName = teacher.getLastName();
-        this.code=group.getCode();
-        this.classRoom=classRoom.getName();
+        this.code = group.getCode();
+        this.classRoom = classRoom.getName();
         this.beginLesson = beginLesson;
         this.endLesson = endLesson;
 
