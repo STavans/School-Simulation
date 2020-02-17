@@ -1,33 +1,34 @@
 package data;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Student extends Person {
 
    // private String firstName;
-    private String Group;
-    private SimpleStringProperty groupTBST;
+    private Group group;
+    private SimpleObjectProperty groupTBST;
     private SimpleStringProperty genderTBST;
     private SimpleStringProperty lastNameTBST;
 
-    public Student(String lastName, String Group, String gender) {
+    public Student(String lastName, Group group, String gender) {
         super(gender,lastName);
-        this.Group = Group;
-        groupTBST = new SimpleStringProperty(Group);
+        this.group = group;
+        groupTBST = new SimpleObjectProperty(group);
         genderTBST = new SimpleStringProperty(gender);
         lastNameTBST = new SimpleStringProperty(lastName);
 
     }
 
-    public String getStudentGroup() { return Group;}
+    public Group getStudentGroup() { return group;}
 
-    public void setStudentGroup(String Group) {this.Group=Group;}
+    public void setStudentGroup(Group group) {this.group = group;}
 
-    public String getGroupTBST() {
-        return groupTBST.get();
+    public Group getGroupTBST() {
+        return (Group) this.groupTBST.get();
     }
 
-    public SimpleStringProperty groupTBProperty() {
+    public SimpleObjectProperty groupTBProperty() {
         return groupTBST;
     }
 
@@ -59,6 +60,6 @@ public class Student extends Person {
 
     @Override
     public String toString() {
-        return "name: " + this.getLastName() + ", group: " + this.getStudentGroup()+ ", gender: " + this.getGender();
+        return "name: " + this.getLastName() + ", group: " + this.getStudentGroup() + ", gender: " + this.getGender();
     }
 }
