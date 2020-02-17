@@ -158,7 +158,7 @@ public class Gui implements Initializable {
             File teacherAdd = new File("Student.txt");
             FileWriter teacherAddFr = new FileWriter(teacherAdd, true);
             BufferedWriter teacherAddBr = new BufferedWriter(teacherAddFr);
-            teacherAddBr.write(studentNameField.getText() + "," + StudentGender + "," + StudentGroup + "\n");
+            teacherAddBr.write(studentNameField.getText() + ", " + StudentGender + ", " + StudentGroup + "\n");
 
             teacherAddBr.close();
             teacherAddFr.close();
@@ -228,7 +228,7 @@ public class Gui implements Initializable {
             File studentAdd = new File("Student.txt");
             FileWriter studentAddFr = new FileWriter(studentAdd, true);
             BufferedWriter studentAddBr = new BufferedWriter(studentAddFr);
-            studentAddBr.write("name: " + studentNameField.getText() + "," + "group: " + StudentGroup + "," + "gender: " + StudentGender + "\n");
+            studentAddBr.write("name: " + studentNameField.getText() + ", " + "group: " + StudentGroup + ", " + "gender: " + StudentGender + "\n");
 
             studentAddBr.close();
             studentAddFr.close();
