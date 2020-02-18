@@ -51,9 +51,10 @@ public class Gui implements Initializable {
     @FXML private TableColumn<Student, String> studentGenderColumn;
 
     //Roster
-    @FXML private TableColumn<Lesson, String> rosterTeacherColumn;
-    @FXML private TableColumn<Lesson, String> rosterGroupColumn;
-    @FXML private TableColumn<Lesson, String> rosterClassroomColumn;
+    @FXML private TableColumn<Lesson, Teacher> rosterTeacherColumn;
+    @FXML private TableColumn<Lesson, String> rosterSubjectColumn;
+    @FXML private TableColumn<Lesson, Group> rosterGroupColumn;
+    @FXML private TableColumn<Lesson, Classroom> rosterClassroomColumn;
     @FXML private TableColumn<Lesson, String> rosterBeginTimeColumn;
     @FXML private TableColumn<Lesson, String> rosterEndTimeColumn;
 
@@ -120,10 +121,10 @@ public class Gui implements Initializable {
     }
 
     //Roster
-    private data.Teacher rosterTeacherColumn1;
+    private Teacher rosterTeacherColumn1;
     public void setrosterTeacherColumn1() {
         teacherAllNameBox.valueProperty().addListener((observable, oldValue, newValue) -> {
-           Teacher rosterTeacherColumn1 = observable.getValue();
+            rosterTeacherColumn1 = observable.getValue();
             System.out.println(rosterTeacherColumn1);
         });
     }
@@ -131,7 +132,7 @@ public class Gui implements Initializable {
     private data.Group StudentGroups;
     public void setStudentGroupBoxs() {
         studentGroupBoxs.valueProperty().addListener((observable, oldValue, newValue) -> {
-            Group StudentGroups = observable.getValue();
+            StudentGroups = observable.getValue();
             System.out.println(StudentGroups);
         });
     }
@@ -139,7 +140,7 @@ public class Gui implements Initializable {
     private Classroom ClassRoom;
     public void setClassRoomBox() {
         classRoomBox.valueProperty().addListener((observable, oldValue, newValue) -> {
-            Classroom classRoom = observable.getValue();
+            ClassRoom = observable.getValue();
             System.out.println(ClassRoom);
         });
     }
@@ -182,9 +183,9 @@ public class Gui implements Initializable {
    }
 
     @FXML void teacherDeleteButton(){
-        ObservableList<Teacher> list ,list2;
-        list=teachersTable.getItems();
-        list2=teachersTable.getSelectionModel().getSelectedItems();
+        ObservableList<Teacher> list, list2;
+        list = teachersTable.getItems();
+        list2 = teachersTable.getSelectionModel().getSelectedItems();
         list2.forEach(list::remove);
 
         try {
@@ -308,6 +309,7 @@ public class Gui implements Initializable {
     //Button Roster
     @FXML void rosterAddButton(){
         ObservableList<Lesson> list = FXCollections.observableArrayList(new data.Lesson(rosterTeacherColumn1, StudentGroups, ClassRoom, BeginTime, EndTime));
+        System.out.println(rosterTeacherColumn1 + "" + StudentGroups + ClassRoom + BeginTime+ EndTime);
         rosterTable.getItems().addAll(list);
 
         try {
@@ -344,7 +346,6 @@ public class Gui implements Initializable {
         comboClassRoom.add(new Classroom(102));
         comboClassRoom.add(new Classroom(103));
         comboClassRoom.add(new Classroom(104));
-//        classRoomBox.setItems(comboClassRoom);
 
         //PersonManager
         teacherSubjectBox.setItems(comboTeacherSubject);
@@ -370,7 +371,8 @@ public class Gui implements Initializable {
         studentNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastNameTBST"));
 
         //roster
-       // rosterTeacherColumn.setCellValueFactory(new PropertyValueFactory<>("teacherTB"));
+        rosterTeacherColumn.setCellValueFactory(new PropertyValueFactory<>("teacherTB"));
+        rosterSubjectColumn.setCellValueFactory(new PropertyValueFactory<>("subjectTB"));
         rosterGroupColumn.setCellValueFactory(new PropertyValueFactory<>("groupTB"));
         rosterClassroomColumn.setCellValueFactory(new PropertyValueFactory<>("classRoomTB"));
         rosterBeginTimeColumn.setCellValueFactory(new PropertyValueFactory<>("beginTimeTB"));
@@ -378,7 +380,6 @@ public class Gui implements Initializable {
 
         teachersTable.getItems().addListener((ListChangeListener<Teacher>) c -> {
             comboTeacherNameList = teachersTable.getItems();
-            System.out.println("Teacher added to combobox");
             teacherAllNameBox.setItems(comboTeacherNameList);
         });
         studentsTable.getItems().addListener((ListChangeListener<Student>) c -> {
@@ -390,8 +391,6 @@ public class Gui implements Initializable {
             comboStudentGroupRoster.addAll(groupSet);
             comboStudentGroupRoster.sorted();
             studentGroupBoxs.setItems(comboStudentGroupRoster);
-
-
         });
     }
 
