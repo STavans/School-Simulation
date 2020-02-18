@@ -1,38 +1,38 @@
 package data;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Lesson {
-    private String beginLesson;
-    private String endLesson;
+
+    private Teacher teacher;
     private String subject;
-    //private Room name;
-    private String classRoom;
-    private String code;
-   // private Group amount;
-    private String lastName;
-   //private Student firstName;
     private Group group;
+    private Classroom classroom;
+    private String beginTime;
+    private String endTime;
 
-    private SimpleStringProperty teacherTB;
-    private SimpleStringProperty groupTB;
-    private SimpleStringProperty classRoomTB;
-    private SimpleStringProperty beginLessonTB;
-    private SimpleStringProperty endLessonTB;
+    private SimpleObjectProperty teacherTB;
+    private SimpleStringProperty subjectTB;
+    private SimpleObjectProperty groupTB;
+    private SimpleObjectProperty classRoomTB;
+    private SimpleStringProperty beginTimeTB;
+    private SimpleStringProperty endTimeTB;
 
 
-    public Lesson (Teacher teacher, Group group, Room classRoom ,String beginLesson, String endLesson) {
-        this.lastName = teacher.getLastName();
-        this.code = group.getCode();
-        this.classRoom = classRoom.getName();
-        this.beginLesson = beginLesson;
-        this.endLesson = endLesson;
+    public Lesson (Teacher teacher, Group group, Classroom classroom, String beginTime, String endTime) {
+        this.teacher = teacher;
+        this.group = group;
+        this.classroom = classroom;
+        this.beginTime = beginTime;
+        this.endTime = endTime;
 
-        teacherTB = new SimpleStringProperty(teacher.getLastNameTB());
-        groupTB = new SimpleStringProperty(group.getCode());
-        classRoomTB = new SimpleStringProperty(classRoom.getName());
-        beginLessonTB = new SimpleStringProperty(beginLesson);
-        endLessonTB = new SimpleStringProperty(endLesson);
+        teacherTB = new SimpleObjectProperty(this.teacher);
+        groupTB = new SimpleObjectProperty(this.group);
+        subjectTB = new SimpleStringProperty(this.teacher.getTeacherSubject());
+        classRoomTB = new SimpleObjectProperty(this.classroom);
+        beginTimeTB = new SimpleStringProperty(this.beginTime);
+        endTimeTB = new SimpleStringProperty(this.endTime);
 
     }
     public String getSubject() {
@@ -44,35 +44,35 @@ public class Lesson {
     }
 
     public String getBeginLesson() {
-        return beginLesson;
+        return beginTime;
     }
 
-    public void setBeginLesson(String beginLesson) {
-        this.beginLesson = beginLesson;
+    public void setBeginLesson(String beginTime) {
+        this.beginTime = beginTime;
     }
 
     public String getEndLesson() {
-        return endLesson;
+        return endTime;
     }
 
-    public void setEndLesson(String endLesson) {
-        this.endLesson = endLesson;
+    public void setEndLesson(String endTime) {
+        this.endTime = endTime;
     }
 
-    public String getClassRoom() {
-        return classRoom;
+    public Classroom getClassRoom() {
+        return classroom;
     }
 
-    public void setClassRoom(String classRoom) {
-        this.classRoom = classRoom;
+    public void setClassRoom(Classroom classroom) {
+        this.classroom = classroom;
     }
 
-    public String getTeacherName() {
-        return lastName;
+    public Teacher getTeacher() {
+        return teacher;
     }
 
-    public void setTeacherName(String teacherName) {
-        lastName = teacherName;
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 
     public Group getGroup() {
@@ -84,70 +84,79 @@ public class Lesson {
     }
 
     public String getBeginLessonTB() {
-        return beginLessonTB.get();
+        return beginTimeTB.get();
     }
 
-    public SimpleStringProperty beginLessonTBProperty() {
-        return beginLessonTB;
+    public SimpleStringProperty beginTimeTBProperty() {
+        return beginTimeTB;
     }
 
-    public void setBeginLessonTB(String beginLessonTB) {
-        this.beginLessonTB.set(beginLessonTB);
+    public void setBeginLessonTB(String beginTimeTB) {
+        this.beginTimeTB.set(beginTimeTB);
     }
 
     public String getEndLessonTB() {
-        return endLessonTB.get();
+        return endTimeTB.get();
     }
 
-    public SimpleStringProperty endLessonTBProperty() {
-        return endLessonTB;
+    public SimpleStringProperty endTimeTBProperty() {
+        return endTimeTB;
     }
 
-    public void setEndLessonTB(String endLessonTB) {
-        this.endLessonTB.set(endLessonTB);
+    public void setEndLessonTB(String endTimeTB) {
+        this.endTimeTB.set(endTimeTB);
     }
 
-    public String getClassRoomTB() {
-        return classRoomTB.get();
+    public Classroom getClassRoomTB() {
+        return (Classroom) classRoomTB.get();
     }
 
-    public SimpleStringProperty classRoomTBProperty() {
+    public SimpleObjectProperty classRoomTBProperty() {
         return classRoomTB;
     }
 
-    public void setClassRoomTB(String classRoomTB) {
+    public void setClassRoomTB(Classroom classRoomTB) {
         this.classRoomTB.set(classRoomTB);
     }
 
-    public String getGroupTB() {
-        return groupTB.get();
+    public Group getGroupTBST() {
+        return (Group) this.groupTB.get();
     }
 
-    public SimpleStringProperty groupTBProperty() {
+    public SimpleObjectProperty groupTBProperty() {
         return groupTB;
     }
 
-    public void setGroupTB(String groupTB) {
+    public void setGroupTB(Group groupTB) {
         this.groupTB.set(groupTB);
     }
 
-    public String getTeacherTB() {
-        return teacherTB.get();
+    public Teacher getTeacherTB() {
+        return (Teacher) teacherTB.get();
     }
 
-    public SimpleStringProperty teacherTBProperty() {
+    public SimpleObjectProperty teacherTBProperty() {
         return teacherTB;
     }
 
-    public void setTeacherTB(String teacherTB) {
+    public void setTeacherTB(Teacher teacherTB) {
         this.teacherTB.set(teacherTB);
     }
 
-    public String getCode() {
-        return code;
+    public String getSubjectTB() {
+        return subjectTB.get();
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public SimpleStringProperty subjectTBProperty() {
+        return subjectTB;
+    }
+
+    public void setSubjectTB(String subjectTB) {
+        this.subjectTB.set(subjectTB);
+    }
+
+    @Override
+    public String toString() {
+        return "Teacher: " + teacher.getLastName() + " subject; " + teacher.getTeacherSubject() + " classroom: " + classroom + " begin time: " + beginTime + " end time: "+ endTime;
     }
 }

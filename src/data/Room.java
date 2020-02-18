@@ -1,28 +1,10 @@
 package data;
 
-public class Room {
+public abstract class Room {
 
-    private String name;
-    private int classRoom;
+    private int roomID;
 
-    public Room () {
-        this.name = name;
-        this.classRoom = classRoom;
-    }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getNumber() {
-        return classRoom;
-    }
-
-    public void setNumber(int classRoom) {
-        this.classRoom = classRoom;
-    }
 }
+

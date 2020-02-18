@@ -60,6 +60,6 @@ public class Student extends Person {
 
     @Override
     public String toString() {
-        return "name: " + this.getLastName() + ", group: " + this.getStudentGroup() + ", gender: " + this.getGender();
+        return "name: " + this.lastNameTBST.get() + ", group: " + this.groupTBST.get() + ", gender: " + this.genderTBST.get();
     }
 }
