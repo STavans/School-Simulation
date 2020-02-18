@@ -38,7 +38,7 @@ public class Gui implements Initializable {
     @FXML private ComboBox<Group> studentGroupBoxs;//6
     @FXML private ComboBox<String> beginTimeBox;//7
     @FXML private ComboBox<String> endTimeBox;//8
-    @FXML private ComboBox<String> classRoomBox;//8
+    @FXML private ComboBox<Classroom> classRoomBox;//8
 
     //new privates colums Teacher
     @FXML private TableColumn<Teacher, String> teacherNameColumn;
@@ -64,13 +64,14 @@ public class Gui implements Initializable {
     private Set<Group> groupSet;
 
     //Groups
-    Group groupA = new Group("A");
-    Group groupB = new Group("B");
-    Group groupC = new Group("C");
-    Group groupD = new Group("D");
-    Group groupE = new Group("E");
-    Group groupF = new Group("F");
-    
+    private Group groupA = new Group("A");
+    private Group groupB = new Group("B");
+    private Group groupC = new Group("C");
+    private Group groupD = new Group("D");
+    private Group groupE = new Group("E");
+    private Group groupF = new Group("F");
+
+
     //list PersonManager
     private ObservableList<String> comboTeacherSubject = FXCollections.observableArrayList("OGP", "Math", "OOM", "2D Graphics", "P&OC");
     private ObservableList<String> comboTeacherGender  = FXCollections.observableArrayList("Male", "Female");
@@ -80,7 +81,7 @@ public class Gui implements Initializable {
     //Roster
     private ObservableList<Teacher> comboTeacherNameList  = FXCollections.observableArrayList();
     private ObservableList<Group> comboStudentGroupRoster = FXCollections.observableArrayList();
-    private ObservableList<String> comboClassRoom  = FXCollections.observableArrayList("001","101","202","220");
+    private ObservableList<Classroom> comboClassRoom  = FXCollections.observableArrayList();
     private ObservableList<String> comboBeginTime  = FXCollections.observableArrayList("9:00","10:00","11:00","12:00","13:00","14:00","15:00");
     private ObservableList<String> comboEndTime  = FXCollections.observableArrayList("9:50","10:50","11:50","12:50","13:50","14:50","15:50");
 
@@ -135,10 +136,10 @@ public class Gui implements Initializable {
         });
     }
 
-    private data.Room ClassRoom;
+    private Classroom ClassRoom;
     public void setClassRoomBox() {
         classRoomBox.valueProperty().addListener((observable, oldValue, newValue) -> {
-            String ClassRoom = observable.getValue();
+            Classroom classRoom = observable.getValue();
             System.out.println(ClassRoom);
         });
     }
@@ -292,7 +293,6 @@ public class Gui implements Initializable {
     }
 
     @FXML void studentSaveButton(){
-
         System.out.println(studentsTable.getItems());
     }
 
@@ -307,7 +307,7 @@ public class Gui implements Initializable {
 
     //Button Roster
     @FXML void rosterAddButton(){
-        ObservableList<Lesson> list = FXCollections.observableArrayList(new data.Lesson(rosterTeacherColumn1, StudentGroups, ClassRoom,BeginTime,EndTime));
+        ObservableList<Lesson> list = FXCollections.observableArrayList(new data.Lesson(rosterTeacherColumn1, StudentGroups, ClassRoom, BeginTime, EndTime));
         rosterTable.getItems().addAll(list);
 
         try {
@@ -331,13 +331,20 @@ public class Gui implements Initializable {
     }
 
     @FXML void rosterSaveButton(){
-        System.out.println("doet het");
-        System.out.println(studentsTable.getItems());
+        System.out.println(rosterTable.getItems());
+        System.out.println("Objects printed");
+
     }
 
     //Making ComboBox working
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        comboClassRoom.add(new Classroom(101));
+        comboClassRoom.add(new Classroom(102));
+        comboClassRoom.add(new Classroom(103));
+        comboClassRoom.add(new Classroom(104));
+//        classRoomBox.setItems(comboClassRoom);
 
         //PersonManager
         teacherSubjectBox.setItems(comboTeacherSubject);
@@ -384,7 +391,7 @@ public class Gui implements Initializable {
             comboStudentGroupRoster.sorted();
             studentGroupBoxs.setItems(comboStudentGroupRoster);
 
-            
+
         });
     }
 
