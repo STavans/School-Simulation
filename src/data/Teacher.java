@@ -2,12 +2,17 @@ package data;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class Teacher extends Person {
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class Teacher extends Person implements Serializable {
 
     private String subject;
-    private SimpleStringProperty subjectTB;
-    private SimpleStringProperty genderTB;
-    private SimpleStringProperty lastNameTB;
+    private transient SimpleStringProperty subjectTB;
+    private transient SimpleStringProperty genderTB;
+    private transient SimpleStringProperty lastNameTB;
 
     public Teacher (String lastName,String gender,String TeacherSubject) {
         super(gender, lastName);
@@ -73,5 +78,19 @@ public class Teacher extends Person {
     @Override
     public String toString() {
         return getLastName();
+    }
+
+    private void writeObject(ObjectOutputStream oos) throws IOException {
+        oos.defaultWriteObject();
+        oos.writeUTF(subjectTB.get());
+        oos.writeUTF(genderTB.get());
+        oos.writeUTF(lastNameTB.get());
+    }
+
+    private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+        ois.defaultReadObject();
+        subjectTB = new SimpleStringProperty(ois.readUTF());
+        genderTB = new SimpleStringProperty(ois.readUTF());
+        lastNameTB = new SimpleStringProperty(ois.readUTF());
     }
 }

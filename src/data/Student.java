@@ -3,13 +3,18 @@ package data;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class Student extends Person {
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class Student extends Person implements Serializable {
 
    // private String firstName;
     private Group group;
-    private SimpleObjectProperty groupTBST;
-    private SimpleStringProperty genderTBST;
-    private SimpleStringProperty lastNameTBST;
+    private transient SimpleObjectProperty groupTBST;
+    private transient SimpleStringProperty genderTBST;
+    private transient SimpleStringProperty lastNameTBST;
 
     public Student(String lastName, Group group, String gender) {
         super(gender,lastName);
@@ -61,5 +66,18 @@ public class Student extends Person {
     @Override
     public String toString() {
         return "name: " + this.lastNameTBST.get() + ", group: " + this.groupTBST.get() + ", gender: " + this.genderTBST.get();
+    }
+
+    private void writeObject(ObjectOutputStream oos) throws IOException {
+        oos.defaultWriteObject();
+        oos.writeObject(groupTBST.get());
+        oos.writeUTF(genderTBST.get());
+        oos.writeUTF(lastNameTBST.get());
+    }
+    private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+        ois.defaultReadObject();
+        groupTBST = new SimpleObjectProperty(ois.readObject());
+        genderTBST = new SimpleStringProperty(ois.readUTF());
+        lastNameTBST = new SimpleStringProperty(ois.readUTF());
     }
 }

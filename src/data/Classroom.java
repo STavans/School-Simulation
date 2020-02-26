@@ -1,6 +1,8 @@
 package data;
 
-public class Classroom {
+import java.io.Serializable;
+
+public class Classroom implements Serializable {
 
     private int classNumber;
 

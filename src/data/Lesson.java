@@ -3,7 +3,12 @@ package data;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class Lesson {
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class Lesson implements Serializable {
 
     private Teacher teacher;
     private String subject;
@@ -14,23 +19,24 @@ public class Lesson {
 
     private SimpleObjectProperty teacherTB;
     private SimpleStringProperty subjectTB;
-    private SimpleObjectProperty groupTB;
-    private SimpleObjectProperty classRoomTB;
+    private SimpleObjectProperty<Group> groupTB;
+    private SimpleObjectProperty<Classroom> classRoomTB;
     private SimpleStringProperty beginTimeTB;
     private SimpleStringProperty endTimeTB;
 
 
     public Lesson (Teacher teacher, Group group, Classroom classroom, String beginTime, String endTime) {
         this.teacher = teacher;
+        this.subject = this.teacher.getSubject();
         this.group = group;
         this.classroom = classroom;
         this.beginTime = beginTime;
         this.endTime = endTime;
 
         teacherTB = new SimpleObjectProperty(this.teacher);
-        groupTB = new SimpleObjectProperty(this.group);
-        subjectTB = new SimpleStringProperty(this.teacher.getTeacherSubject());
-        classRoomTB = new SimpleObjectProperty(this.classroom);
+        groupTB = new SimpleObjectProperty<>(this.group);
+        subjectTB = new SimpleStringProperty(this.subject);
+        classRoomTB = new SimpleObjectProperty<>(this.classroom);
         beginTimeTB = new SimpleStringProperty(this.beginTime);
         endTimeTB = new SimpleStringProperty(this.endTime);
 
@@ -108,10 +114,10 @@ public class Lesson {
     }
 
     public Classroom getClassRoomTB() {
-        return (Classroom) classRoomTB.get();
+        return classRoomTB.get();
     }
 
-    public SimpleObjectProperty classRoomTBProperty() {
+    public SimpleObjectProperty<Classroom> classRoomTBProperty() {
         return classRoomTB;
     }
 
@@ -120,10 +126,10 @@ public class Lesson {
     }
 
     public Group getGroupTBST() {
-        return (Group) this.groupTB.get();
+        return this.groupTB.get();
     }
 
-    public SimpleObjectProperty groupTBProperty() {
+    public SimpleObjectProperty<Group> groupTBProperty() {
         return groupTB;
     }
 
@@ -158,5 +164,38 @@ public class Lesson {
     @Override
     public String toString() {
         return "Teacher: " + teacher.getLastName() + " subject; " + teacher.getTeacherSubject() + " classroom: " + classroom + " begin time: " + beginTime + " end time: "+ endTime;
+    }
+
+    @SuppressWarnings("Duplicates")
+    private void writeObject(ObjectOutputStream oos) throws IOException {
+        oos.writeObject(this.teacher);
+        oos.writeUTF(this.subject);
+        oos.writeObject(this.group);
+        oos.writeObject(this.classroom);
+        oos.writeUTF(this.beginTime);
+        oos.writeUTF(this.endTime);
+        oos.writeObject(teacherTB.get());
+        oos.writeUTF(subjectTB.get());
+        oos.writeObject(groupTB.get());
+        oos.writeObject(classRoomTB.get());
+        oos.writeUTF(beginTimeTB.get());
+        oos.writeUTF(endTimeTB.get());
+    }
+    private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+
+        this.teacher = (Teacher) ois.readObject();
+        this.subject = ois.readUTF();
+        this.group = (Group) ois.readObject();
+        this.classroom = (Classroom) ois.readObject();
+        this.beginTime = ois.readUTF();
+        this.endTime = ois.readUTF();
+        teacherTB = new SimpleObjectProperty(ois.readObject());
+        subjectTB = new SimpleStringProperty(ois.readUTF());
+        groupTB = new SimpleObjectProperty(ois.readObject());
+        classRoomTB = new SimpleObjectProperty(ois.readObject());
+        beginTimeTB = new SimpleStringProperty(ois.readUTF());
+        endTimeTB = new SimpleStringProperty(ois.readUTF());
+
+
     }
 }

@@ -2,7 +2,9 @@ package data;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public abstract class Person {
+import java.io.Serializable;
+
+public abstract class Person implements Serializable {
 
     private String gender;
     private String lastName;
