@@ -24,7 +24,7 @@ public class FileIO {
     }
 
     public void writeAll(ObservableList<Student> obStudents, ObservableList<Teacher> obTeachers, ObservableList<Lesson> obLessons) throws IOException, ClassNotFoundException {
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("src/SaveFile"));
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("src/SaveFile.txt"));
 
         ArrayList<Student> allStudents = new ArrayList<>(obStudents);
         ArrayList<Teacher> allTeachers = new ArrayList<>(obTeachers);
@@ -38,7 +38,7 @@ public class FileIO {
     }
 
     public ObservableList getStudents() throws IOException, ClassNotFoundException {
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/SaveFile"));
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/SaveFile.txt"));
         ArrayList<Student> loadedStudents = (ArrayList<Student>) ois.readObject();
         ObservableList<Student> ObsStudents = observableArrayList(loadedStudents);
         ois.close();
@@ -47,7 +47,7 @@ public class FileIO {
     }
 
     public ObservableList getTeachers() throws IOException, ClassNotFoundException {
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/SaveFile"));
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/SaveFile.txt"));
         ois.readObject();
         ArrayList<Teacher> loadedTeachers = (ArrayList<Teacher>) ois.readObject();
         ObservableList<Teacher> ObsTeachers = observableArrayList(loadedTeachers);
@@ -56,7 +56,7 @@ public class FileIO {
     }
 
     public ObservableList getLessons() throws IOException, ClassNotFoundException {
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/SaveFile"));
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/SaveFile.txt"));
         ois.readObject();
         ois.readObject();
         ArrayList<Lesson> loadedLessons = (ArrayList<Lesson>) ois.readObject();
