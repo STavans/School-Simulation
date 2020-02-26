@@ -1,8 +1,7 @@
+import gui.FileIO;
 import gui.Gui;
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -12,6 +11,8 @@ import java.io.IOException;
 public class Main extends Application {
 
     public static void main(String[] args) {
+        FileIO fileIO = new FileIO();
+
         launch(args);
 
     }
@@ -39,7 +40,8 @@ public class Main extends Application {
             gui.setBeginTimeBox();
             gui.setEndTimeBox();
             gui.setClassRoomBox();
-
+            primaryStage.setOnCloseRequest(event ->
+                    gui.save());
         } catch (IOException e) {
             e.printStackTrace();
         }
