@@ -351,18 +351,40 @@ public class Gui implements Initializable {
     @FXML
     void rosterAddButton() {
         ObservableList<Lesson> list = observableArrayList(new data.Lesson(rosterTeacherColumn1, StudentGroups, ClassRoom, BeginTime, EndTime));
-        System.out.println(rosterTeacherColumn1 + "" + StudentGroups + ClassRoom + BeginTime + EndTime);
+        System.out.println(rosterTeacherColumn1 +" "+ StudentGroups +" "+ ClassRoom +" "+ BeginTime +" "+ EndTime);
         rosterTable.getItems().addAll(list);
     }
 
     @FXML
     void rosterDeleteButton() {
-        System.out.println("doet het");
+        ObservableList<Lesson> list, list2;
+        list = rosterTable.getItems();
+        list2 = rosterTable.getSelectionModel().getSelectedItems();
+        list2.forEach(list::remove);
     }
 
     @FXML
     void rosterEditButton() {
-        System.out.println("doet het");
+        rosterTable.setEditable(true);
+        rosterTeacherColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboTeacherNameList));
+        rosterSubjectColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboTeacherSubject));
+        rosterGroupColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboStudentGroupRoster));
+        rosterClassroomColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboClassRoom));
+        rosterBeginTimeColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboBeginTime));
+        rosterEndTimeColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboEndTime));
+
+        rosterTeacherColumn.setOnEditCommit(event ->
+                rosterTable.getItems().get(event.getTablePosition().getRow()).setTeacher(event.getNewValue()));
+        rosterSubjectColumn.setOnEditCommit(event ->
+                rosterTable.getItems().get(event.getTablePosition().getRow()).setSubject(event.getNewValue()));
+        rosterGroupColumn.setOnEditCommit(event ->
+                rosterTable.getItems().get(event.getTablePosition().getRow()).setGroup(event.getNewValue()));
+        rosterClassroomColumn.setOnEditCommit(event ->
+                rosterTable.getItems().get(event.getTablePosition().getRow()).setClassRoom(event.getNewValue()));
+        rosterBeginTimeColumn.setOnEditCommit(event ->
+                rosterTable.getItems().get(event.getTablePosition().getRow()).setBeginLesson(event.getNewValue()));
+        rosterEndTimeColumn.setOnEditCommit(event ->
+                rosterTable.getItems().get(event.getTablePosition().getRow()).setEndLesson(event.getNewValue()));
     }
 
     @FXML
