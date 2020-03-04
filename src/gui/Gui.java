@@ -385,4 +385,8 @@ public class Gui implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public void simulationStartButton(){
+        
+    }
 }
