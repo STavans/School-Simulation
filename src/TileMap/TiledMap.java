@@ -1,3 +1,5 @@
+package TileMap;
+
 import javax.imageio.ImageIO;
 import javax.json.Json;
 import javax.json.JsonArray;

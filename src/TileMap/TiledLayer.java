@@ -1,4 +1,5 @@
-import org.jfree.fx.FXGraphics2D;
+package TileMap;
+
 
 import javax.json.JsonObject;
 import java.awt.*;
