@@ -1,4 +1,4 @@
-package TileMap;
+package tileMap;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -10,13 +10,14 @@ import org.jfree.fx.ResizableCanvas;
 
 import java.awt.*;
 
-public class MapDemo extends Application {
+public class SimulationController {
 
 	private TiledMap map;
 	private ResizableCanvas canvas;
 
-	@Override
-	public void start(Stage stage) throws Exception {
+	public void start() throws Exception {
+		Stage stage = new Stage();
+		init();
 		BorderPane mainPane = new BorderPane();
 		canvas = new ResizableCanvas(g -> draw(g), mainPane);
 		mainPane.setCenter(canvas);
@@ -37,39 +38,21 @@ public class MapDemo extends Application {
 		stage.setTitle("Fading image");
 		stage.show();
 		draw(g2d);
-
-
 	}
 
 
-	public void init()
-	{
-		map = new TiledMap("Tilemap.json");
-
+	public void init(){
+		map = new TiledMap("/Tilemap.json");
 	}
 
 
 
-	public void draw(Graphics2D g)
-	{
+	public void draw(Graphics2D g){
 		g.setBackground(Color.pink);
 		g.clearRect(0,0,(int)canvas.getWidth(), (int)canvas.getHeight());
-
 		map.draw(g);
 	}
 
-	public void update(double deltaTime)
-	{
-
-
+	public void update(double deltaTime){
 	}
-
-
-
-
-	public static void main(String[] args)
-	{
-		launch(MapDemo.class);
-	}
-
 }
