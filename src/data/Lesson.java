@@ -17,12 +17,12 @@ public class Lesson implements Serializable {
     private String beginTime;
     private String endTime;
 
-    private SimpleObjectProperty teacherTB;
-    private SimpleStringProperty subjectTB;
-    private SimpleObjectProperty<Group> groupTB;
-    private SimpleObjectProperty<Classroom> classRoomTB;
-    private SimpleStringProperty beginTimeTB;
-    private SimpleStringProperty endTimeTB;
+    private transient SimpleObjectProperty teacherTB;
+    private transient SimpleStringProperty subjectTB;
+    private transient SimpleObjectProperty<Group> groupTB;
+    private transient SimpleObjectProperty<Classroom> classRoomTB;
+    private transient SimpleStringProperty beginTimeTB;
+    private transient SimpleStringProperty endTimeTB;
 
 
     public Lesson (Teacher teacher, Group group, Classroom classroom, String beginTime, String endTime) {
@@ -168,12 +168,7 @@ public class Lesson implements Serializable {
 
     @SuppressWarnings("Duplicates")
     private void writeObject(ObjectOutputStream oos) throws IOException {
-        oos.writeObject(this.teacher);
-        oos.writeUTF(this.subject);
-        oos.writeObject(this.group);
-        oos.writeObject(this.classroom);
-        oos.writeUTF(this.beginTime);
-        oos.writeUTF(this.endTime);
+        oos.defaultWriteObject();
         oos.writeObject(teacherTB.get());
         oos.writeUTF(subjectTB.get());
         oos.writeObject(groupTB.get());
@@ -182,20 +177,12 @@ public class Lesson implements Serializable {
         oos.writeUTF(endTimeTB.get());
     }
     private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
-
-        this.teacher = (Teacher) ois.readObject();
-        this.subject = ois.readUTF();
-        this.group = (Group) ois.readObject();
-        this.classroom = (Classroom) ois.readObject();
-        this.beginTime = ois.readUTF();
-        this.endTime = ois.readUTF();
+        ois.defaultReadObject();
         teacherTB = new SimpleObjectProperty(ois.readObject());
         subjectTB = new SimpleStringProperty(ois.readUTF());
         groupTB = new SimpleObjectProperty(ois.readObject());
         classRoomTB = new SimpleObjectProperty(ois.readObject());
         beginTimeTB = new SimpleStringProperty(ois.readUTF());
         endTimeTB = new SimpleStringProperty(ois.readUTF());
-
-
     }
 }
