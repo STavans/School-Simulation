@@ -11,7 +11,7 @@ import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import tileMap.SimulationController;
-import warningSign.warningSign;
+import warningSign.ErrorMessage;
 
 import java.io.*;
 import java.net.URL;
@@ -23,7 +23,7 @@ import static javafx.collections.FXCollections.observableArrayList;
 
 public class Gui implements Initializable {
     SimulationController simulationController = new SimulationController();
-    warningSign warningSign=new warningSign();
+    ErrorMessage errorMessage = new ErrorMessage();
 
     //tableView
     @FXML
@@ -129,7 +129,7 @@ public class Gui implements Initializable {
             teachersTable.setItems(fileIO.getTeachers());
             rosterTable.setItems(fileIO.getLessons());
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("No data found to load");
         }
 
         //PersonManager
@@ -353,13 +353,11 @@ public class Gui implements Initializable {
     @FXML
     void rosterAddButton() {
         ObservableList<Lesson> list = observableArrayList(new data.Lesson(rosterTeacherColumn1, StudentGroups, ClassRoom, BeginTime, EndTime));
-        System.out.println(rosterTeacherColumn1 +" "+ StudentGroups +" "+ ClassRoom +" "+ BeginTime +" "+ EndTime);
+        System.out.println(rosterTeacherColumn1 + " " + StudentGroups + " " + ClassRoom + " " + BeginTime + " " + EndTime);
 
-        if(comboEndTime.indexOf(EndTime)<comboBeginTime.indexOf(BeginTime)) {
-System.out.print("Fout");
-warningSign.start();
-        }
-        else {
+        if (comboEndTime.indexOf(EndTime) < comboBeginTime.indexOf(BeginTime)) {
+            errorMessage.showError("Can't add a new lesson: please select a chronological time order.");
+        } else {
             rosterTable.getItems().addAll(list);
         }
     }
@@ -417,7 +415,7 @@ warningSign.start();
         }
     }
 
-    public void simulationStartButton(){
+    public void simulationStartButton() {
         try {
             simulationController.start();
         } catch (Exception e) {
