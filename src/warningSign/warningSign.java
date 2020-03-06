@@ -15,6 +15,7 @@ public class warningSign {
     private ResizableCanvas canvas;
 
     public void start() {
+        init();
         Stage stage = new Stage();
         BorderPane mainPane = new BorderPane();
         FXGraphics2D g2d = new FXGraphics2D(canvas.getGraphicsContext2D());
@@ -41,7 +42,6 @@ public class warningSign {
     public void draw(Graphics2D g){
         g.setBackground(Color.pink);
         g.clearRect(0,0,(int)canvas.getWidth(), (int)canvas.getHeight());
-
     }
     public void update(double deltaTime){
     }
