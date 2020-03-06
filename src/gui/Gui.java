@@ -11,6 +11,7 @@ import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import tileMap.SimulationController;
+import warningSign.warningSign;
 
 import java.io.*;
 import java.net.URL;
@@ -409,8 +410,10 @@ public class Gui implements Initializable {
 
     public void simulationStartButton(){
         SimulationController simulationController = new SimulationController();
+        warningSign warningSign=new warningSign();
         try {
-            simulationController.start();
+           // simulationController.start();
+          warningSign.start();
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Failed to start simulation");
