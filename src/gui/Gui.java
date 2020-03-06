@@ -11,6 +11,7 @@ import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import tileMap.SimulationController;
+import warningSign.warningSign;
 
 import java.io.*;
 import java.net.URL;
@@ -21,6 +22,8 @@ import java.util.Set;
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class Gui implements Initializable {
+    SimulationController simulationController = new SimulationController();
+    warningSign warningSign=new warningSign();
 
     //tableView
     @FXML
@@ -113,7 +116,7 @@ public class Gui implements Initializable {
     private ObservableList<Group> comboStudentGroupRoster = observableArrayList();
     private ObservableList<Classroom> comboClassRoom = observableArrayList(classroom101, classroom102, classroom103, classroom104);
     private ObservableList<String> comboBeginTime = observableArrayList("9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00");
-    private ObservableList<String> comboEndTime = observableArrayList("9:50", "10:50", "11:50", "12:50", "13:50", "14:50", "15:50");
+    private ObservableList<String> comboEndTime = observableArrayList("9:30", "10:30", "11:30", "12:30", "13:30", "14:30", "15:30");
 
 
     //to get something out the combobox PersonManager
@@ -351,7 +354,14 @@ public class Gui implements Initializable {
     void rosterAddButton() {
         ObservableList<Lesson> list = observableArrayList(new data.Lesson(rosterTeacherColumn1, StudentGroups, ClassRoom, BeginTime, EndTime));
         System.out.println(rosterTeacherColumn1 +" "+ StudentGroups +" "+ ClassRoom +" "+ BeginTime +" "+ EndTime);
-        rosterTable.getItems().addAll(list);
+
+        if(comboEndTime.indexOf(EndTime)<comboBeginTime.indexOf(BeginTime)) {
+System.out.print("Fout");
+warningSign.start();
+        }
+        else {
+            rosterTable.getItems().addAll(list);
+        }
     }
 
     @FXML
@@ -408,7 +418,6 @@ public class Gui implements Initializable {
     }
 
     public void simulationStartButton(){
-        SimulationController simulationController = new SimulationController();
         try {
             simulationController.start();
         } catch (Exception e) {
