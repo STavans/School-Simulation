@@ -1,10 +1,8 @@
 package data;
 
-import javafx.beans.property.SimpleStringProperty;
-
 import java.io.Serializable;
 
-public abstract class Person implements Serializable {
+public abstract class Person implements Serializable, Drawable {
 
     private String gender;
     private String lastName;

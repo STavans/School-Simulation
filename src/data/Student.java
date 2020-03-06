@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+
 public class Student extends Person implements Serializable {
 
    // private String firstName;
@@ -79,5 +80,15 @@ public class Student extends Person implements Serializable {
         groupTBST = new SimpleObjectProperty(ois.readObject());
         genderTBST = new SimpleStringProperty(ois.readUTF());
         lastNameTBST = new SimpleStringProperty(ois.readUTF());
+    }
+
+    @Override
+    public void update() {
+
+    }
+
+    @Override
+    public void draw() {
+
     }
 }

@@ -93,4 +93,14 @@ public class Teacher extends Person implements Serializable {
         genderTB = new SimpleStringProperty(ois.readUTF());
         lastNameTB = new SimpleStringProperty(ois.readUTF());
     }
+
+    @Override
+    public void update() {
+
+    }
+
+    @Override
+    public void draw() {
+
+    }
 }
