@@ -266,10 +266,16 @@ public class Gui implements Initializable {
         ObservableList<Teacher> list = observableArrayList(new data.Teacher(teacherNameField.getText(), TeacherGender, TeacherSubject));
         data.Teacher TeacherTotal = new data.Teacher(teacherNameField.getText(), TeacherGender, TeacherSubject);
         if(teacherNameField.getText().isEmpty()) {
-            errorMessage.showError("Teacher name is empty: please enter a name before add");
+            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
         }
         else if(teacherNameField.getText().matches(".*[^a-zA-Z].*")) {
             errorMessage.showError("Teacher name contains non Alphabetic characters: please use only Alphabetic characters ");
+        }
+        else if(TeacherGender.isEmpty()) {
+            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+        }
+        else if(TeacherSubject.isEmpty()) {
+            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
         }
         else {
             teachersTable.getItems().addAll(list);
@@ -314,10 +320,13 @@ public class Gui implements Initializable {
     void studentAddButton() {
         ObservableList<Student> list1 = observableArrayList(new data.Student(studentNameField.getText(), StudentGroup, StudentGender));
         if(studentNameField.getText().isEmpty()) {
-            errorMessage.showError("Student name is empty: please enter a name before add");
+            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
         }
         else if(studentNameField.getText().matches(".*[^a-zA-Z].*")) {
             errorMessage.showError("Student name contains non Alphabetic characters: please use only Alphabetic characters ");
+        }
+        else if(StudentGender.isEmpty()) {
+            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
         }
         else {
             studentsTable.getItems().addAll(list1);
@@ -372,7 +381,14 @@ public class Gui implements Initializable {
 
         if (comboEndTime.indexOf(EndTime) < comboBeginTime.indexOf(BeginTime)) {
             errorMessage.showError("Can't add a new lesson: please select a chronological time order.");
-        } else {
+        }
+        else if (BeginTime.isEmpty()) {
+            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+        }
+        else if (EndTime.isEmpty()) {
+            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+        }
+        else {
             rosterTable.getItems().addAll(list);
         }
     }
