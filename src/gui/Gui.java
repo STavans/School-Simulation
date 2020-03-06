@@ -265,8 +265,12 @@ public class Gui implements Initializable {
     void teacherAddButton() {
         ObservableList<Teacher> list = observableArrayList(new data.Teacher(teacherNameField.getText(), TeacherGender, TeacherSubject));
         data.Teacher TeacherTotal = new data.Teacher(teacherNameField.getText(), TeacherGender, TeacherSubject);
-        teachersTable.getItems().addAll(list);
-
+        if(teacherNameField.getText().isEmpty()) {
+            errorMessage.showError("Teacher name is empty: please enter a name before add");
+        }
+        else {
+            teachersTable.getItems().addAll(list);
+        }
     }
 
     @FXML
@@ -307,6 +311,13 @@ public class Gui implements Initializable {
     void studentAddButton() {
         ObservableList<Student> list1 = observableArrayList(new data.Student(studentNameField.getText(), StudentGroup, StudentGender));
         studentsTable.getItems().addAll(list1);
+
+        if(studentNameField.getText().isEmpty()) {
+            errorMessage.showError("Student name is empty: please enter a name before add");
+        }
+        else {
+            studentsTable.getItems().addAll(list1);
+        }
     }
 
     @FXML
