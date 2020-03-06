@@ -310,8 +310,6 @@ public class Gui implements Initializable {
     @FXML
     void studentAddButton() {
         ObservableList<Student> list1 = observableArrayList(new data.Student(studentNameField.getText(), StudentGroup, StudentGender));
-        studentsTable.getItems().addAll(list1);
-
         if(studentNameField.getText().isEmpty()) {
             errorMessage.showError("Student name is empty: please enter a name before add");
         }
