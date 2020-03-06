@@ -268,6 +268,9 @@ public class Gui implements Initializable {
         if(teacherNameField.getText().isEmpty()) {
             errorMessage.showError("Teacher name is empty: please enter a name before add");
         }
+        else if(teacherNameField.getText().matches(".*[^a-zA-Z].*")) {
+            errorMessage.showError("Teacher name contains non Alphabetic characters: please use only Alphabetic characters ");
+        }
         else {
             teachersTable.getItems().addAll(list);
         }
@@ -312,6 +315,9 @@ public class Gui implements Initializable {
         ObservableList<Student> list1 = observableArrayList(new data.Student(studentNameField.getText(), StudentGroup, StudentGender));
         if(studentNameField.getText().isEmpty()) {
             errorMessage.showError("Student name is empty: please enter a name before add");
+        }
+        else if(studentNameField.getText().matches(".*[^a-zA-Z].*")) {
+            errorMessage.showError("Student name contains non Alphabetic characters: please use only Alphabetic characters ");
         }
         else {
             studentsTable.getItems().addAll(list1);
