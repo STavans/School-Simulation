@@ -1,4 +1,4 @@
-package TileMap;
+package tileMap;
 
 
 import javax.json.JsonObject;

@@ -1,7 +1,6 @@
 package gui;
 
 import data.*;
-import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,10 +10,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import tileMap.SimulationController;
 
 import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -409,6 +408,12 @@ public class Gui implements Initializable {
     }
 
     public void simulationStartButton(){
-        
+        SimulationController simulationController = new SimulationController();
+        try {
+            simulationController.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Failed to start simulation");
+        }
     }
 }

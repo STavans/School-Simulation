@@ -1,4 +1,4 @@
-package TileMap;
+package tileMap;
 
 import javax.imageio.ImageIO;
 import javax.json.Json;
@@ -38,7 +38,7 @@ public class TiledMap {
             try {
                 JsonObject tileset = tilesets.getJsonObject(i);
 
-                BufferedImage tilemap = ImageIO.read(getClass().getResourceAsStream(tileset.getString("image")));
+                BufferedImage tilemap = ImageIO.read(getClass().getResourceAsStream("/" + tileset.getString("image")));
 
                 tileHeight = tileset.getInt("tileheight");
                 tileWidth = tileset.getInt("tilewidth");
