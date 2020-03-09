@@ -316,7 +316,7 @@ public class Gui implements Initializable {
     //Student
     @FXML
     void studentAddButton() {
-        ObservableList<Student> list1 = observableArrayList(new data.Student(studentNameField.getText(), StudentGroup, StudentGender));
+        ObservableList<Student> list1 = observableArrayList(new data.Student(studentNameField.getText(), StudentGroup, StudentGender, null));
         if(studentNameField.getText().isEmpty()) {
             errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
         }
@@ -457,6 +457,7 @@ public class Gui implements Initializable {
     }
 
     public void simulationStartButton() {
+        save();
         try {
             simulationController.start();
         } catch (Exception e) {
