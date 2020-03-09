@@ -33,5 +33,7 @@ public abstract class Person implements Serializable, Drawable {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+
 }
 

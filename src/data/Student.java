@@ -26,17 +26,17 @@ public class Student extends Person implements Serializable {
     private Point2D position;
     private double angle;
     private double speed;
-    private BufferedImage sprite;
 
     private Point2D target;
     private double rotationSpeed;
 
-    private BufferedImage image;
-    private BufferedImage[] tiles;
-    private BufferedImage[] up;
-    private BufferedImage[] down;
-    private BufferedImage[] left;
-    private BufferedImage[] right;
+    private transient BufferedImage sprite;
+    private transient BufferedImage image;
+    private transient BufferedImage[] tiles;
+    private transient BufferedImage[] up;
+    private transient BufferedImage[] down;
+    private transient BufferedImage[] left;
+    private transient BufferedImage[] right;
     private double counter = 0;
 
     private boolean walkingRight = false;
@@ -44,21 +44,26 @@ public class Student extends Person implements Serializable {
     private boolean walkingUp = false;
     private boolean walkingDown = true;
 
-    public Student(String lastName, Group group, String gender) {
+    public Student(String lastName, Group group, String gender, Point2D position) {
         super(gender,lastName);
         this.group = group;
         this.groupTBST = new SimpleObjectProperty(group);
         this.genderTBST = new SimpleStringProperty(gender);
         this.lastNameTBST = new SimpleStringProperty(lastName);
 
-        this.position = new Point2D.Double(Math.random() * 5, Math.random() * 5);
+        this.position = position;
         this.angle = 0;
         this.speed = 2;
         this.target = new Point2D.Double(200, 200);
         this.rotationSpeed = 0.1;
 
         try {
-            image = ImageIO.read(getClass().getResource("/Female.png"));
+            if (this.genderTBST.get().equals("Female")) {
+                image = ImageIO.read(getClass().getResource("/Female.png"));
+            } else {
+                image = ImageIO.read(getClass().getResource("/Male.png"));
+            }
+
             tiles = new BufferedImage[35];
             for (int i = 0; i < 35; i++) {
                 tiles[i] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
@@ -140,11 +145,44 @@ public class Student extends Person implements Serializable {
         oos.writeUTF(genderTBST.get());
         oos.writeUTF(lastNameTBST.get());
     }
+    
     private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
         ois.defaultReadObject();
         groupTBST = new SimpleObjectProperty(ois.readObject());
         genderTBST = new SimpleStringProperty(ois.readUTF());
         lastNameTBST = new SimpleStringProperty(ois.readUTF());
+
+        if (this.genderTBST.get().equals("Female")) {
+                image = ImageIO.read(getClass().getResource("/Female.png"));
+            } else {
+                image = ImageIO.read(getClass().getResource("/Male.png"));
+            }
+
+        tiles = new BufferedImage[35];
+        for (int i = 0; i < 35; i++) {
+            tiles[i] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
+        }
+
+        up = new BufferedImage[9];
+        for (int i = 1; i < 9; i++) {
+            up[i - 1] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
+        }
+
+        left = new BufferedImage[9];
+        for (int i = 10; i < 18; i++) {
+            left[i - 10] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
+        }
+
+        down = new BufferedImage[9];
+        for (int i = 19; i < 27; i++) {
+            down[i - 19] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
+        }
+
+        right = new BufferedImage[9];
+        for (int i = 28; i < 36; i++) {
+            right[i - 28] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
+        }
+        this.sprite = tiles[0];
     }
 
     @Override
@@ -238,5 +276,10 @@ public class Student extends Person implements Serializable {
 
     public Point2D getPosition(){
         return this.position;
+    }
+
+    @Override
+    public void setPosition(Point2D position) {
+        this.position = position;
     }
 }

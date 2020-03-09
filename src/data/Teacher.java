@@ -117,4 +117,9 @@ public class Teacher extends Person implements Serializable {
     public Point2D getPosition() {
         return null;
     }
+
+    @Override
+    public void setPosition(Point2D position) {
+
+    }
 }

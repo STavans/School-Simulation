@@ -5,8 +5,6 @@ import data.Person;
 import data.Student;
 import gui.FileIO;
 import javafx.animation.AnimationTimer;
-import javafx.application.Application;
-import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -23,36 +21,37 @@ import java.util.ArrayList;
 
 public class SimulationController {
 
-	private FileIO fileIO = new FileIO();
-	private TiledMap map;
-	private ResizableCanvas canvas;
-	private BufferedImage[] tiles;
-	private BufferedImage image;
-	private ArrayList<Person> people;
+    private FileIO fileIO = new FileIO();
+    private TiledMap map;
+    private ResizableCanvas canvas;
+    private BufferedImage[] tiles;
+    private BufferedImage image;
+    private ArrayList<Person> people;
 
-	public void start() throws Exception {
-		Stage stage = new Stage();
-		init();
-		BorderPane mainPane = new BorderPane();
-		canvas = new ResizableCanvas(g -> draw(g), mainPane);
-		mainPane.setCenter(canvas);
-		FXGraphics2D g2d = new FXGraphics2D(canvas.getGraphicsContext2D());
-		new AnimationTimer() {
-			long last = -1;
-			@Override
-			public void handle(long now) {
-				if(last == -1)
-					last = now;
-				update((now - last) / 1000000000.0);
-				last = now;
-				draw(g2d);
-			}
-		}.start();
+    public void start() throws Exception {
+        Stage stage = new Stage();
+        init();
+        BorderPane mainPane = new BorderPane();
+        canvas = new ResizableCanvas(g -> draw(g), mainPane);
+        mainPane.setCenter(canvas);
+        FXGraphics2D g2d = new FXGraphics2D(canvas.getGraphicsContext2D());
+        new AnimationTimer() {
+            long last = -1;
 
-		stage.setScene(new Scene(mainPane));
-		stage.setTitle("Fading image");
-		stage.show();
-		draw(g2d);
+            @Override
+            public void handle(long now) {
+                if (last == -1)
+                    last = now;
+                update((now - last) / 1000000000.0);
+                last = now;
+                draw(g2d);
+            }
+        }.start();
+
+        stage.setScene(new Scene(mainPane));
+        stage.setTitle("Fading image");
+        stage.show();
+        draw(g2d);
 
         canvas.setOnMouseMoved(e ->
         {
@@ -60,53 +59,40 @@ public class SimulationController {
                 student.setTarget(new Point2D.Double(e.getX(), e.getY()));
             }
         });
-	}
+    }
 
 
-	public void init(){
-		map = new TiledMap("/Tilemap.json");
-		this.people = new ArrayList<>();
+    public void init() {
+        map = new TiledMap("/Tilemap.json");
 
-		try {
-			image = ImageIO.read(getClass().getResource("/Female.png"));
-			tiles = new BufferedImage[35];
-			for (int i = 0; i < 35; i++) {
-				tiles[i] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-
-//			this.people.addAll(fileIO.getStudents());
-			this.people.add(new Student("Bobba", new Group("test"), "apache"));
-
-
-//		for (int i = 0; i < 9; i++) {
-//			for (int j = 0; j < 9; j++) {
-//				this.people.add(new Person(new Point2D.Double(500 * i, 500 * j), tiles[0]));
-//			}
-//		}
-	}
-
-
-
-	public void draw(Graphics2D g){
-		g.setBackground(Color.pink);
-		g.clearRect(0,0,(int)canvas.getWidth(), (int)canvas.getHeight());
-		map.draw(g);
-
-		g.setTransform(new AffineTransform());
-
-		for (Person person : people) {
-			person.draw(g);
-		}
-
-	}
-
-	public void update(double deltaTime){
-	    for(Person person: people){
-	        person.update(people);
+        try {
+            this.people = new ArrayList<>(fileIO.getStudents());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
-	}
+        for (int i = 0; i < this.people.size(); i++) {
+            this.people.get(i).setPosition(new Point2D.Double(250 * i, 500));
+        }
+
+    }
+
+
+    public void draw(Graphics2D g) {
+        g.setBackground(Color.pink);
+        g.clearRect(0, 0, (int) canvas.getWidth(), (int) canvas.getHeight());
+        map.draw(g);
+        g.setTransform(new AffineTransform());
+
+        for (Person person : people) {
+            person.draw(g);
+        }
+    }
+
+    public void update(double deltaTime) {
+        for (Person person : people) {
+            person.update(people);
+        }
+    }
 }
