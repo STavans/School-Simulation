@@ -22,8 +22,8 @@ import static javafx.collections.FXCollections.observableArrayList;
 public class Gui implements Initializable {
     SimulationController simulationController = new SimulationController();
     ErrorMessage errorMessage = new ErrorMessage();
-    ArrayList<String> StudentGroupArray = new ArrayList<>();
-
+    ArrayList<String> Teachersize = new ArrayList();
+    ArrayList<String> Studentsize = new ArrayList();
     //tableView
     @FXML
     private TableView<Teacher> teachersTable;
@@ -266,6 +266,12 @@ public class Gui implements Initializable {
         if(teacherNameField.getText().isEmpty()) {
             errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
         }
+        else if(Teachersize.size()>=6) {
+            errorMessage.showError("Sorry to much!");
+        }
+        else if(Teachersize.contains(teacherNameField.getText())) {
+            errorMessage.showError("This teacher already excist ");
+        }
         else if(teacherNameField.getText().matches(".*[^a-zA-Z].*")) {
             errorMessage.showError("Teacher name contains non Alphabetic characters: please use only Alphabetic characters ");
         }
@@ -277,6 +283,7 @@ public class Gui implements Initializable {
         }
         else {
             teachersTable.getItems().addAll(list);
+            Teachersize.add(teacherNameField.getText());
         }
     }
 
@@ -317,11 +324,14 @@ public class Gui implements Initializable {
     @FXML
     void studentAddButton() {
         ObservableList<Student> list1 = observableArrayList(new data.Student(studentNameField.getText(), StudentGroup, StudentGender));
-        if(studentNameField.getText().isEmpty()) {
-            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
-        }
-        else if(studentNameField.getText().matches(".*[^a-zA-Z].*")) {
+        if(studentNameField.getText().matches(".*[^a-zA-Z].*")) {
             errorMessage.showError("Student name contains non Alphabetic characters: please use only Alphabetic characters ");
+        }
+        else if(Studentsize.size()>72) {
+            errorMessage.showError("Sorry to much students!");
+        }
+        else if(studentNameField.getText().isEmpty()) {
+            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
         }
         else if(StudentGender.isEmpty()) {
             errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
@@ -331,6 +341,7 @@ public class Gui implements Initializable {
         }
         else {
             studentsTable.getItems().addAll(list1);
+            Studentsize.add(studentNameField.getText());
         }
     }
 
@@ -379,30 +390,22 @@ public class Gui implements Initializable {
     void rosterAddButton() {
         ObservableList<Lesson> list = observableArrayList(new data.Lesson(rosterTeacherColumn1, StudentGroups, ClassRoom, BeginTime, EndTime));
         System.out.println(rosterTeacherColumn1 + " " + StudentGroups + " " + ClassRoom + " " + BeginTime + " " + EndTime);
-
-        if (comboEndTime.indexOf(EndTime) < comboBeginTime.indexOf(BeginTime)) {
-            errorMessage.showError("Can't add a new lesson: please select a chronological time order.");
-        }
-        else if(rosterTeacherColumn1 == null) {
-            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
-        }
-        else if(StudentGroup == null) {
-            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
-        }
-        else if(ClassRoom == null) {
-            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
-        }
-        else if (BeginTime.isEmpty()) {
-            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
-        }
-        else if (EndTime.isEmpty()) {
-            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
-        }
-        else {
-            rosterTable.getItems().addAll(list);
-        }
-    }
-
+            if (comboEndTime.indexOf(EndTime) < comboBeginTime.indexOf(BeginTime)) {
+                errorMessage.showError("Can't add a new lesson: please select a chronological time order.");
+            } else if (rosterTeacherColumn1 == null) {
+                errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+            } else if (StudentGroup == null) {
+                errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+            } else if (ClassRoom == null) {
+                errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+            } else if (BeginTime.isEmpty()) {
+                errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+            } else if (EndTime.isEmpty()) {
+                errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+            } else {
+                rosterTable.getItems().addAll(list);
+            }
+}
     @FXML
     void rosterDeleteButton() {
         ObservableList<Lesson> list, list2;
