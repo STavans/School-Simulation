@@ -15,15 +15,14 @@ import warningSign.ErrorMessage;
 
 import java.io.*;
 import java.net.URL;
-import java.util.HashSet;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class Gui implements Initializable {
     SimulationController simulationController = new SimulationController();
     ErrorMessage errorMessage = new ErrorMessage();
+    ArrayList<String> StudentGroupArray = new ArrayList<>();
 
     //tableView
     @FXML
@@ -162,7 +161,6 @@ public class Gui implements Initializable {
         rosterClassroomColumn.setCellValueFactory(new PropertyValueFactory<>("classRoomTB"));
         rosterBeginTimeColumn.setCellValueFactory(new PropertyValueFactory<>("beginTimeTB"));
         rosterEndTimeColumn.setCellValueFactory(new PropertyValueFactory<>("endTimeTB"));
-
 
         teachersTable.getItems().addListener((ListChangeListener<Teacher>) c -> {
             comboTeacherNameList = teachersTable.getItems();
@@ -328,6 +326,9 @@ public class Gui implements Initializable {
         else if(StudentGender.isEmpty()) {
             errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
         }
+        else if(StudentGroup == null) {
+            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+        }
         else {
             studentsTable.getItems().addAll(list1);
         }
@@ -381,6 +382,15 @@ public class Gui implements Initializable {
 
         if (comboEndTime.indexOf(EndTime) < comboBeginTime.indexOf(BeginTime)) {
             errorMessage.showError("Can't add a new lesson: please select a chronological time order.");
+        }
+        else if(rosterTeacherColumn1 == null) {
+            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+        }
+        else if(StudentGroup == null) {
+            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+        }
+        else if(ClassRoom == null) {
+            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
         }
         else if (BeginTime.isEmpty()) {
             errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");

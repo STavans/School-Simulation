@@ -24,12 +24,12 @@
                      <children>
                         <TableView id="rosterTable" fx:id="rosterTable" prefHeight="351.0" prefWidth="816.0">
                            <columns>
-                              <TableColumn fx:id="rosterTeacherColumn" prefWidth="157.0" text="Name" />
-                              <TableColumn fx:id="rosterSubjectColumn" prefWidth="156.0" text="Subject" />
-                              <TableColumn fx:id="rosterGroupColumn" prefWidth="114.0" text="Group" />
-                              <TableColumn fx:id="rosterClassroomColumn" prefWidth="118.0" text="Classroom" />
-                              <TableColumn fx:id="rosterBeginTimeColumn" prefWidth="129.0" text="Begin time" />
-                              <TableColumn fx:id="rosterEndTimeColumn" prefWidth="125.0" text="End time" />
+                              <TableColumn fx:id="rosterTeacherColumn" editable="false" prefWidth="157.0" resizable="false" sortable="false" text="Name" />
+                              <TableColumn fx:id="rosterSubjectColumn" editable="false" prefWidth="156.0" text="Subject" />
+                              <TableColumn fx:id="rosterGroupColumn" editable="false" prefWidth="114.0" text="Group" />
+                              <TableColumn fx:id="rosterClassroomColumn" editable="false" prefWidth="118.0" text="Classroom" />
+                              <TableColumn fx:id="rosterBeginTimeColumn" editable="false" prefWidth="129.0" text="Begin time" />
+                              <TableColumn fx:id="rosterEndTimeColumn" editable="false" prefWidth="125.0" text="End time" />
                            </columns>
                         </TableView>
                      </children>
