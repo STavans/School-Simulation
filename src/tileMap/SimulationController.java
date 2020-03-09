@@ -1,19 +1,34 @@
 package tileMap;
 
+import data.Group;
+import data.Person;
+import data.Student;
+import gui.FileIO;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.jfree.fx.FXGraphics2D;
 import org.jfree.fx.ResizableCanvas;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class SimulationController {
 
+	private FileIO fileIO = new FileIO();
 	private TiledMap map;
 	private ResizableCanvas canvas;
+	private BufferedImage[] tiles;
+	private BufferedImage image;
+	private ArrayList<Person> people;
 
 	public void start() throws Exception {
 		Stage stage = new Stage();
@@ -38,11 +53,40 @@ public class SimulationController {
 		stage.setTitle("Fading image");
 		stage.show();
 		draw(g2d);
+
+        canvas.setOnMouseMoved(e ->
+        {
+            for (Person student : people) {
+                student.setTarget(new Point2D.Double(e.getX(), e.getY()));
+            }
+        });
 	}
 
 
 	public void init(){
 		map = new TiledMap("/Tilemap.json");
+		this.people = new ArrayList<>();
+
+		try {
+			image = ImageIO.read(getClass().getResource("/Female.png"));
+			tiles = new BufferedImage[35];
+			for (int i = 0; i < 35; i++) {
+				tiles[i] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+
+//			this.people.addAll(fileIO.getStudents());
+			this.people.add(new Student("Bobba", new Group("test"), "apache"));
+
+
+//		for (int i = 0; i < 9; i++) {
+//			for (int j = 0; j < 9; j++) {
+//				this.people.add(new Person(new Point2D.Double(500 * i, 500 * j), tiles[0]));
+//			}
+//		}
 	}
 
 
@@ -51,8 +95,18 @@ public class SimulationController {
 		g.setBackground(Color.pink);
 		g.clearRect(0,0,(int)canvas.getWidth(), (int)canvas.getHeight());
 		map.draw(g);
+
+		g.setTransform(new AffineTransform());
+
+		for (Person person : people) {
+			person.draw(g);
+		}
+
 	}
 
 	public void update(double deltaTime){
+	    for(Person person: people){
+	        person.update(people);
+        }
 	}
 }

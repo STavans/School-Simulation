@@ -2,10 +2,13 @@ package data;
 
 import javafx.beans.property.SimpleStringProperty;
 
+import java.awt.*;
+import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Teacher extends Person implements Serializable {
 
@@ -94,13 +97,24 @@ public class Teacher extends Person implements Serializable {
         lastNameTB = new SimpleStringProperty(ois.readUTF());
     }
 
+
     @Override
-    public void update() {
+    public void update(ArrayList<Person> people) {
 
     }
 
     @Override
-    public void draw() {
+    public void draw(Graphics2D g) {
 
+    }
+
+    @Override
+    public void setTarget(Point2D point2D) {
+
+    }
+
+    @Override
+    public Point2D getPosition() {
+        return null;
     }
 }

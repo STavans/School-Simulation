@@ -425,6 +425,7 @@ public class Gui implements Initializable {
     }
 
     public void simulationStartButton() {
+        save();
         try {
             simulationController.start();
         } catch (Exception e) {
