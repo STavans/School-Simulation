@@ -323,7 +323,7 @@ public class Gui implements Initializable {
     //Student
     @FXML
     void studentAddButton() {
-        ObservableList<Student> list1 = observableArrayList(new data.Student(studentNameField.getText(), StudentGroup, StudentGender));
+        ObservableList<Student> list1 = observableArrayList(new data.Student(studentNameField.getText(), StudentGroup, StudentGender,null));
         if(studentNameField.getText().matches(".*[^a-zA-Z].*")) {
             errorMessage.showError("Student name contains non Alphabetic characters: please use only Alphabetic characters ");
         }
