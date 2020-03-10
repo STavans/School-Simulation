@@ -331,9 +331,6 @@ public class Gui implements Initializable {
         else if(Studentsize.size()>=72) {
             errorMessage.showError("Sorry to much students!");
         }
-        else if(Groupsize.size()>=6) {
-            errorMessage.showError("Sorry to much students in a class!");
-        }
         else if(studentNameField.getText().isEmpty()) {
             errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
         }
