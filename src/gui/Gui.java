@@ -274,7 +274,7 @@ public class Gui implements Initializable {
         if(teacherNameField.getText().isEmpty()) {
             errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
         }
-        else if(Teachersize.size()>=6) {
+        else if(Teachersize.size() >= 6) {
             errorMessage.showError("Sorry to much!");
         }
         else if(Teachersize.contains(teacherNameField.getText())) {
@@ -357,10 +357,10 @@ public class Gui implements Initializable {
         if(studentNameField.getText().matches(".*[^a-zA-Z].*")) {
             errorMessage.showError("Student name contains non Alphabetic characters: please use only alphabetic characters ");
         }
-        else if(Studentsize.size()>=72) {
+        else if(Studentsize.size() >= 72) {
             errorMessage.showError("Sorry to much students!");
         }
-        else if(A>=6||B>=6||C>=6||D>=6||E>=6||F>=6) {
+        else if(A >= 6||B >= 6||C >= 6||D >= 6||E >= 6||F >= 6) {
             errorMessage.showError("Sorry to much students in the group!");
         }
         else if(studentNameField.getText().isEmpty()) {
