@@ -24,6 +24,7 @@ public class Gui implements Initializable {
     ErrorMessage errorMessage = new ErrorMessage();
     ArrayList<String> Teachersize = new ArrayList();
     ArrayList<String> Studentsize = new ArrayList();
+    ArrayList<String> Groupsize = new ArrayList();
     //tableView
     @FXML
     private TableView<Teacher> teachersTable;
@@ -327,8 +328,11 @@ public class Gui implements Initializable {
         if(studentNameField.getText().matches(".*[^a-zA-Z].*")) {
             errorMessage.showError("Student name contains non Alphabetic characters: please use only Alphabetic characters ");
         }
-        else if(Studentsize.size()>72) {
+        else if(Studentsize.size()>=72) {
             errorMessage.showError("Sorry to much students!");
+        }
+        else if(Groupsize.size()>=6) {
+            errorMessage.showError("Sorry to much students in a class!");
         }
         else if(studentNameField.getText().isEmpty()) {
             errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
@@ -342,6 +346,7 @@ public class Gui implements Initializable {
         else {
             studentsTable.getItems().addAll(list1);
             Studentsize.add(studentNameField.getText());
+            Groupsize.add(StudentGroup.getCode());
         }
     }
 
