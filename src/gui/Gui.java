@@ -20,6 +20,13 @@ import java.util.*;
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class Gui implements Initializable {
+    int i = 0;
+    int A = 0;
+    int B = 0;
+    int C = 0;
+    int D = 0;
+    int E = 0;
+    int F = 0;
     SimulationController simulationController = new SimulationController();
     ErrorMessage errorMessage = new ErrorMessage();
     ArrayList<String> Teachersize = new ArrayList();
@@ -325,11 +332,36 @@ public class Gui implements Initializable {
     @FXML
     void studentAddButton() {
         ObservableList<Student> list1 = observableArrayList(new data.Student(studentNameField.getText(), StudentGroup, StudentGender,null));
+        if (Groupsize.isEmpty()) {
+            i = 0;
+        }
+       else if (Groupsize.get(i).equals("Group A")) {
+            A++; i++;
+        }
+       else if (Groupsize.get(i).equals("Group B")) {
+            B++; i++;
+        }
+       else if (Groupsize.get(i).equals("Group C")) {
+            C++; i++;
+        }
+       else if (Groupsize.get(i).equals("Group D")) {
+            D++;i++;
+        }
+        else if (Groupsize.get(i).equals("Group E")) {
+            E++; i++;
+        }
+        else if (Groupsize.get(i).equals("Group F")) {
+            F++; i++;
+        }
+
         if(studentNameField.getText().matches(".*[^a-zA-Z].*")) {
-            errorMessage.showError("Student name contains non Alphabetic characters: please use only Alphabetic characters ");
+            errorMessage.showError("Student name contains non Alphabetic characters: please use only alphabetic characters ");
         }
         else if(Studentsize.size()>=72) {
             errorMessage.showError("Sorry to much students!");
+        }
+        else if(A>=6||B>=6||C>=6||D>=6||E>=6||F>=6) {
+            errorMessage.showError("Sorry to much students in the group!");
         }
         else if(studentNameField.getText().isEmpty()) {
             errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
@@ -343,7 +375,7 @@ public class Gui implements Initializable {
         else {
             studentsTable.getItems().addAll(list1);
             Studentsize.add(studentNameField.getText());
-            Groupsize.add(StudentGroup.getCode());
+            Groupsize.add(StudentGroup.toString());
         }
     }
 
