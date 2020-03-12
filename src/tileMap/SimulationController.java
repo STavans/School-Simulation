@@ -26,7 +26,8 @@ public class SimulationController {
     private ResizableCanvas canvas;
     private BufferedImage[] tiles;
     private BufferedImage image;
-    private ArrayList<Person> people;
+    private ArrayList<Person> students;
+    private ArrayList<Person> teachers;
 
     public void start() throws Exception {
         Stage stage = new Stage();
@@ -55,7 +56,7 @@ public class SimulationController {
 
         canvas.setOnMouseMoved(e ->
         {
-            for (Person student : people) {
+            for (Person student : students) {
                 student.setTarget(new Point2D.Double(e.getX(), e.getY()));
             }
         });
@@ -66,16 +67,19 @@ public class SimulationController {
         map = new TiledMap("/Tilemap.json");
 
         try {
-            this.people = new ArrayList<>(fileIO.getStudents());
+            this.students = new ArrayList<>(fileIO.getStudents());
+            this.teachers = new ArrayList<>(fileIO.getTeachers());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        for (int i = 0; i < this.people.size(); i++) {
-            this.people.get(i).setPosition(new Point2D.Double(250 * i, 500));
+        for (int i = 0; i < this.students.size(); i++) {
+            this.students.get(i).setPosition(new Point2D.Double(250 * i, 500));
         }
-
+        for (int i = 0; i < this.teachers.size(); i++) {
+            this.teachers.get(i).setPosition(new Point2D.Double(500 * i, 500));
+        }
     }
 
 
@@ -85,14 +89,20 @@ public class SimulationController {
         map.draw(g);
         g.setTransform(new AffineTransform());
 
-        for (Person person : people) {
-            person.draw(g);
+        for (Person student : students) {
+            student.draw(g);
+        }
+        for (Person teacher : teachers){
+            teacher.draw(g);
         }
     }
 
     public void update(double deltaTime) {
-        for (Person person : people) {
-            person.update(people);
+        for (Person student : this.students) {
+            student.update(this.students);
+        }
+        for (Person teacher : this.teachers) {
+            teacher.update(this.teachers);
         }
     }
 }
