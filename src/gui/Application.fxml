@@ -178,5 +178,36 @@
             </AnchorPane>
         </content>
       </Tab>
+      <Tab text="StudentEditor">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="346.0" layoutY="68.0">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="579.0" layoutY="308.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="128.0" text="SAVE" />
+                  <Button layoutX="61.0" layoutY="58.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="128.0" text="STUDENT" />
+                  <Button layoutX="579.0" layoutY="57.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="128.0" text="GENDER" />
+                  <Button layoutX="316.0" layoutY="58.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="128.0" text="GROUP" />
+                  <Button layoutX="61.0" layoutY="306.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="128.0" text="CANCEL" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="TeacherEditor">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button layoutX="66.0" layoutY="57.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="128.0" text="TEACHER" />
+                  <Button layoutX="321.0" layoutY="57.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="128.0" text="SUBJECT" />
+                  <Button layoutX="66.0" layoutY="305.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="128.0" text="CANCEL" />
+                  <Button layoutX="583.0" layoutY="57.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="128.0" text="GENDER" />
+                  <Button layoutX="583.0" layoutY="305.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="128.0" text="SAVE" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
   </tabs>
 </TabPane>
