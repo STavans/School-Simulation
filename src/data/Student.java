@@ -15,9 +15,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 
+@SuppressWarnings("Duplicates")
 public class Student extends Person implements Serializable {
 
-   // private String firstName;
     private Group group;
     private transient SimpleObjectProperty groupTBST;
     private transient SimpleStringProperty genderTBST;
