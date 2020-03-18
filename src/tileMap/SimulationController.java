@@ -28,6 +28,7 @@ public class SimulationController {
     private BufferedImage image;
     private ArrayList<Person> students;
     private ArrayList<Person> teachers;
+    private Target map2;
 
     public void start() throws Exception {
         Stage stage = new Stage();
@@ -65,6 +66,7 @@ public class SimulationController {
 
     public void init() {
         map = new TiledMap("/Tilemap.json");
+        map2 = new Target("/Tilemap.json");
 
         try {
             this.students = new ArrayList<>(fileIO.getStudents());

@@ -107,10 +107,10 @@ public class Gui implements Initializable {
     private Group groupE = new Group("E");
     private Group groupF = new Group("F");
 
-    private Classroom classroom101 = new Classroom(101);
-    private Classroom classroom102 = new Classroom(102);
-    private Classroom classroom103 = new Classroom(103);
-    private Classroom classroom104 = new Classroom(104);
+    private Classroom classroom101 = new Classroom("101");
+    private Classroom classroom102 = new Classroom("102");
+    private Classroom classroom103 = new Classroom("103");
+    private Classroom classroom104 = new Classroom("104");
 
     //list PersonManager
     private ObservableList<String> comboTeacherSubject = observableArrayList("OGP", "Math", "OOM", "2D Graphics", "P&OC");
