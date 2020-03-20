@@ -96,7 +96,7 @@ public class Gui implements Initializable {
     @FXML
     private TextField studentNameField;
 
-    private Set<Group> groupSet;
+    private HashSet<Group> groupSet = new HashSet<>();
     private FileIO fileIO = new FileIO();
 
     //Groups
@@ -131,6 +131,7 @@ public class Gui implements Initializable {
     //to get something out the combobox PersonManager
     private String TeacherSubject = "";
 
+    @SuppressWarnings("Duplicates")
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -138,8 +139,15 @@ public class Gui implements Initializable {
             teachersTable.setItems(fileIO.getTeachers());
             rosterTable.setItems(fileIO.getLessons());
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println("No data found to load");
+            System.out.println("Missing data to load");
         }
+
+        for (Student student : studentsTable.getItems()) {
+            groupSet.add(student.getStudentGroup());
+        }
+        comboStudentGroupRoster.setAll(groupSet);
+        studentGroupBoxs.setItems(comboStudentGroupRoster);
+        System.out.println(groupSet);
 
         //PersonManager
         teacherSubjectBox.setItems(comboTeacherSubject);
@@ -148,7 +156,7 @@ public class Gui implements Initializable {
         studentGenderBox.setItems(comboStudentGender);
 
         //Roster
-        teacherAllNameBox.setItems(comboTeacherNameList);
+        teacherAllNameBox.setItems(teachersTable.getItems());
         classRoomBox.setItems(comboClassroom);
         beginTimeBox.setItems(comboBeginTime);
         endTimeBox.setItems(comboEndTime);
@@ -177,13 +185,12 @@ public class Gui implements Initializable {
             teacherAllNameBox.setItems(comboTeacherNameList);
         });
         studentsTable.getItems().addListener((ListChangeListener<Student>) c -> {
-            groupSet = new HashSet<>();
+            groupSet.clear();
             for (Student student : studentsTable.getItems()) {
                 groupSet.add(student.getStudentGroup());
             }
             comboStudentGroupRoster.clear();
             comboStudentGroupRoster.addAll(groupSet);
-            comboStudentGroupRoster.sorted();
             studentGroupBoxs.setItems(comboStudentGroupRoster);
         });
     }
@@ -430,7 +437,7 @@ public class Gui implements Initializable {
                 errorMessage.showError("Can't add a new lesson: please select a chronological time order.");
             } else if (rosterTeacherColumn1 == null) {
                 errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
-            } else if (StudentGroup == null) {
+            } else if (StudentGroups == null) {
                 errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
             } else if (ClassRoom == null) {
                 errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
