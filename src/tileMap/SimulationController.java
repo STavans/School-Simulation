@@ -1,9 +1,7 @@
 package tileMap;
 
-import data.Group;
 import data.Lesson;
 import data.Person;
-import data.Student;
 import gui.FileIO;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
@@ -12,23 +10,20 @@ import javafx.stage.Stage;
 import org.jfree.fx.FXGraphics2D;
 import org.jfree.fx.ResizableCanvas;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+@SuppressWarnings("Duplicates")
 public class SimulationController {
 
     private FileIO fileIO = new FileIO();
     private TiledMap map;
     private ResizableCanvas canvas;
-    private BufferedImage[] tiles;
-    private BufferedImage image;
     private ArrayList<Person> students;
     private ArrayList<Person> teachers;
     private ArrayList<Lesson> lessons;
@@ -53,8 +48,6 @@ public class SimulationController {
 
                     @Override
                     public void run() {
-//                        System.out.println(hour + " " + minute);
-
                         minute++;
                         if (minute >= 6){
                             minute = 0;
@@ -80,15 +73,7 @@ public class SimulationController {
         stage.setTitle("Fading image");
         stage.show();
         draw(g2d);
-
-//        canvas.setOnMouseMoved(e ->
-//        {
-//            for (Person student : students) {
-//                student.setTarget(new Point2D.Double(e.getX(), e.getY()));
-//            }
-//        });
     }
-
 
     public void init() {
         map = new TiledMap("/Tilemap.json");
@@ -105,14 +90,15 @@ public class SimulationController {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
         for (int i = 0; i < this.students.size(); i++) {
-            this.students.get(i).setPosition(new Point2D.Double(250 * i, 500));
+            this.students.get(i).setPosition(new Point2D.Double(1090, 1040 + (i * 64)));
         }
+
         for (int i = 0; i < this.teachers.size(); i++) {
-            this.teachers.get(i).setPosition(new Point2D.Double(250 * i, 1000));
+            this.teachers.get(i).setPosition(new Point2D.Double(1010, 1040 + (i * 64)));
         }
     }
-
 
     public void draw(Graphics2D g) {
         g.setBackground(Color.pink);
@@ -123,6 +109,7 @@ public class SimulationController {
         for (Person student : students) {
             student.draw(g);
         }
+
         for (Person teacher : teachers){
             teacher.draw(g);
         }
@@ -135,8 +122,7 @@ public class SimulationController {
             for (Lesson lesson : lessons){
                 int time[] = lesson.getBeginLesson();
 
-                String locationS = lesson.getClassRoom().getClassNumber() + "s";
-                System.out.println(locationS);
+                String locationS = lesson.getClassroom().getClassNumber() + "s";
 
                 if (hour == time[0] && minute == time[1]){
                     student.setTarget(target.getCenter(classrooms.indexOf(locationS)));
@@ -150,7 +136,7 @@ public class SimulationController {
             for (Lesson lesson : lessons){
                 int time[] = lesson.getBeginLesson();
 
-                String locationT = lesson.getClassRoom().getClassNumber() + "t";
+                String locationT = lesson.getClassroom().getClassNumber() + "t";
 
                 if (hour == time[0] && minute == time[1]){
                     teacher.setTarget(target.getCenter(classrooms.indexOf(locationT)));

@@ -123,7 +123,7 @@ public class Gui implements Initializable {
     //Roster
     private ObservableList<Teacher> comboTeacherNameList = observableArrayList();
     private ObservableList<Group> comboStudentGroupRoster = observableArrayList();
-    private ObservableList<Classroom> comboClassRoom = observableArrayList(classroom101, classroom102, classroom103, classroom104, classroom105, classroom106);
+    private ObservableList<Classroom> comboClassroom = observableArrayList(classroom101, classroom102, classroom103, classroom104, classroom105, classroom106);
     private ObservableList<String> comboBeginTime = observableArrayList("9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00");
     private ObservableList<String> comboEndTime = observableArrayList("9:30", "10:30", "11:30", "12:30", "13:30", "14:30", "15:30");
 
@@ -149,7 +149,7 @@ public class Gui implements Initializable {
 
         //Roster
         teacherAllNameBox.setItems(comboTeacherNameList);
-        classRoomBox.setItems(comboClassRoom);
+        classRoomBox.setItems(comboClassroom);
         beginTimeBox.setItems(comboBeginTime);
         endTimeBox.setItems(comboEndTime);
         System.out.println("Comboboxes Initialised");
@@ -456,7 +456,7 @@ public class Gui implements Initializable {
         rosterTeacherColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboTeacherNameList));
         rosterSubjectColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboTeacherSubject));
         rosterGroupColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboStudentGroupRoster));
-        rosterClassroomColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboClassRoom));
+        rosterClassroomColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboClassroom));
         rosterBeginTimeColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboBeginTime));
         rosterEndTimeColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboEndTime));
 
@@ -467,7 +467,7 @@ public class Gui implements Initializable {
         rosterGroupColumn.setOnEditCommit(event ->
                 rosterTable.getItems().get(event.getTablePosition().getRow()).setGroup(event.getNewValue()));
         rosterClassroomColumn.setOnEditCommit(event ->
-                rosterTable.getItems().get(event.getTablePosition().getRow()).setClassRoom(event.getNewValue()));
+                rosterTable.getItems().get(event.getTablePosition().getRow()).setClassroom(event.getNewValue()));
         rosterBeginTimeColumn.setOnEditCommit(event ->
                 rosterTable.getItems().get(event.getTablePosition().getRow()).setBeginLesson(event.getNewValue()));
         rosterEndTimeColumn.setOnEditCommit(event ->

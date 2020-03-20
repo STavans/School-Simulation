@@ -12,8 +12,6 @@ import java.util.HashMap;
 
 public class Target {
 
-    private HashMap<String, Integer> hashMap;
-
     private Classroom cantine = new Classroom("cantine");
     private Classroom teacherRoom = new Classroom("teacherroom");
     private Classroom classroom101t = new Classroom("101t");
@@ -30,11 +28,9 @@ public class Target {
     private Classroom classroom106s = new Classroom("106s");
     private Classroom toilets = new Classroom("toilets");
 
-    private double height;
-    private double width;
-
     private JsonArray layers;
     private ArrayList<String> classrooms;
+    private HashMap<String, Integer> hashMap;
 
     public Target(String fileName){
         classrooms = new ArrayList<>();
@@ -67,8 +63,6 @@ public class Target {
 
             hashMap.put(classrooms.get(i), id);
         }
-
-//        System.out.println(getCenter(classrooms.indexOf("cantine")));
     }
 
     public int getX(int location){
@@ -89,10 +83,6 @@ public class Target {
 
     public Point2D getCenter(int location){
         return new Point2D.Float((getX(location) + (getWidth(location) / 2)), getY(location) + (getHeight(location) / 2));
-    }
-
-    public void setTarget(String location){
-
     }
 
     public ArrayList getClassroomList(){

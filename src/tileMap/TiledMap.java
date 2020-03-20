@@ -12,8 +12,6 @@ import java.util.ArrayList;
 
 
 public class TiledMap {
-	private int width;
-	private int height;
 
 	private int tileHeight;
 	private int tileWidth;
@@ -24,12 +22,9 @@ public class TiledMap {
 
 	public TiledMap(String fileName)
 	{
-		JsonReader reader = null;
+		JsonReader reader;
 		reader = Json.createReader(getClass().getResourceAsStream(fileName));
 		JsonObject root = reader.readObject();
-
-		this.width = root.getInt("width");
-		this.height = root.getInt("height");
 
         JsonArray tilesets = root.getJsonArray("tilesets");
 
@@ -50,7 +45,6 @@ public class TiledMap {
                     tiles.add(null);
                 }
 
-
                 for (int y = 0; y < tilemap.getHeight(); y += tileHeight) {
                     for (int x = 0; x < tilemap.getWidth(); x += tileWidth) {
                         tiles.set(gid, tilemap.getSubimage(x, y, tileWidth, tileHeight));
@@ -65,25 +59,18 @@ public class TiledMap {
 
         JsonArray layers = root.getJsonArray("layers");
 
-
         for(int i = 0; i < layers.size(); i++) {
 			JsonObject layerInfo = layers.getJsonObject(i);
 			if(layerInfo.getString("type").equals("tilelayer")) {
 				this.layers.add(new TiledLayer(layerInfo));
 			}
 		}
-
-
 	}
 
 	void draw(Graphics2D g2d)
 	{
-
 		for(TiledLayer layer : this.layers) {
 			layer.draw(g2d, tiles);
 		}
-
-
 	}
-
 }

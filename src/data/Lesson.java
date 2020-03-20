@@ -75,11 +75,11 @@ public class Lesson implements Serializable {
         this.endTime = endTime;
     }
 
-    public Classroom getClassRoom() {
+    public Classroom getClassroom() {
         return classroom;
     }
 
-    public void setClassRoom(Classroom classroom) {
+    public void setClassroom(Classroom classroom) {
         this.classroom = classroom;
     }
 
