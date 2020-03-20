@@ -109,7 +109,7 @@ public class SimulationController {
             this.students.get(i).setPosition(new Point2D.Double(250 * i, 500));
         }
         for (int i = 0; i < this.teachers.size(); i++) {
-            this.teachers.get(i).setPosition(new Point2D.Double(500 * i, 500));
+            this.teachers.get(i).setPosition(new Point2D.Double(250 * i, 1000));
         }
     }
 
