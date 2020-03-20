@@ -6,10 +6,13 @@ import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Target {
+
+    private HashMap<String, Integer> hashMap;
 
     private Classroom cantine = new Classroom("cantine");
     private Classroom teacherRoom = new Classroom("teacherroom");
@@ -27,9 +30,15 @@ public class Target {
     private Classroom classroom106s = new Classroom("106s");
     private Classroom toilets = new Classroom("toilets");
 
+    private double height;
+    private double width;
+
+    private JsonArray layers;
+    private ArrayList<String> classrooms;
+
     public Target(String fileName){
-        ArrayList<String> classrooms = new ArrayList<>();
-        HashMap<String, Integer> hashMap = new HashMap();
+        classrooms = new ArrayList<>();
+        hashMap = new HashMap();
 
         classrooms.add(cantine.getClassNumber());
         classrooms.add(teacherRoom.getClassNumber());
@@ -51,12 +60,42 @@ public class Target {
         reader = Json.createReader(getClass().getResourceAsStream(fileName));
         JsonObject root = reader.readObject();
 
-        JsonArray layers = root.getJsonArray("layers").getJsonObject(4).getJsonArray("objects");
+        layers = root.getJsonArray("layers").getJsonObject(4).getJsonArray("objects");
 
         for(int i = 0; i < layers.size(); i++) {
             int id = layers.getJsonObject(i).getInt("id");
 
             hashMap.put(classrooms.get(i), id);
         }
+
+//        System.out.println(getCenter(classrooms.indexOf("cantine")));
+    }
+
+    public int getX(int location){
+        return layers.getJsonObject(location).getInt("x");
+    }
+
+    public int getY(int location){
+        return layers.getJsonObject(location).getInt("y");
+    }
+
+    public int getHeight(int location){
+        return layers.getJsonObject(location).getInt("height");
+    }
+
+    public int getWidth(int location){
+        return layers.getJsonObject(location).getInt("width");
+    }
+
+    public Point2D getCenter(int location){
+        return new Point2D.Float((getX(location) + (getWidth(location) / 2)), getY(location) + (getHeight(location) / 2));
+    }
+
+    public void setTarget(String location){
+
+    }
+
+    public ArrayList getClassroomList(){
+        return classrooms;
     }
 }

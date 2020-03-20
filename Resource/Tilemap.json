@@ -80,7 +80,7 @@
                 {
                  "height":160,
                  "id":77,
-                 "name":"101",
+                 "name":"101t",
                  "rotation":0,
                  "type":"Teacher",
                  "visible":true,
@@ -91,7 +91,7 @@
                 {
                  "height":160,
                  "id":78,
-                 "name":"102",
+                 "name":"102t",
                  "rotation":0,
                  "type":"Teacher",
                  "visible":true,
@@ -102,7 +102,7 @@
                 {
                  "height":160,
                  "id":79,
-                 "name":"101",
+                 "name":"101s",
                  "rotation":0,
                  "type":"Sudent",
                  "visible":true,
@@ -113,7 +113,7 @@
                 {
                  "height":160,
                  "id":80,
-                 "name":"102",
+                 "name":"102s",
                  "rotation":0,
                  "type":"Student",
                  "visible":true,
@@ -124,7 +124,7 @@
                 {
                  "height":160,
                  "id":81,
-                 "name":"103",
+                 "name":"103s",
                  "rotation":0,
                  "type":"Student",
                  "visible":true,
@@ -135,7 +135,7 @@
                 {
                  "height":160,
                  "id":82,
-                 "name":"104",
+                 "name":"104s",
                  "rotation":0,
                  "type":"Student",
                  "visible":true,
@@ -146,7 +146,7 @@
                 {
                  "height":160,
                  "id":83,
-                 "name":"103",
+                 "name":"103s",
                  "rotation":0,
                  "type":"Teacher",
                  "visible":true,
@@ -157,7 +157,7 @@
                 {
                  "height":160,
                  "id":84,
-                 "name":"104",
+                 "name":"104t",
                  "rotation":0,
                  "type":"Teacher",
                  "visible":true,
@@ -168,7 +168,7 @@
                 {
                  "height":160,
                  "id":86,
-                 "name":"105",
+                 "name":"105t",
                  "rotation":0,
                  "type":"Teacher",
                  "visible":true,
@@ -179,7 +179,7 @@
                 {
                  "height":160,
                  "id":87,
-                 "name":"105",
+                 "name":"105s",
                  "rotation":0,
                  "type":"Student",
                  "visible":true,
@@ -190,7 +190,7 @@
                 {
                  "height":160,
                  "id":88,
-                 "name":"106",
+                 "name":"106t",
                  "rotation":0,
                  "type":"Teacher",
                  "visible":true,
@@ -201,7 +201,7 @@
                 {
                  "height":160,
                  "id":89,
-                 "name":"106",
+                 "name":"106s",
                  "rotation":0,
                  "type":"Student",
                  "visible":true,

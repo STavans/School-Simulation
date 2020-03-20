@@ -111,6 +111,8 @@ public class Gui implements Initializable {
     private Classroom classroom102 = new Classroom("102");
     private Classroom classroom103 = new Classroom("103");
     private Classroom classroom104 = new Classroom("104");
+    private Classroom classroom105 = new Classroom("105");
+    private Classroom classroom106 = new Classroom("106");
 
     //list PersonManager
     private ObservableList<String> comboTeacherSubject = observableArrayList("OGP", "Math", "OOM", "2D Graphics", "P&OC");
@@ -121,7 +123,7 @@ public class Gui implements Initializable {
     //Roster
     private ObservableList<Teacher> comboTeacherNameList = observableArrayList();
     private ObservableList<Group> comboStudentGroupRoster = observableArrayList();
-    private ObservableList<Classroom> comboClassRoom = observableArrayList(classroom101, classroom102, classroom103, classroom104);
+    private ObservableList<Classroom> comboClassRoom = observableArrayList(classroom101, classroom102, classroom103, classroom104, classroom105, classroom106);
     private ObservableList<String> comboBeginTime = observableArrayList("9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00");
     private ObservableList<String> comboEndTime = observableArrayList("9:30", "10:30", "11:30", "12:30", "13:30", "14:30", "15:30");
 
