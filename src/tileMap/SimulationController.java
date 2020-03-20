@@ -53,7 +53,7 @@ public class SimulationController {
 
                     @Override
                     public void run() {
-                        System.out.println(hour + " " + minute);
+//                        System.out.println(hour + " " + minute);
 
                         minute++;
                         if (minute >= 6){
@@ -133,15 +133,29 @@ public class SimulationController {
             student.update(this.students);
 
             for (Lesson lesson : lessons){
-                if (hour == lesson.getBeginLesson());
-            }
+                int time[] = lesson.getBeginLesson();
 
-//            if (hour == 9) {
-//                student.setTarget(target.getCenter(classrooms.indexOf("101s")));
-//            }
+                String locationS = lesson.getClassRoom().getClassNumber() + "s";
+                System.out.println(locationS);
+
+                if (hour == time[0] && minute == time[1]){
+                    student.setTarget(target.getCenter(classrooms.indexOf(locationS)));
+                }
+            }
         }
+
         for (Person teacher : this.teachers) {
             teacher.update(this.teachers);
+
+            for (Lesson lesson : lessons){
+                int time[] = lesson.getBeginLesson();
+
+                String locationT = lesson.getClassRoom().getClassNumber() + "t";
+
+                if (hour == time[0] && minute == time[1]){
+                    teacher.setTarget(target.getCenter(classrooms.indexOf(locationT)));
+                }
+            }
         }
     }
 }

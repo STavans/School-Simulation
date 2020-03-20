@@ -56,9 +56,9 @@ public class Teacher extends Person implements Serializable {
         this.rotationSpeed = 0.1;
         try {
             if (this.genderTB.get().equals("Female")) {
-                image = ImageIO.read(getClass().getResource("/Female.png"));
+                image = ImageIO.read(getClass().getResource("/FemaleTeacher.png"));
             } else {
-                image = ImageIO.read(getClass().getResource("/Male.png"));
+                image = ImageIO.read(getClass().getResource("/Teacher.png"));
             }
 
             tiles = new BufferedImage[35];
@@ -164,9 +164,9 @@ public class Teacher extends Person implements Serializable {
         lastNameTB = new SimpleStringProperty(ois.readUTF());
 
         if (this.genderTB.get().equals("Female")) {
-            image = ImageIO.read(getClass().getResource("/Female.png"));
+            image = ImageIO.read(getClass().getResource("/FemaleTeacher.png"));
         } else {
-            image = ImageIO.read(getClass().getResource("/Male.png"));
+            image = ImageIO.read(getClass().getResource("/Teacher.png"));
         }
 
         tiles = new BufferedImage[35];
@@ -284,7 +284,7 @@ public class Teacher extends Person implements Serializable {
 
     @Override
     public void setTarget(Point2D point2D) {
-        this.target = target;
+        this.target = point2D;
     }
 
     @Override

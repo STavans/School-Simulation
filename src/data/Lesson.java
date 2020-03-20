@@ -49,16 +49,16 @@ public class Lesson implements Serializable {
         this.subject = subject;
     }
 
-    public double getBeginLesson() {
+    public int[] getBeginLesson() {
         String[] splittedBeginTime = beginTime.split(":");
 
-        double time = 0;
+        int time[] = new int[2];
+
+        time[0] = Integer.parseInt(splittedBeginTime[0]);
 
         if (splittedBeginTime[1].equals("30")){
-            time += 0.5;
+            time[1] = 30;
         }
-
-        time += Double.parseDouble(splittedBeginTime[0]);
 
         return time;
     }
