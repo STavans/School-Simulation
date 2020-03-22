@@ -14,7 +14,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
 @SuppressWarnings("Duplicates")
 public class Student extends Person implements Serializable {
 
@@ -30,13 +29,13 @@ public class Student extends Person implements Serializable {
     private Point2D target;
     private double rotationSpeed;
 
-    private transient BufferedImage sprite;
     private transient BufferedImage image;
     private transient BufferedImage[] tiles;
     private transient BufferedImage[] up;
     private transient BufferedImage[] down;
     private transient BufferedImage[] left;
     private transient BufferedImage[] right;
+
     private double counter = 0;
 
     private boolean walkingRight = false;
@@ -88,9 +87,6 @@ public class Student extends Person implements Serializable {
             for (int i = 28; i < 36; i++) {
                 right[i - 28] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
             }
-
-            this.sprite = tiles[0];
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -182,7 +178,6 @@ public class Student extends Person implements Serializable {
         for (int i = 28; i < 36; i++) {
             right[i - 28] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
         }
-        this.sprite = tiles[0];
     }
 
     @Override
@@ -209,7 +204,7 @@ public class Student extends Person implements Serializable {
         boolean collided = false;
 
         for (Person other : students) {
-            if (other != this && newPosition.distance(other.getPosition()) < 64) {
+            if (other != this && newPosition.distance(other.getPosition()) < 50) {
                 collided = true;
             }
         }
@@ -224,14 +219,12 @@ public class Student extends Person implements Serializable {
             walkingLeft = false;
             walkingUp = false;
             walkingDown = false;
-        }
-        else if (angle > -2.2 && angle < -0.8) {
+        } else if (angle > -2.2 && angle < -0.8) {
             walkingRight = false;
             walkingLeft = false;
             walkingUp = true;
             walkingDown = false;
-        }
-        else if (angle > 2.2 || angle < -2.2) {
+        } else if (angle > 2.2 || angle < -2.2) {
             walkingRight = false;
             walkingLeft = true;
             walkingUp = false;
@@ -266,7 +259,7 @@ public class Student extends Person implements Serializable {
 
     private AffineTransform getTransform() {
         AffineTransform tx = new AffineTransform();
-        tx.translate(position.getX(), position.getY());
+        tx.translate(position.getX() - 32, position.getY() - 32);
         return tx;
     }
 

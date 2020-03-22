@@ -1,6 +1,5 @@
 package tileMap;
 
-
 import javax.json.JsonObject;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -8,13 +7,13 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class TiledLayer {
+
     private int width;
     private int height;
     private String name;
     private int [][] map;
     private double opacity;
     private boolean visible;
-
 
     public TiledLayer(JsonObject jsonData) {
 
@@ -24,7 +23,6 @@ public class TiledLayer {
         this.name = jsonData.getString("name");
         this.opacity = jsonData.getJsonNumber("opacity").doubleValue();
         this.visible = jsonData.getBoolean("visible");
-
 
         map = new int[height][width];
         int i = 0;
@@ -36,8 +34,6 @@ public class TiledLayer {
                 i++;
             }
         }
-
-
     }
 
     public void draw(Graphics2D g, ArrayList<BufferedImage> tiles)
@@ -55,6 +51,4 @@ public class TiledLayer {
             }
         }
     }
-
-
 }

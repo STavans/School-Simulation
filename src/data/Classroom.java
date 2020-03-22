@@ -4,17 +4,17 @@ import java.io.Serializable;
 
 public class Classroom implements Serializable {
 
-    private int classNumber;
+    private String classNumber;
 
-    public Classroom(int classNumber) {
+    public Classroom(String classNumber) {
         this.classNumber = classNumber;
     }
 
-    public int getClassNumber() {
+    public String getClassNumber() {
         return classNumber;
     }
 
-    public void setClassNumber(int classNumber) {
+    public void setClassNumber(String classNumber) {
         this.classNumber = classNumber;
     }
 

@@ -28,13 +28,13 @@ public class Teacher extends Person implements Serializable {
     private Point2D target;
     private double rotationSpeed;
 
-    private transient BufferedImage sprite;
     private transient BufferedImage image;
     private transient BufferedImage[] tiles;
     private transient BufferedImage[] up;
     private transient BufferedImage[] down;
     private transient BufferedImage[] left;
     private transient BufferedImage[] right;
+
     private double counter = 0;
 
     private boolean walkingRight = false;
@@ -56,9 +56,9 @@ public class Teacher extends Person implements Serializable {
         this.rotationSpeed = 0.1;
         try {
             if (this.genderTB.get().equals("Female")) {
-                image = ImageIO.read(getClass().getResource("/Female.png"));
+                image = ImageIO.read(getClass().getResource("/FemaleTeacher.png"));
             } else {
-                image = ImageIO.read(getClass().getResource("/Male.png"));
+                image = ImageIO.read(getClass().getResource("/Teacher.png"));
             }
 
             tiles = new BufferedImage[35];
@@ -85,9 +85,6 @@ public class Teacher extends Person implements Serializable {
             for (int i = 28; i < 36; i++) {
                 right[i - 28] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
             }
-
-            this.sprite = tiles[0];
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -164,9 +161,9 @@ public class Teacher extends Person implements Serializable {
         lastNameTB = new SimpleStringProperty(ois.readUTF());
 
         if (this.genderTB.get().equals("Female")) {
-            image = ImageIO.read(getClass().getResource("/Female.png"));
+            image = ImageIO.read(getClass().getResource("/FemaleTeacher.png"));
         } else {
-            image = ImageIO.read(getClass().getResource("/Male.png"));
+            image = ImageIO.read(getClass().getResource("/Teacher.png"));
         }
 
         tiles = new BufferedImage[35];
@@ -193,9 +190,7 @@ public class Teacher extends Person implements Serializable {
         for (int i = 28; i < 36; i++) {
             right[i - 28] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
         }
-        this.sprite = tiles[0];
     }
-
 
     @Override
     public void update(ArrayList<Person> teachers) {
@@ -221,7 +216,7 @@ public class Teacher extends Person implements Serializable {
         boolean collided = false;
 
         for (Person other : teachers) {
-            if (other != this && newPosition.distance(other.getPosition()) < 64) {
+            if (other != this && newPosition.distance(other.getPosition()) < 50) {
                 collided = true;
             }
         }
@@ -236,14 +231,12 @@ public class Teacher extends Person implements Serializable {
             walkingLeft = false;
             walkingUp = false;
             walkingDown = false;
-        }
-        else if (angle > -2.2 && angle < -0.8) {
+        } else if (angle > -2.2 && angle < -0.8) {
             walkingRight = false;
             walkingLeft = false;
             walkingUp = true;
             walkingDown = false;
-        }
-        else if (angle > 2.2 || angle < -2.2) {
+        } else if (angle > 2.2 || angle < -2.2) {
             walkingRight = false;
             walkingLeft = true;
             walkingUp = false;
@@ -278,13 +271,13 @@ public class Teacher extends Person implements Serializable {
 
     private AffineTransform getTransform() {
         AffineTransform tx = new AffineTransform();
-        tx.translate(position.getX(), position.getY());
+        tx.translate(position.getX() - 32, position.getY() -32);
         return tx;
     }
 
     @Override
     public void setTarget(Point2D point2D) {
-        this.target = target;
+        this.target = point2D;
     }
 
     @Override

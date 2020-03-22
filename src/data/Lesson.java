@@ -49,8 +49,18 @@ public class Lesson implements Serializable {
         this.subject = subject;
     }
 
-    public String getBeginLesson() {
-        return beginTime;
+    public int[] getBeginLesson() {
+        String[] splittedBeginTime = beginTime.split(":");
+
+        int time[] = new int[2];
+
+        time[0] = Integer.parseInt(splittedBeginTime[0]);
+
+        if (splittedBeginTime[1].equals("30")){
+            time[1] = 30;
+        }
+
+        return time;
     }
 
     public void setBeginLesson(String beginTime) {
@@ -65,11 +75,11 @@ public class Lesson implements Serializable {
         this.endTime = endTime;
     }
 
-    public Classroom getClassRoom() {
+    public Classroom getClassroom() {
         return classroom;
     }
 
-    public void setClassRoom(Classroom classroom) {
+    public void setClassroom(Classroom classroom) {
         this.classroom = classroom;
     }
 
