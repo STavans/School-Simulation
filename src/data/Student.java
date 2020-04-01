@@ -2,6 +2,7 @@ package data;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import tileMap.PathfindLogic;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -21,6 +22,14 @@ public class Student extends Person implements Serializable {
     private transient SimpleObjectProperty groupTBST;
     private transient SimpleStringProperty genderTBST;
     private transient SimpleStringProperty lastNameTBST;
+    private transient BufferedImage image;
+    private transient BufferedImage[] tiles;
+    private transient BufferedImage[] up;
+    private transient BufferedImage[] down;
+    private transient BufferedImage[] left;
+    private transient BufferedImage[] right;
+
+    private PathfindLogic pathfindLogic;
 
     private Point2D position;
     private double angle;
@@ -28,13 +37,6 @@ public class Student extends Person implements Serializable {
 
     private Point2D target;
     private double rotationSpeed;
-
-    private transient BufferedImage image;
-    private transient BufferedImage[] tiles;
-    private transient BufferedImage[] up;
-    private transient BufferedImage[] down;
-    private transient BufferedImage[] left;
-    private transient BufferedImage[] right;
 
     private double counter = 0;
 
@@ -141,7 +143,7 @@ public class Student extends Person implements Serializable {
         oos.writeUTF(genderTBST.get());
         oos.writeUTF(lastNameTBST.get());
     }
-    
+
     private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
         ois.defaultReadObject();
         groupTBST = new SimpleObjectProperty(ois.readObject());
@@ -178,6 +180,7 @@ public class Student extends Person implements Serializable {
         for (int i = 28; i < 36; i++) {
             right[i - 28] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
         }
+
     }
 
     @Override
@@ -274,5 +277,9 @@ public class Student extends Person implements Serializable {
     @Override
     public void setPosition(Point2D position) {
         this.position = position;
+    }
+
+    public void setPathfindLogic(PathfindLogic pathfindLogic) {
+        this.pathfindLogic = pathfindLogic;
     }
 }

@@ -2,6 +2,7 @@ package tileMap;
 
 import data.Lesson;
 import data.Person;
+import data.Student;
 import gui.FileIO;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
@@ -32,6 +33,8 @@ public class SimulationController {
     private int hour = 8;
     private int minute;
     private int periodTime = 1000;
+    private PathfindLogic pathfindLogic = new PathfindLogic("Tilemap.json");
+    private double[][] distanceMap;
 
     private ArrayList classrooms;
 
@@ -91,6 +94,14 @@ public class SimulationController {
             e.printStackTrace();
         }
 
+        for (Person student: this.students) {
+            student.setPathfindLogic(pathfindLogic);
+        }
+
+        for (Person teacher: this.teachers) {
+            teacher.setPathfindLogic(pathfindLogic);
+        }
+
         for (int i = 0; i < this.students.size(); i++) {
             this.students.get(i).setPosition(new Point2D.Double(1090, 1040 + (i * 64)));
         }
@@ -98,6 +109,8 @@ public class SimulationController {
         for (int i = 0; i < this.teachers.size(); i++) {
             this.teachers.get(i).setPosition(new Point2D.Double(1010, 1040 + (i * 64)));
         }
+        pathfindLogic.generate();
+        this.distanceMap = pathfindLogic.getDistanceMap().getDistanceMap();
     }
 
     public void draw(Graphics2D g) {
@@ -112,6 +125,20 @@ public class SimulationController {
 
         for (Person teacher : teachers){
             teacher.draw(g);
+        }
+
+        String distanceMapString;
+        for (int y = 0; y < 32; y++){
+            for (int x = 0; x < 60; x++){
+                if ((int) distanceMap[x][y] > 1000){
+                    continue;
+                }
+                else {
+                    distanceMapString = String.valueOf((int) distanceMap[x][y]);
+                    g.setColor(Color.yellow);
+                    g.drawString(distanceMapString, x * 32 + 16, y * 32 + 16);
+                }
+            }
         }
     }
 

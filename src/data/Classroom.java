@@ -6,6 +6,7 @@ public class Classroom implements Serializable {
 
     private String classNumber;
 
+
     public Classroom(String classNumber) {
         this.classNumber = classNumber;
     }

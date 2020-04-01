@@ -25,7 +25,7 @@ public class TiledMap {
 		JsonReader reader;
 		reader = Json.createReader(getClass().getResourceAsStream(fileName));
 		JsonObject root = reader.readObject();
-
+        reader.close();
         JsonArray tilesets = root.getJsonArray("tilesets");
 
         for(int i = 0; i < tilesets.size(); i++) {

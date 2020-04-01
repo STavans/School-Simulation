@@ -1,5 +1,7 @@
 package data;
 
+import tileMap.PathfindLogic;
+
 import java.awt.geom.Point2D;
 import java.io.Serializable;
 
@@ -31,6 +33,7 @@ public abstract class Person implements Serializable, Drawable {
         this.lastName = lastName;
     }
 
+    public abstract void setPathfindLogic(PathfindLogic pathfindLogic);
 
 }
 

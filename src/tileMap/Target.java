@@ -7,6 +7,7 @@ import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import java.awt.geom.Point2D;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -32,7 +33,7 @@ public class Target {
     private ArrayList<String> classrooms;
     private HashMap<String, Integer> hashMap;
 
-    public Target(String fileName){
+    public Target(String filename){
         classrooms = new ArrayList<>();
         hashMap = new HashMap();
 
@@ -53,7 +54,8 @@ public class Target {
         classrooms.add(toilets.getClassNumber());
 
         JsonReader reader;
-        reader = Json.createReader(getClass().getResourceAsStream(fileName));
+        reader = Json.createReader(getClass().getResourceAsStream("/Tilemap.json"));
+//        System.out.println(Json.createReader(getClass().getResourceAsStream("/" + filename)));
         JsonObject root = reader.readObject();
 
         layers = root.getJsonArray("layers").getJsonObject(4).getJsonArray("objects");
@@ -63,6 +65,7 @@ public class Target {
 
             hashMap.put(classrooms.get(i), id);
         }
+        reader.close();
     }
 
     public int getX(int location){
@@ -82,10 +85,14 @@ public class Target {
     }
 
     public Point2D getCenter(int location){
-        return new Point2D.Float((getX(location) + (getWidth(location) / 2)), getY(location) + (getHeight(location) / 2));
+        return new Point2D.Float((float) (getX(location) + (getWidth(location) / 2.0)), getY(location) + (float) (getHeight(location) / 2.0));
     }
 
     public ArrayList getClassroomList(){
         return classrooms;
+    }
+
+    public HashMap<String, Integer> getClassroomsHashMap() {
+        return hashMap;
     }
 }

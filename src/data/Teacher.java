@@ -1,6 +1,7 @@
 package data;
 
 import javafx.beans.property.SimpleStringProperty;
+import tileMap.PathfindLogic;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -27,6 +28,8 @@ public class Teacher extends Person implements Serializable {
 
     private Point2D target;
     private double rotationSpeed;
+
+    private PathfindLogic pathfindLogic;
 
     private transient BufferedImage image;
     private transient BufferedImage[] tiles;
@@ -104,6 +107,9 @@ public class Teacher extends Person implements Serializable {
 
     public void setSubject(String subject) {
         this.subject = subject;
+    }
+    public void setPathfindLogic(PathfindLogic pathfindLogic) {
+        this.pathfindLogic = pathfindLogic;
     }
 
     public String getSubjectTB() {
