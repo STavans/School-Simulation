@@ -50,25 +50,28 @@ public class Lesson implements Serializable {
     }
 
     public int[] getBeginLesson() {
-        String[] splittedBeginTime = beginTime.split(":");
 
-        int time[] = new int[2];
-
-        time[0] = Integer.parseInt(splittedBeginTime[0]);
-
-        if (splittedBeginTime[1].equals("30")){
-            time[1] = 30;
-        }
-
-        return time;
+        return convertToTime(beginTime);
     }
 
     public void setBeginLesson(String beginTime) {
         this.beginTime = beginTime;
     }
 
-    public String getEndLesson() {
-        return endTime;
+    public int[] getEndLesson() {
+        return convertToTime(endTime);
+    }
+    public int[] convertToTime(String time){
+        String[] splitTime = time.split(":");
+
+        int[] convertedTime = new int[2];
+
+        convertedTime[0] = Integer.parseInt(splitTime[0]);
+
+        if (splitTime[1].equals("30")){
+            convertedTime[1] = 30;
+        }
+        return convertedTime;
     }
 
     public void setEndLesson(String endTime) {

@@ -1,6 +1,7 @@
 package data;
 
 import javafx.beans.property.SimpleStringProperty;
+import tileMap.PathfindLogic;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -28,6 +29,8 @@ public class Teacher extends Person implements Serializable {
     private Point2D target;
     private double rotationSpeed;
 
+    private PathfindLogic pathfindLogic;
+
     private transient BufferedImage image;
     private transient BufferedImage[] tiles;
     private transient BufferedImage[] up;
@@ -41,6 +44,7 @@ public class Teacher extends Person implements Serializable {
     private boolean walkingLeft = false;
     private boolean walkingUp = false;
     private boolean walkingDown = true;
+    private boolean collision = false;
 
     public Teacher (String lastName,String gender,String TeacherSubject, Point2D position) {
         super(gender, lastName);
@@ -104,6 +108,9 @@ public class Teacher extends Person implements Serializable {
 
     public void setSubject(String subject) {
         this.subject = subject;
+    }
+    public void setPathfindLogic(PathfindLogic pathfindLogic) {
+        this.pathfindLogic = pathfindLogic;
     }
 
     public String getSubjectTB() {
@@ -197,26 +204,13 @@ public class Teacher extends Person implements Serializable {
         double targetAngle = Math.atan2(this.target.getY() - this.position.getY(),
                 this.target.getX() - this.position.getX());
 
-        double angleDifference = this.angle - targetAngle;
-        while (angleDifference < -Math.PI)
-            angleDifference += 2 * Math.PI;
-        while (angleDifference > Math.PI)
-            angleDifference -= 2 * Math.PI;
-
-        if (Math.abs(angleDifference) < this.rotationSpeed)
-            this.angle = targetAngle;
-        else if (angleDifference < 0)
-            this.angle += this.rotationSpeed;
-        else
-            this.angle -= this.rotationSpeed;
-
-        Point2D newPosition = new Point2D.Double(this.position.getX() + this.speed * Math.cos(this.angle),
-                this.position.getY() + this.speed * Math.sin(this.angle));
+        Point2D newPosition = new Point2D.Double(this.position.getX() + this.speed * Math.cos(targetAngle),
+                this.position.getY() + this.speed * Math.sin(targetAngle));
 
         boolean collided = false;
 
         for (Person other : teachers) {
-            if (other != this && newPosition.distance(other.getPosition()) < 50) {
+            if (other != this && newPosition.distance(other.getPosition()) < 50 && collision) {
                 collided = true;
             }
         }
@@ -288,5 +282,9 @@ public class Teacher extends Person implements Serializable {
     @Override
     public void setPosition(Point2D position) {
         this.position = position;
+    }
+
+    public Point2D getTarget() {
+        return this.target;
     }
 }

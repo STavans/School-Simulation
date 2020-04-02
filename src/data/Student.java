@@ -2,6 +2,7 @@ package data;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import tileMap.PathfindLogic;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -21,6 +22,14 @@ public class Student extends Person implements Serializable {
     private transient SimpleObjectProperty groupTBST;
     private transient SimpleStringProperty genderTBST;
     private transient SimpleStringProperty lastNameTBST;
+    private transient BufferedImage image;
+    private transient BufferedImage[] tiles;
+    private transient BufferedImage[] up;
+    private transient BufferedImage[] down;
+    private transient BufferedImage[] left;
+    private transient BufferedImage[] right;
+
+    private PathfindLogic pathfindLogic;
 
     private Point2D position;
     private double angle;
@@ -29,19 +38,13 @@ public class Student extends Person implements Serializable {
     private Point2D target;
     private double rotationSpeed;
 
-    private transient BufferedImage image;
-    private transient BufferedImage[] tiles;
-    private transient BufferedImage[] up;
-    private transient BufferedImage[] down;
-    private transient BufferedImage[] left;
-    private transient BufferedImage[] right;
-
     private double counter = 0;
 
     private boolean walkingRight = false;
     private boolean walkingLeft = false;
     private boolean walkingUp = false;
     private boolean walkingDown = true;
+    private boolean collision = false;
 
     public Student(String lastName, Group group, String gender, Point2D position) {
         super(gender,lastName);
@@ -53,8 +56,8 @@ public class Student extends Person implements Serializable {
         this.position = position;
         this.angle = 0;
         this.speed = 2;
-        this.target = new Point2D.Double(200, 200);
-        this.rotationSpeed = 0.1;
+        this.target = new Point2D.Double(300, 500);
+        this.rotationSpeed = 1;
 
         try {
             if (this.genderTBST.get().equals("Female")) {
@@ -141,7 +144,7 @@ public class Student extends Person implements Serializable {
         oos.writeUTF(genderTBST.get());
         oos.writeUTF(lastNameTBST.get());
     }
-    
+
     private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
         ois.defaultReadObject();
         groupTBST = new SimpleObjectProperty(ois.readObject());
@@ -178,33 +181,34 @@ public class Student extends Person implements Serializable {
         for (int i = 28; i < 36; i++) {
             right[i - 28] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
         }
+
     }
 
     @Override
     public void update(ArrayList<Person> students) {
         double targetAngle = Math.atan2(this.target.getY() - this.position.getY(),
                 this.target.getX() - this.position.getX());
+//
+//        double angleDifference = this.angle - targetAngle;
+//        while (angleDifference < -Math.PI)
+//            angleDifference += 2 * Math.PI;
+//        while (angleDifference > Math.PI)
+//            angleDifference -= 2 * Math.PI;
+//
+//        if (Math.abs(angleDifference) < this.rotationSpeed)
+//            this.angle = targetAngle;
+//        else if (angleDifference < 0)
+//            this.angle += this.rotationSpeed;
+//        else
+//            this.angle -= this.rotationSpeed;
 
-        double angleDifference = this.angle - targetAngle;
-        while (angleDifference < -Math.PI)
-            angleDifference += 2 * Math.PI;
-        while (angleDifference > Math.PI)
-            angleDifference -= 2 * Math.PI;
-
-        if (Math.abs(angleDifference) < this.rotationSpeed)
-            this.angle = targetAngle;
-        else if (angleDifference < 0)
-            this.angle += this.rotationSpeed;
-        else
-            this.angle -= this.rotationSpeed;
-
-        Point2D newPosition = new Point2D.Double(this.position.getX() + this.speed * Math.cos(this.angle),
-                this.position.getY() + this.speed * Math.sin(this.angle));
+        Point2D newPosition = new Point2D.Double(this.position.getX() + this.speed * Math.cos(targetAngle),
+                this.position.getY() + this.speed * Math.sin(targetAngle));
 
         boolean collided = false;
 
         for (Person other : students) {
-            if (other != this && newPosition.distance(other.getPosition()) < 50) {
+            if (other != this && newPosition.distance(other.getPosition()) < 50 && collision) {
                 collided = true;
             }
         }
@@ -260,11 +264,15 @@ public class Student extends Person implements Serializable {
     private AffineTransform getTransform() {
         AffineTransform tx = new AffineTransform();
         tx.translate(position.getX() - 32, position.getY() - 32);
+        tx.scale(0.9,0.9);
         return tx;
     }
 
     public void setTarget(Point2D target) {
         this.target = target;
+    }
+    public Point2D getTarget() {
+        return this.target;
     }
 
     public Point2D getPosition(){
@@ -274,5 +282,9 @@ public class Student extends Person implements Serializable {
     @Override
     public void setPosition(Point2D position) {
         this.position = position;
+    }
+
+    public void setPathfindLogic(PathfindLogic pathfindLogic) {
+        this.pathfindLogic = pathfindLogic;
     }
 }
