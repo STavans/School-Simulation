@@ -31,12 +31,17 @@ public class SimulationController {
     private Target target;
 
     private int hour = 8;
-    private int minute;
+    private int minute = 5;
     private int periodTime = 1000;
     private PathfindLogic pathfindLogic = new PathfindLogic("Tilemap.json");
     private double[][] distanceMap;
 
+
+    private AnimationTimer animationTimer;
+    private Timer timer;
     private ArrayList classrooms;
+
+//    private int tileTargetSwitchTime = 0;
 
     public void start() throws Exception {
         Stage stage = new Stage();
@@ -46,22 +51,24 @@ public class SimulationController {
         mainPane.setCenter(canvas);
         FXGraphics2D g2d = new FXGraphics2D(canvas.getGraphicsContext2D());
 
-        new Timer().schedule(
+        timer = new Timer();
+        timer.schedule(
                 new TimerTask() {
 
                     @Override
                     public void run() {
                         minute++;
-                        if (minute >= 6){
+                        System.out.println(hour + ":" + minute);
+                        if (minute >= 20) {
                             minute = 0;
                             hour++;
+
                         }
                     }
                 }, 0, periodTime);
 
-        new AnimationTimer() {
+        animationTimer = new AnimationTimer() {
             long last = -1;
-
             @Override
             public void handle(long now) {
                 if (last == -1)
@@ -70,12 +77,20 @@ public class SimulationController {
                 last = now;
                 draw(g2d);
             }
-        }.start();
+        };
 
+        animationTimer.start();
+
+        stage.setOnCloseRequest(event ->
+                stopSimulation()
+        );
         stage.setScene(new Scene(mainPane));
-        stage.setTitle("Fading image");
+        stage.setTitle("School Simulation");
         stage.show();
+        canvas.setOnMouseClicked(event ->
+                getMouseLocation());
         draw(g2d);
+
     }
 
     public void init() {
@@ -94,11 +109,11 @@ public class SimulationController {
             e.printStackTrace();
         }
 
-        for (Person student: this.students) {
+        for (Person student : this.students) {
             student.setPathfindLogic(pathfindLogic);
         }
 
-        for (Person teacher: this.teachers) {
+        for (Person teacher : this.teachers) {
             teacher.setPathfindLogic(pathfindLogic);
         }
 
@@ -123,17 +138,16 @@ public class SimulationController {
             student.draw(g);
         }
 
-        for (Person teacher : teachers){
+        for (Person teacher : teachers) {
             teacher.draw(g);
         }
 
         String distanceMapString;
-        for (int y = 0; y < 32; y++){
-            for (int x = 0; x < 60; x++){
-                if ((int) distanceMap[x][y] > 1000){
+        for (int y = 0; y < 32; y++) {
+            for (int x = 0; x < 60; x++) {
+                if ((int) distanceMap[x][y] > 1000) {
                     continue;
-                }
-                else {
+                } else {
                     distanceMapString = String.valueOf((int) distanceMap[x][y]);
                     g.setColor(Color.yellow);
                     g.drawString(distanceMapString, x * 32 + 16, y * 32 + 16);
@@ -145,14 +159,13 @@ public class SimulationController {
     public void update(double deltaTime) {
         for (Person student : this.students) {
             student.update(this.students);
-
-            for (Lesson lesson : lessons){
-                int time[] = lesson.getBeginLesson();
+            for (Lesson lesson : lessons) {
+                int beginTime[] = lesson.getBeginLesson();
 
                 String locationS = lesson.getClassroom().getClassNumber() + "s";
 
-                if (hour == time[0] && minute == time[1]){
-                    student.setTarget(target.getCenter(classrooms.indexOf(locationS)));
+                if (hour >= beginTime[0] && minute >= beginTime[1]) {
+                    student.setTarget(pathfindLogic.getPath(student.getPosition(), locationS));
                 }
             }
         }
@@ -160,15 +173,26 @@ public class SimulationController {
         for (Person teacher : this.teachers) {
             teacher.update(this.teachers);
 
-            for (Lesson lesson : lessons){
-                int time[] = lesson.getBeginLesson();
+            for (Lesson lesson : lessons) {
+                int beginTime[] = lesson.getBeginLesson();
+                int endTime[] = lesson.getEndLesson();
 
                 String locationT = lesson.getClassroom().getClassNumber() + "t";
 
-                if (hour == time[0] && minute == time[1]){
-                    teacher.setTarget(target.getCenter(classrooms.indexOf(locationT)));
+                if (hour >= beginTime[0] && minute >= beginTime[1]) {
+                    teacher.setTarget(pathfindLogic.getPath(teacher.getPosition(), locationT));
                 }
             }
         }
+//        tileTargetSwitchTime++;
+    }
+
+    public void getMouseLocation() {
+        System.out.println(MouseInfo.getPointerInfo().getLocation());
+    }
+
+    public void stopSimulation() {
+        timer.cancel();
+        animationTimer.stop();
     }
 }

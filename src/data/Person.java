@@ -35,5 +35,7 @@ public abstract class Person implements Serializable, Drawable {
 
     public abstract void setPathfindLogic(PathfindLogic pathfindLogic);
 
+    public abstract Point2D getTarget();
+
 }
 

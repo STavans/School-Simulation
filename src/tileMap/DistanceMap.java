@@ -22,8 +22,6 @@ public class DistanceMap {
     public void recalculate() {
         for (int y = 0; y < 32; y++){
             for (int x = 0; x < 60; x++){
-                System.out.println('\n' + "y: " + y + " data: " + collisionMap[y][x]);
-                System.out.println("x" + x);
                 if (collisionMap[y][x] != 0){
                     map[x][y] = true;
                 }

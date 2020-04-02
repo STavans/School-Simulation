@@ -23,8 +23,6 @@ public class PathfindLogic {
     }
     public void generate(){
         for (String classroom: classroomHashMap.keySet()) {
-            System.out.println(classroom);
-            System.out.println(get2DArrayCollisionLayer().length);
             int targetX = target.getX(classroomsArrayList.indexOf(classroom)) / 32;
             int targetY = target.getY(classroomsArrayList.indexOf(classroom)) / 32;
             distanceHashMaps.put(classroom, new DistanceMap(get2DArrayCollisionLayer(), targetX, targetY));
@@ -59,11 +57,11 @@ public class PathfindLogic {
         return null;
     }
     public DistanceMap getDistanceMap(){
-        return distanceHashMaps.get("103s");
+        return distanceHashMaps.get("106s");
     }
     public Point2D getPath(Point2D position, String target){
-        int currentTileX = (int) Math.round((position.getX()) / 32);
-        int currentTileY = (int) Math.round((position.getY()) / 32);
+        int currentTileX = (int) Math.floor((position.getX()) / 32);
+        int currentTileY = (int) Math.floor((position.getY()) / 32);
         DistanceMap targetField = distanceHashMaps.get(target);
         double currentDistance = targetField.getDistanceMap()[currentTileX][currentTileY];
 //        System.out.println(currentDistance);
