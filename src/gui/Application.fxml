@@ -48,6 +48,7 @@
                         <Button id="rosterAddButton" fx:id="rosterAddButtonBox" mnemonicParsing="false" onAction="#rosterAddButton" text="Add" />
                         <Button id="rosterEditButton" fx:id="rosterEditButton" mnemonicParsing="false" onAction="#rosterEditButton" text="Edit" />
                         <Button id="rosterDeleteButton" fx:id="rosterDeleteButton" mnemonicParsing="false" onAction="#rosterDeleteButton" text="Delete" />
+                        <Button fx:id="rosterClearButton" mnemonicParsing="false" onAction="#rosterClearButton" text="Clear" />
                      </children>
                   </HBox>
                </children>
