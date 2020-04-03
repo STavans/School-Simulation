@@ -39,10 +39,11 @@ public class PathfindLogic {
                 ArrayList<DistanceMap> distanceMaps = new ArrayList<>();
                 for (int y = 0; y < 4; y++) {
                     for (int x = 0; x < 3; x++) {
-                        distanceMaps.add(new DistanceMap(get2DArrayCollisionLayer(), targetX + (2 * x), targetY + y));
+                        distanceMaps.add(new DistanceMap(get2DArrayCollisionLayer(), targetX + (3 * x), targetY + y));
                     }
                 }
                 classroomArrayList.get(classroomCodesArrayList.indexOf(classroom)).setChairDistanceMaps(distanceMaps);
+                System.out.println(classroomArrayList.get(classroomCodesArrayList.indexOf(classroom)) + " Initialized");
             }
         }
     }
@@ -69,14 +70,23 @@ public class PathfindLogic {
         return null;
     }
     public DistanceMap getDistanceMap(){
-        return distanceHashMaps.get("106s");
+        return classroomArrayList.get(5).getChairDistanceMaps().get(4);
     }
+
     public Point2D getPath(Point2D position, String target){
+        DistanceMap targetField = distanceHashMaps.get(target);
+       return calculatePath(position, targetField);
+    }
+
+    public Point2D getPath(Point2D position, DistanceMap distanceMap){
+        DistanceMap targetField = distanceMap;
+        return calculatePath(position, targetField);
+    }
+
+    private Point2D calculatePath(Point2D position, DistanceMap targetField){
         int currentTileX = (int) Math.floor((position.getX()) / 32);
         int currentTileY = (int) Math.floor((position.getY()) / 32);
-        DistanceMap targetField = distanceHashMaps.get(target);
         double currentDistance = targetField.getDistanceMap()[currentTileX][currentTileY];
-
         if (currentDistance > targetField.getDistanceMap()[currentTileX + 1][currentTileY] && targetField.getDistanceMap()[currentTileX + 1][currentTileY] != Integer.MAX_VALUE) {
             return tileTargets[currentTileX + 1][currentTileY];
         }
@@ -91,5 +101,9 @@ public class PathfindLogic {
             return tileTargets[currentTileX][currentTileY -1];
         }
         return tileTargets[currentTileX][currentTileY - 1];
+    }
+
+    public ArrayList<Classroom> getClassroomArrayList() {
+        return classroomArrayList;
     }
 }

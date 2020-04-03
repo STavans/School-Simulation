@@ -1,5 +1,6 @@
 package tileMap;
 
+import data.Classroom;
 import data.Lesson;
 import data.Person;
 import data.Student;
@@ -16,6 +17,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -39,7 +41,11 @@ public class SimulationController {
 
     private AnimationTimer animationTimer;
     private Timer timer;
-    private ArrayList classrooms;
+    private ArrayList<Classroom> classroomChairs = new ArrayList<>();
+    private ArrayList classroomCodesArrayList = new ArrayList();
+    private Boolean ranOnce = false;
+    private int chairIndex = 0;
+
 
 //    private int tileTargetSwitchTime = 0;
 
@@ -100,8 +106,19 @@ public class SimulationController {
         hour = 8;
         minute = 6;
 
-        classrooms = target.getClassroomList();
+        pathfindLogic.generate();
+        this.distanceMap = pathfindLogic.getDistanceMap().getDistanceMap();
+        classroomCodesArrayList = target.getClassroomCodesList();
+        classroomChairs = pathfindLogic.getClassroomArrayList();
+        for (Classroom cla :
+                classroomChairs) {
+            System.out.println("Added: " + cla.getChairDistanceMaps());
+        }
 
+        for (Classroom cla :
+                pathfindLogic.getClassroomArrayList()) {
+            System.out.println("Added: " +  cla.getClassNumber() + " Active: " + cla.getChairDistanceMaps());
+        }
         try {
             this.students = new ArrayList<>(fileIO.getStudents());
             this.teachers = new ArrayList<>(fileIO.getTeachers());
@@ -119,8 +136,7 @@ public class SimulationController {
         for (Person teacher : this.teachers) {
             teacher.setPathfindLogic(pathfindLogic);
         }
-        pathfindLogic.generate();
-        this.distanceMap = pathfindLogic.getDistanceMap().getDistanceMap();
+
 
         for (int i = 0; i < this.students.size(); i++) {
 //            this.students.get(i).setPosition(new Point2D.Double(1090, 1040 + (i * 64)));
@@ -166,13 +182,21 @@ public class SimulationController {
     public void update(double deltaTime) {
         for (Person student : this.students) {
             student.update(this.students);
+
             for (Lesson lesson : lessons) {
                 int beginTime[] = lesson.getBeginLesson();
                 int endTime[] = lesson.getEndLesson();
                 String locationS = lesson.getClassroom().getClassNumber() + "s";
 
+
+
                 if (hour >= beginTime[0] && minute >= beginTime[1] && hour <= endTime[0] && minute <= endTime[1]) {
-                    student.setTarget(pathfindLogic.getPath(student.getPosition(), locationS));
+                    if (!ranOnce) {
+                        chairIndex = new Random().nextInt(12);
+                        System.out.println("NEXT FUCKING INT" + chairIndex);
+                        ranOnce = true;
+                    }
+                    student.setTarget(pathfindLogic.getPath(student.getPosition(), classroomChairs.get(classroomCodesArrayList.indexOf(locationS)).getChairDistanceMaps().get(chairIndex)));
                 } else {
                     student.setTarget(pathfindLogic.getPath(student.getPosition(), "canteen"));
                 }
