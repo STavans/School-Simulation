@@ -321,6 +321,10 @@ public class Gui implements Initializable {
         list2.forEach(list::remove);
     }
 
+    @FXML
+    void teacherClearButton() {
+        teachersTable.getItems().clear();
+    }
 
     @FXML
     void teacherGenerateButton() {
@@ -373,22 +377,21 @@ public class Gui implements Initializable {
     }
 
     @FXML
-    void studentDeleteButton() {
-        ObservableList<Student> list, list2;
-        list = studentsTable.getItems();
-        list2 = studentsTable.getSelectionModel().getSelectedItems();
-        list2.forEach(list::remove);
-
-    }
-
-    @FXML
     void studentEditButton() throws IOException {
         startStudentEditor(studentsTable.getSelectionModel().getFocusedIndex());
     }
 
     @FXML
-    void studentSaveButton() {
-        System.out.println(studentsTable.getItems());
+    void studentDeleteButton() {
+        ObservableList<Student> list, list2;
+        list = studentsTable.getItems();
+        list2 = studentsTable.getSelectionModel().getSelectedItems();
+        list2.forEach(list::remove);
+    }
+
+    @FXML
+    void studentClearButton() {
+        studentsTable.getItems().clear();
     }
 
     @FXML
@@ -458,7 +461,8 @@ public class Gui implements Initializable {
     }
 
     @FXML
-    void rosterSaveButton() {
+    void rosterClearButton() {
+        rosterTable.getItems().clear();
     }
 
     //TextFields names
