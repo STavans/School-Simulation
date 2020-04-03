@@ -30,8 +30,8 @@ public class SimulationController {
     private ArrayList<Lesson> lessons;
     private Target target;
 
-    private int hour = 8;
-    private int minute = 5;
+    private int hour;
+    private int minute;
     private int periodTime = 1000;
     private PathfindLogic pathfindLogic = new PathfindLogic("Tilemap.json");
     private double[][] distanceMap;
@@ -97,6 +97,8 @@ public class SimulationController {
     public void init() {
         map = new TiledMap("/Tilemap.json");
         target = new Target("/Tilemap.json");
+        hour = 8;
+        minute = 6;
 
         classrooms = target.getClassroomList();
 
