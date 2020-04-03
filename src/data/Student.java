@@ -188,19 +188,6 @@ public class Student extends Person implements Serializable {
     public void update(ArrayList<Person> students) {
         double targetAngle = Math.atan2(this.target.getY() - this.position.getY(),
                 this.target.getX() - this.position.getX());
-//
-//        double angleDifference = this.angle - targetAngle;
-//        while (angleDifference < -Math.PI)
-//            angleDifference += 2 * Math.PI;
-//        while (angleDifference > Math.PI)
-//            angleDifference -= 2 * Math.PI;
-//
-//        if (Math.abs(angleDifference) < this.rotationSpeed)
-//            this.angle = targetAngle;
-//        else if (angleDifference < 0)
-//            this.angle += this.rotationSpeed;
-//        else
-//            this.angle -= this.rotationSpeed;
 
         Point2D newPosition = new Point2D.Double(this.position.getX() + this.speed * Math.cos(targetAngle),
                 this.position.getY() + this.speed * Math.sin(targetAngle));
