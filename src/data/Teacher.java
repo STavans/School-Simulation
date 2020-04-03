@@ -109,6 +109,7 @@ public class Teacher extends Person implements Serializable {
     public void setSubject(String subject) {
         this.subject = subject;
     }
+
     public void setPathfindLogic(PathfindLogic pathfindLogic) {
         this.pathfindLogic = pathfindLogic;
     }

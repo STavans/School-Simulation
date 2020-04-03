@@ -107,7 +107,7 @@ public class Student extends Person implements Serializable {
         return groupTBST;
     }
 
-    public void setGroupTBST(String groupTBST) {
+    public void setGroupTBST(Group groupTBST) {
         this.groupTBST.set(groupTBST);
     }
 

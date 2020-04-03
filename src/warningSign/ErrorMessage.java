@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 import java.awt.*;
 
 public class ErrorMessage {
-    private ResizableCanvas canvas;
 
     public void showError(String errorMessage) {
         final JPanel panel = new JPanel();
