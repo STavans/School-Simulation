@@ -4,12 +4,22 @@ import data.*;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import tileMap.SimulationController;
 import warningSign.ErrorMessage;
 
@@ -29,9 +39,9 @@ public class Gui implements Initializable {
     int F = 0;
     SimulationController simulationController = new SimulationController();
     ErrorMessage errorMessage = new ErrorMessage();
-    ArrayList<String> Teachersize = new ArrayList();
-    ArrayList<String> Studentsize = new ArrayList();
-    ArrayList<String> Groupsize = new ArrayList();
+    ArrayList<String> Teachersize = new ArrayList<>();
+    ArrayList<String> Studentsize = new ArrayList<>();
+    ArrayList<String> Groupsize = new ArrayList<>();
     //tableView
     @FXML
     private TableView<Teacher> teachersTable;
@@ -280,28 +290,27 @@ public class Gui implements Initializable {
     void teacherAddButton() {
         ObservableList<Teacher> list = observableArrayList(new data.Teacher(teacherNameField.getText(), TeacherGender, TeacherSubject, null));
         data.Teacher TeacherTotal = new data.Teacher(teacherNameField.getText(), TeacherGender, TeacherSubject, null);
-        if(teacherNameField.getText().isEmpty()) {
+        if (teacherNameField.getText().isEmpty()) {
             errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
-        }
-        else if(Teachersize.size() >= 6) {
+        } else if (Teachersize.size() >= 6) {
             errorMessage.showError("Sorry to much!");
-        }
-        else if(Teachersize.contains(teacherNameField.getText())) {
-            errorMessage.showError("This teacher already excist ");
-        }
-        else if(teacherNameField.getText().matches(".*[^a-zA-Z].*")) {
+        } else if (Teachersize.contains(teacherNameField.getText())) {
+            errorMessage.showError("This teacher already exist ");
+        } else if (teacherNameField.getText().matches(".*[^a-zA-Z].*")) {
             errorMessage.showError("Teacher name contains non Alphabetic characters: please use only Alphabetic characters ");
-        }
-        else if(TeacherGender.isEmpty()) {
+        } else if (TeacherGender.isEmpty()) {
             errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
-        }
-        else if(TeacherSubject.isEmpty()) {
+        } else if (TeacherSubject.isEmpty()) {
             errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
-        }
-        else {
+        } else {
             teachersTable.getItems().addAll(list);
             Teachersize.add(teacherNameField.getText());
         }
+    }
+
+    @FXML
+    void teacherEditButton() throws IOException {
+        startTeacherEditor(teachersTable.getSelectionModel().getFocusedIndex());
     }
 
     @FXML
@@ -312,76 +321,51 @@ public class Gui implements Initializable {
         list2.forEach(list::remove);
     }
 
-    @FXML
-    void teacherEditButton() {
-        teachersTable.setEditable(true);
-        teacherNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        teacherSubjectColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboTeacherSubject));
-        teacherGenderColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboStudentGender));
-
-        teacherNameColumn.setOnEditCommit(event ->
-                teachersTable.getItems().get(event.getTablePosition().getRow()).setLastName(event.getNewValue()));
-        teacherSubjectColumn.setOnEditCommit(event ->
-                teachersTable.getItems().get(event.getTablePosition().getRow()).setSubject(event.getNewValue()));
-        teacherGenderColumn.setOnEditCommit(event ->
-                teachersTable.getItems().get(event.getTablePosition().getRow()).setGender(event.getNewValue()));
-    }
-
-    @FXML
-    void teacherSaveButton() {
-        System.out.println("TeacherSave");
-    }
 
     @FXML
     void teacherGenerateButton() {
-        System.out.println("TeacherGenerate");
+
     }
 
     //Student
     @FXML
     void studentAddButton() {
-        ObservableList<Student> list1 = observableArrayList(new data.Student(studentNameField.getText(), StudentGroup, StudentGender,null));
+        ObservableList<Student> list1 = observableArrayList(new data.Student(studentNameField.getText(), StudentGroup, StudentGender, null));
         if (Groupsize.isEmpty()) {
             i = 0;
-        }
-       else if (Groupsize.get(i).equals("Group A")) {
-            A++; i++;
-        }
-       else if (Groupsize.get(i).equals("Group B")) {
-            B++; i++;
-        }
-       else if (Groupsize.get(i).equals("Group C")) {
-            C++; i++;
-        }
-       else if (Groupsize.get(i).equals("Group D")) {
-            D++;i++;
-        }
-        else if (Groupsize.get(i).equals("Group E")) {
-            E++; i++;
-        }
-        else if (Groupsize.get(i).equals("Group F")) {
-            F++; i++;
+        } else if (Groupsize.get(i).equals("Group A")) {
+            A++;
+            i++;
+        } else if (Groupsize.get(i).equals("Group B")) {
+            B++;
+            i++;
+        } else if (Groupsize.get(i).equals("Group C")) {
+            C++;
+            i++;
+        } else if (Groupsize.get(i).equals("Group D")) {
+            D++;
+            i++;
+        } else if (Groupsize.get(i).equals("Group E")) {
+            E++;
+            i++;
+        } else if (Groupsize.get(i).equals("Group F")) {
+            F++;
+            i++;
         }
 
-        if(studentNameField.getText().matches(".*[^a-zA-Z].*")) {
+        if (studentNameField.getText().matches(".*[^a-zA-Z].*")) {
             errorMessage.showError("Student name contains non Alphabetic characters: please use only alphabetic characters ");
-        }
-        else if(Studentsize.size() >= 72) {
+        } else if (Studentsize.size() >= 72) {
             errorMessage.showError("Sorry to much students!");
-        }
-        else if(A >= 6||B >= 6||C >= 6||D >= 6||E >= 6||F >= 6) {
+        } else if (A >= 6 || B >= 6 || C >= 6 || D >= 6 || E >= 6 || F >= 6) {
             errorMessage.showError("Sorry to much students in the group!");
-        }
-        else if(studentNameField.getText().isEmpty()) {
+        } else if (studentNameField.getText().isEmpty()) {
             errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
-        }
-        else if(StudentGender.isEmpty()) {
+        } else if (StudentGender.isEmpty()) {
             errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
-        }
-        else if(StudentGroup == null) {
+        } else if (StudentGroup == null) {
             errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
-        }
-        else {
+        } else {
             studentsTable.getItems().addAll(list1);
             Studentsize.add(studentNameField.getText());
             Groupsize.add(StudentGroup.toString());
@@ -398,18 +382,8 @@ public class Gui implements Initializable {
     }
 
     @FXML
-    void studentEditButton() {
-        studentsTable.setEditable(true);
-        studentNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        studentGroupColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboStudentGroup));
-        studentGenderColumn.setCellFactory(ComboBoxTableCell.forTableColumn(comboStudentGender));
-
-        studentNameColumn.setOnEditCommit((TableColumn.CellEditEvent<Student, String> event) ->
-                studentsTable.getItems().get(event.getTablePosition().getRow()).setLastName(event.getNewValue()));
-        studentGroupColumn.setOnEditCommit(event ->
-                studentsTable.getItems().get(event.getTablePosition().getRow()).setStudentGroup(event.getNewValue()));
-        studentGenderColumn.setOnEditCommit(event ->
-                studentsTable.getItems().get(event.getTablePosition().getRow()).setGender(event.getNewValue()));
+    void studentEditButton() throws IOException {
+        startStudentEditor(studentsTable.getSelectionModel().getFocusedIndex());
     }
 
     @FXML
@@ -433,29 +407,23 @@ public class Gui implements Initializable {
     void rosterAddButton() {
         ObservableList<Lesson> list = observableArrayList(new data.Lesson(rosterTeacherColumn1, StudentGroups, ClassRoom, BeginTime, EndTime));
         System.out.println(rosterTeacherColumn1 + " " + StudentGroups + " " + ClassRoom + " " + BeginTime + " " + EndTime);
-            if (comboEndTime.indexOf(EndTime) < comboBeginTime.indexOf(BeginTime)) {
-                errorMessage.showError("Can't add a new lesson: please select a chronological time order.");
-            } else if (rosterTeacherColumn1 == null) {
-                errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
-            } else if (StudentGroups == null) {
-                errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
-            } else if (ClassRoom == null) {
-                errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
-            } else if (BeginTime.isEmpty()) {
-                errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
-            } else if (EndTime.isEmpty()) {
-                errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
-            } else {
-                rosterTable.getItems().addAll(list);
-            }
-}
-    @FXML
-    void rosterDeleteButton() {
-        ObservableList<Lesson> list, list2;
-        list = rosterTable.getItems();
-        list2 = rosterTable.getSelectionModel().getSelectedItems();
-        list2.forEach(list::remove);
+        if (comboEndTime.indexOf(EndTime) < comboBeginTime.indexOf(BeginTime)) {
+            errorMessage.showError("Can't add a new lesson: please select a chronological time order.");
+        } else if (rosterTeacherColumn1 == null) {
+            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+        } else if (StudentGroups == null) {
+            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+        } else if (ClassRoom == null) {
+            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+        } else if (BeginTime.isEmpty()) {
+            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+        } else if (EndTime.isEmpty()) {
+            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+        } else {
+            rosterTable.getItems().addAll(list);
+        }
     }
+
 
     @FXML
     void rosterEditButton() {
@@ -479,6 +447,14 @@ public class Gui implements Initializable {
                 rosterTable.getItems().get(event.getTablePosition().getRow()).setBeginLesson(event.getNewValue()));
         rosterEndTimeColumn.setOnEditCommit(event ->
                 rosterTable.getItems().get(event.getTablePosition().getRow()).setEndLesson(event.getNewValue()));
+    }
+
+    @FXML
+    void rosterDeleteButton() {
+        ObservableList<Lesson> list, list2;
+        list = rosterTable.getItems();
+        list2 = rosterTable.getSelectionModel().getSelectedItems();
+        list2.forEach(list::remove);
     }
 
     @FXML
@@ -510,5 +486,184 @@ public class Gui implements Initializable {
             e.printStackTrace();
             System.out.println("Failed to start simulation");
         }
+    }
+
+    @SuppressWarnings("Duplicates")
+    public void startTeacherEditor(int index) throws IOException {
+
+        Stage stage = new Stage();
+
+        BorderPane mainPane = new BorderPane();
+        VBox vBox1 = new VBox();
+
+        HBox hBox1 = new HBox();
+        hBox1.translateXProperty().set(10);
+        hBox1.setMinWidth(400);
+        hBox1.setMinHeight(25);
+        Label nameLabel = new Label("NAME");
+        nameLabel.setMinWidth(140);
+        Label subjectLabel = new Label("SUBJECT");
+        subjectLabel.setMinWidth(140);
+        Label genderLabel = new Label("GENDER");
+        genderLabel.setMinWidth(140);
+        genderLabel.translateXProperty().set(5);
+
+        HBox hBox2 = new HBox();
+        hBox2.setMinWidth(230);
+        hBox2.setMinHeight(30);
+        TextField nameField = new TextField(teachersTable.getItems().get(index).getLastName());
+        ComboBox<String> subjectComboBox = new ComboBox<>(comboTeacherSubject);
+        subjectComboBox.setPromptText(teachersTable.getItems().get(index).getSubject());
+        subjectComboBox.setPrefWidth(150);
+        ComboBox<String> genderComboBox = new ComboBox<>(comboTeacherGender);
+        genderComboBox.setPromptText(teachersTable.getItems().get(index).getGender());
+        genderComboBox.setPrefWidth(150);
+
+        HBox hBox3 = new HBox();
+        hBox3.setAlignment(Pos.CENTER);
+        hBox3.setPrefWidth(420);
+        hBox3.setPrefHeight(60);
+
+        HBox hBox3_1 = new HBox();
+        Button cancelButton = new Button("Cancel");
+        cancelButton.setMinWidth(90);
+        cancelButton.setMinHeight(40);
+        cancelButton.setOnAction(event ->
+                stage.close());
+        Teacher currentTeacher = teachersTable.getItems().get(index);
+        hBox3_1.setAlignment(Pos.BOTTOM_LEFT);
+        hBox3_1.getChildren().add(cancelButton);
+        HBox hBox3_2 = new HBox();
+        Button saveButton = new Button("Save");
+        saveButton.setOnAction(event -> {
+            currentTeacher.setLastName(nameField.getText());
+            currentTeacher.setLastNameTB(nameField.getText());
+            if (subjectComboBox.getValue() != null) {
+                currentTeacher.setSubject(subjectComboBox.getValue());
+                currentTeacher.setSubjectTB(subjectComboBox.getValue());
+            }
+            if (genderComboBox.getValue() != null) {
+                currentTeacher.setGender(genderComboBox.getValue());
+                currentTeacher.setGenderTB(genderComboBox.getValue());
+            }
+            stage.close();
+        });
+        saveButton.setMinWidth(90);
+        saveButton.setMinHeight(40);
+        hBox3_2.setAlignment(Pos.BOTTOM_RIGHT);
+        hBox3_2.getChildren().add(saveButton);
+
+        vBox1.setAlignment(Pos.CENTER);
+
+        hBox1.getChildren().addAll(nameLabel, subjectLabel, genderLabel);
+        hBox2.getChildren().addAll(nameField, subjectComboBox, genderComboBox);
+        hBox3.getChildren().addAll(hBox3_1, hBox3_2);
+
+        vBox1.getChildren().addAll(hBox1, hBox2, hBox3);
+        mainPane.setCenter(vBox1);
+        mainPane.setMinWidth(420);
+        mainPane.setMinHeight(120);
+
+        Scene scene = new Scene(mainPane);
+        stage.setScene(scene);
+
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Gui.class.getResource("Application.fxml"));
+        stage.initOwner(loader.getController());
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        stage.show();
+        stage.setAlwaysOnTop(true);
+    }
+
+    @SuppressWarnings("Duplicates")
+    public void startStudentEditor(int index) throws IOException {
+
+        Stage stage = new Stage();
+
+        BorderPane mainPane = new BorderPane();
+        VBox vBox1 = new VBox();
+
+        HBox hBox1 = new HBox();
+        hBox1.translateXProperty().set(10);
+        hBox1.setMinWidth(400);
+        hBox1.setMinHeight(25);
+        Label nameLabel = new Label("NAME");
+        nameLabel.setMinWidth(140);
+        Label groupLabel = new Label("GROUP");
+        groupLabel.setMinWidth(140);
+        Label genderLabel = new Label("GENDER");
+        genderLabel.setMinWidth(140);
+        genderLabel.translateXProperty().set(5);
+
+        HBox hBox2 = new HBox();
+        hBox2.setMinWidth(230);
+        hBox2.setMinHeight(30);
+        TextField nameField = new TextField(studentsTable.getItems().get(index).getLastName());
+        ComboBox<Group> groupComboBox = new ComboBox<>(comboStudentGroup);
+        groupComboBox.setPromptText(studentsTable.getItems().get(index).getStudentGroup().toString());
+        groupComboBox.setPrefWidth(150);
+        ComboBox<String> genderComboBox = new ComboBox<>(comboStudentGender);
+        genderComboBox.setPromptText(studentsTable.getItems().get(index).getGender());
+        genderComboBox.setPrefWidth(150);
+
+        HBox hBox3 = new HBox();
+        hBox3.setAlignment(Pos.CENTER);
+        hBox3.setPrefWidth(420);
+        hBox3.setPrefHeight(60);
+
+        HBox hBox3_1 = new HBox();
+        Button cancelButton = new Button("Cancel");
+        cancelButton.setMinWidth(90);
+        cancelButton.setMinHeight(40);
+        cancelButton.setOnAction(event ->
+                stage.close());
+        Student currentStudent = studentsTable.getItems().get(index);
+        hBox3_1.setAlignment(Pos.BOTTOM_LEFT);
+        hBox3_1.getChildren().add(cancelButton);
+        HBox hBox3_2 = new HBox();
+        Button saveButton = new Button("Save");
+        saveButton.setOnAction(event -> {
+            currentStudent.setLastName(nameField.getText());
+            currentStudent.setLastNameTBST(nameField.getText());
+            if (groupComboBox.getValue() != null) {
+                currentStudent.setStudentGroup(groupComboBox.getValue());
+                currentStudent.setGroupTBST(groupComboBox.getValue());
+            }
+            if (genderComboBox.getValue() != null) {
+                currentStudent.setGender(genderComboBox.getValue());
+                currentStudent.setGenderTBST(genderComboBox.getValue());
+            }
+            studentsTable.refresh();
+            stage.close();
+        });
+        saveButton.setMinWidth(90);
+        saveButton.setMinHeight(40);
+        hBox3_2.setAlignment(Pos.BOTTOM_RIGHT);
+        hBox3_2.getChildren().add(saveButton);
+
+        vBox1.setAlignment(Pos.CENTER);
+
+        hBox1.getChildren().addAll(nameLabel, groupLabel, genderLabel);
+        hBox2.getChildren().addAll(nameField, groupComboBox, genderComboBox);
+        hBox3.getChildren().addAll(hBox3_1, hBox3_2);
+
+        vBox1.getChildren().addAll(hBox1, hBox2, hBox3);
+        mainPane.setCenter(vBox1);
+        mainPane.setMinWidth(420);
+        mainPane.setMinHeight(120);
+
+        Scene scene = new Scene(mainPane);
+        stage.setScene(scene);
+
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Gui.class.getResource("Application.fxml"));
+        stage.initOwner(loader.getController());
+        stage.initModality(Modality.APPLICATION_MODAL);
+
+        stage.show();
+        stage.setAlwaysOnTop(true);
     }
 }

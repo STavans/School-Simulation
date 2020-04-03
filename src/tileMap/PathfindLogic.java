@@ -64,23 +64,18 @@ public class PathfindLogic {
         int currentTileY = (int) Math.floor((position.getY()) / 32);
         DistanceMap targetField = distanceHashMaps.get(target);
         double currentDistance = targetField.getDistanceMap()[currentTileX][currentTileY];
-//        System.out.println(currentDistance);
-//        System.out.println(currentTileX+ " "+ currentTileY);
+
         if (currentDistance > targetField.getDistanceMap()[currentTileX + 1][currentTileY] && targetField.getDistanceMap()[currentTileX + 1][currentTileY] != 2.147483647E9) {
-//                System.out.println("left");
             return tileTargets[currentTileX + 1][currentTileY];
         }
 
         if (currentDistance > targetField.getDistanceMap()[currentTileX][currentTileY + 1] && targetField.getDistanceMap()[currentTileX][currentTileY + 1] != 2.147483647E9) {
-//                System.out.println("down");
             return tileTargets[currentTileX][currentTileY + 1];
         }
         if (currentDistance > targetField.getDistanceMap()[currentTileX -1][currentTileY] && targetField.getDistanceMap()[currentTileX - 1][currentTileY] != 2.147483647E9) {
-//                System.out.println("right");
             return tileTargets[currentTileX - 1][currentTileY];
         }
         if (currentDistance > targetField.getDistanceMap()[currentTileX][currentTileY -1] && targetField.getDistanceMap()[currentTileX][currentTileY - 1] != 2.147483647E9) {
-//                System.out.println("up");
             return tileTargets[currentTileX][currentTileY -1];
         }
         return tileTargets[currentTileX][currentTileY - 1];

@@ -48,7 +48,6 @@
                         <Button id="rosterAddButton" fx:id="rosterAddButtonBox" mnemonicParsing="false" onAction="#rosterAddButton" text="Add" />
                         <Button id="rosterEditButton" fx:id="rosterEditButton" mnemonicParsing="false" onAction="#rosterEditButton" text="Edit" />
                         <Button id="rosterDeleteButton" fx:id="rosterDeleteButton" mnemonicParsing="false" onAction="#rosterDeleteButton" text="Delete" />
-                        <Button id="rosterSaveButton" fx:id="rosterSaveButton" mnemonicParsing="false" onAction="#rosterSaveButton" text="Save" />
                      </children>
                   </HBox>
                </children>
@@ -97,9 +96,9 @@
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                                  <children>
                                     <Button fx:id="teacherAddButton" mnemonicParsing="false" onAction="#teacherAddButton" text="Add" />
-                                    <Button fx:id="teacherDeleteButton" mnemonicParsing="false" onAction="#teacherDeleteButton" text="Delete" />
                                     <Button fx:id="teacherEditButton" mnemonicParsing="false" onAction="#teacherEditButton" text="Edit" />
-                                    <Button fx:id="teacherSaveButton" mnemonicParsing="false" onAction="#teacherSaveButton" text="Save" />
+                                    <Button fx:id="teacherDeleteButton" mnemonicParsing="false" onAction="#teacherDeleteButton" text="Delete" />
+                                    <Button fx:id="teacherClearButton" mnemonicParsing="false" onAction="#teacherClearButton" text="Clear" />
                                  </children>
                               </HBox>
                            </children>
@@ -140,9 +139,9 @@
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                                  <children>
                                     <Button fx:id="studentAddButton" mnemonicParsing="false" onAction="#studentAddButton" text="Add" />
-                                    <Button fx:id="studentDeleteButton" mnemonicParsing="false" onAction="#studentDeleteButton" text="Delete" />
                                     <Button fx:id="studentEditButton" mnemonicParsing="false" onAction="#studentEditButton" text="Edit" />
-                                    <Button fx:id="studentSaveButton" mnemonicParsing="false" onAction="#studentSaveButton" text="Save" />
+                                    <Button fx:id="studentDeleteButton" mnemonicParsing="false" onAction="#studentDeleteButton" text="Delete" />
+                                    <Button fx:id="studentClearButton" mnemonicParsing="false" onAction="#studentClearButton" text="Clear" />
                                  </children>
                               </HBox>
                            </children>
@@ -177,37 +176,6 @@
                </children>
             </AnchorPane>
         </content>
-      </Tab>
-      <Tab text="StudentEditor">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <Label layoutX="346.0" layoutY="68.0">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Label>
-                  <Button layoutX="579.0" layoutY="308.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="128.0" text="SAVE" />
-                  <Button layoutX="61.0" layoutY="58.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="128.0" text="STUDENT" />
-                  <Button layoutX="579.0" layoutY="57.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="128.0" text="GENDER" />
-                  <Button layoutX="316.0" layoutY="58.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="128.0" text="GROUP" />
-                  <Button layoutX="61.0" layoutY="306.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="128.0" text="CANCEL" />
-               </children>
-            </AnchorPane>
-         </content>
-      </Tab>
-      <Tab text="TeacherEditor">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <Button layoutX="66.0" layoutY="57.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="128.0" text="TEACHER" />
-                  <Button layoutX="321.0" layoutY="57.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="128.0" text="SUBJECT" />
-                  <Button layoutX="66.0" layoutY="305.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="128.0" text="CANCEL" />
-                  <Button layoutX="583.0" layoutY="57.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="128.0" text="GENDER" />
-                  <Button layoutX="583.0" layoutY="305.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="128.0" text="SAVE" />
-               </children>
-            </AnchorPane>
-         </content>
       </Tab>
   </tabs>
 </TabPane>
