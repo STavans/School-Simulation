@@ -207,6 +207,7 @@ public class Teacher extends Person implements Serializable {
 
         Point2D newPosition = new Point2D.Double(this.position.getX() + this.speed * Math.cos(targetAngle),
                 this.position.getY() + this.speed * Math.sin(targetAngle));
+        this.angle = targetAngle;
 
         boolean collided = false;
 

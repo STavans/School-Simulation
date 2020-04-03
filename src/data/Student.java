@@ -212,6 +212,7 @@ public class Student extends Person implements Serializable {
                 collided = true;
             }
         }
+        this.angle = targetAngle;
 
         if (angle > 0.8 && angle < 2.2) {
             walkingRight = false;
