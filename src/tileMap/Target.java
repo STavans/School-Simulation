@@ -13,7 +13,7 @@ import java.util.HashMap;
 
 public class Target {
 
-    private Classroom cantine = new Classroom("cantine");
+    private Classroom cantine = new Classroom("canteen");
     private Classroom teacherRoom = new Classroom("teacherroom");
     private Classroom classroom101t = new Classroom("101t");
     private Classroom classroom102t = new Classroom("102t");

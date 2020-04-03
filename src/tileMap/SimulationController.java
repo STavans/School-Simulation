@@ -69,6 +69,7 @@ public class SimulationController {
 
         animationTimer = new AnimationTimer() {
             long last = -1;
+
             @Override
             public void handle(long now) {
                 if (last == -1)
@@ -116,16 +117,20 @@ public class SimulationController {
         for (Person teacher : this.teachers) {
             teacher.setPathfindLogic(pathfindLogic);
         }
+        pathfindLogic.generate();
+        this.distanceMap = pathfindLogic.getDistanceMap().getDistanceMap();
 
         for (int i = 0; i < this.students.size(); i++) {
-            this.students.get(i).setPosition(new Point2D.Double(1090, 1040 + (i * 64)));
+//            this.students.get(i).setPosition(new Point2D.Double(1090, 1040 + (i * 64)));
+            this.students.get(i).setPosition(new Point2D.Double(1040, 1008 - 32));
         }
 
         for (int i = 0; i < this.teachers.size(); i++) {
-            this.teachers.get(i).setPosition(new Point2D.Double(1010, 1040 + (i * 64)));
+//            this.teachers.get(i).setPosition(new Point2D.Double(1010, 1040 + (i * 64)));
+            this.teachers.get(i).setPosition(new Point2D.Double(1040, 1008 - 32));
+
         }
-        pathfindLogic.generate();
-        this.distanceMap = pathfindLogic.getDistanceMap().getDistanceMap();
+
     }
 
     public void draw(Graphics2D g) {
@@ -161,11 +166,13 @@ public class SimulationController {
             student.update(this.students);
             for (Lesson lesson : lessons) {
                 int beginTime[] = lesson.getBeginLesson();
-
+                int endTime[] = lesson.getEndLesson();
                 String locationS = lesson.getClassroom().getClassNumber() + "s";
 
-                if (hour >= beginTime[0] && minute >= beginTime[1]) {
+                if (hour >= beginTime[0] && minute >= beginTime[1] && hour <= endTime[0] && minute <= endTime[1]) {
                     student.setTarget(pathfindLogic.getPath(student.getPosition(), locationS));
+                } else {
+                    student.setTarget(pathfindLogic.getPath(student.getPosition(), "canteen"));
                 }
             }
         }
@@ -179,8 +186,10 @@ public class SimulationController {
 
                 String locationT = lesson.getClassroom().getClassNumber() + "t";
 
-                if (hour >= beginTime[0] && minute >= beginTime[1]) {
+                if (hour >= beginTime[0] && minute >= beginTime[1] && hour <= endTime[0] && minute <= endTime[1]) {
                     teacher.setTarget(pathfindLogic.getPath(teacher.getPosition(), locationT));
+                } else {
+                    teacher.setTarget(pathfindLogic.getPath(teacher.getPosition(), "teacherroom"));
                 }
             }
         }

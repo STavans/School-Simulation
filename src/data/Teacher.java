@@ -267,6 +267,7 @@ public class Teacher extends Person implements Serializable {
     private AffineTransform getTransform() {
         AffineTransform tx = new AffineTransform();
         tx.translate(position.getX() - 32, position.getY() -32);
+        tx.scale(0.9, 0.9);
         return tx;
     }
 
