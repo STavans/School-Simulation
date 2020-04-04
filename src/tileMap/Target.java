@@ -102,6 +102,10 @@ public class Target {
         return layers.getJsonObject(location).getInt("width");
     }
 
+    public String getName(int location) {
+        return layers.getJsonObject(location).getString("name");
+    }
+
     public Point2D getCenter(int location){
         return new Point2D.Float((float) (getX(location) + (getWidth(location) / 2.0)), getY(location) + (float) (getHeight(location) / 2.0));
     }
