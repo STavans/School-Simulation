@@ -1,9 +1,6 @@
 package tileMap;
 
-import data.Classroom;
-import data.Lesson;
-import data.Person;
-import data.Student;
+import data.*;
 import gui.FileIO;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
@@ -27,8 +24,8 @@ public class SimulationController {
     private FileIO fileIO = new FileIO();
     private TiledMap map;
     private ResizableCanvas canvas;
-    private ArrayList<Person> students;
-    private ArrayList<Person> teachers;
+    private ArrayList<Student> students;
+    private ArrayList<Teacher> teachers;
     private ArrayList<Lesson> lessons;
     private Target target;
 
@@ -41,7 +38,7 @@ public class SimulationController {
 
     private AnimationTimer animationTimer;
     private Timer timer;
-    private ArrayList<Classroom> classroomChairs = new ArrayList<>();
+    private ArrayList<Classroom> classroomList = new ArrayList<>();
     private ArrayList classroomCodesArrayList = new ArrayList();
     private Boolean ranOnce = false;
     private int chairIndex = 0;
@@ -109,15 +106,10 @@ public class SimulationController {
         pathfindLogic.generate();
         this.distanceMap = pathfindLogic.getDistanceMap().getDistanceMap();
         classroomCodesArrayList = target.getClassroomCodesList();
-        classroomChairs = pathfindLogic.getClassroomArrayList();
-        for (Classroom cla :
-                classroomChairs) {
-            System.out.println("Added: " + cla.getChairDistanceMaps());
-        }
-
+        classroomList = pathfindLogic.getClassroomArrayList();
         for (Classroom cla :
                 pathfindLogic.getClassroomArrayList()) {
-            System.out.println("Added: " +  cla.getClassNumber() + " Active: " + cla.getChairDistanceMaps());
+            System.out.println("Added: " +  cla.getClassNumber() + " Active: " + cla.getChairs());
         }
         try {
             this.students = new ArrayList<>(fileIO.getStudents());
@@ -180,46 +172,13 @@ public class SimulationController {
     }
 
     public void update(double deltaTime) {
-        for (Person student : this.students) {
-            student.update(this.students);
-
-            for (Lesson lesson : lessons) {
-                int beginTime[] = lesson.getBeginLesson();
-                int endTime[] = lesson.getEndLesson();
-                String locationS = lesson.getClassroom().getClassNumber() + "s";
-
-
-
-                if (hour >= beginTime[0] && minute >= beginTime[1] && hour <= endTime[0] && minute <= endTime[1]) {
-                    if (!ranOnce) {
-                        chairIndex = new Random().nextInt(12);
-                        System.out.println("NEXT FUCKING INT" + chairIndex);
-                        ranOnce = true;
-                    }
-                    student.setTarget(pathfindLogic.getPath(student.getPosition(), classroomChairs.get(classroomCodesArrayList.indexOf(locationS)).getChairDistanceMaps().get(chairIndex)));
-                } else {
-                    student.setTarget(pathfindLogic.getPath(student.getPosition(), "canteen"));
-                }
-            }
+        for (Student student : this.students) {
+            student.update(this.students, lessons, classroomList, hour, minute, pathfindLogic, classroomCodesArrayList);
         }
 
-        for (Person teacher : this.teachers) {
-            teacher.update(this.teachers);
-
-            for (Lesson lesson : lessons) {
-                int beginTime[] = lesson.getBeginLesson();
-                int endTime[] = lesson.getEndLesson();
-
-                String locationT = lesson.getClassroom().getClassNumber() + "t";
-
-                if (hour >= beginTime[0] && minute >= beginTime[1] && hour <= endTime[0] && minute <= endTime[1]) {
-                    teacher.setTarget(pathfindLogic.getPath(teacher.getPosition(), locationT));
-                } else {
-                    teacher.setTarget(pathfindLogic.getPath(teacher.getPosition(), "teacherroom"));
-                }
-            }
+        for (Teacher teacher : this.teachers) {
+            teacher.update(this.teachers, lessons, hour, minute, pathfindLogic);
         }
-//        tileTargetSwitchTime++;
     }
 
     public void getMouseLocation() {

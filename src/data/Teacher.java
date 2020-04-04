@@ -58,40 +58,6 @@ public class Teacher extends Person implements Serializable {
         this.speed = 2;
         this.target = new Point2D.Double(200, 200);
         this.rotationSpeed = 0.1;
-        try {
-            if (this.genderTB.get().equals("Female")) {
-                image = ImageIO.read(getClass().getResource("/FemaleTeacher.png"));
-            } else {
-                image = ImageIO.read(getClass().getResource("/Teacher.png"));
-            }
-
-            tiles = new BufferedImage[35];
-            for (int i = 0; i < 35; i++) {
-                tiles[i] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
-            }
-
-            up = new BufferedImage[9];
-            for (int i = 1; i < 9; i++) {
-                up[i - 1] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
-            }
-
-            left = new BufferedImage[9];
-            for (int i = 10; i < 18; i++) {
-                left[i - 10] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
-            }
-
-            down = new BufferedImage[9];
-            for (int i = 19; i < 27; i++) {
-                down[i - 19] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
-            }
-
-            right = new BufferedImage[9];
-            for (int i = 28; i < 36; i++) {
-                right[i - 28] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void setTeacherSubject(String subject) {
@@ -200,8 +166,7 @@ public class Teacher extends Person implements Serializable {
         }
     }
 
-    @Override
-    public void update(ArrayList<Person> teachers) {
+    public void update(ArrayList<Teacher> teachers, ArrayList<Lesson> lessons, int hour, int minute, PathfindLogic pathfindLogic) {
         double targetAngle = Math.atan2(this.target.getY() - this.position.getY(),
                 this.target.getX() - this.position.getX());
 
@@ -249,6 +214,19 @@ public class Teacher extends Person implements Serializable {
             counter = counter + 0.1;
         } else {
             counter = 0;
+        }
+
+        for (Lesson lesson : lessons) {
+            int[] beginTime = lesson.getBeginLesson();
+            int[] endTime = lesson.getEndLesson();
+
+            String locationT = lesson.getClassroom().getClassNumber() + "t";
+
+            if (hour >= beginTime[0] && minute >= beginTime[1] && hour <= endTime[0] && minute <= endTime[1]) {
+                this.setTarget(this.pathfindLogic.getPath(this.getPosition(), locationT));
+            } else {
+                this.setTarget(this.pathfindLogic.getPath(this.getPosition(), "teacherroom"));
+            }
         }
     }
 

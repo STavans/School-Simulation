@@ -1,5 +1,6 @@
 package data;
 
+import tileMap.Chair;
 import tileMap.DistanceMap;
 
 import java.io.Serializable;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 public class Classroom implements Serializable {
 
     private String classNumber;
-    private ArrayList<DistanceMap> chairLocations;
+    private ArrayList<Chair> chairList;
 
 
     public Classroom(String classNumber) {
@@ -28,12 +29,12 @@ public class Classroom implements Serializable {
         return "" + this.classNumber;
     }
 
-    public void setChairDistanceMaps(ArrayList<DistanceMap> distanceMapArrayList) {
-        this.chairLocations = distanceMapArrayList;
+    public void setChairs(ArrayList<Chair> chairDistanceMaps) {
+        this.chairList = chairDistanceMaps;
     }
 
-    public ArrayList<DistanceMap> getChairDistanceMaps() {
-        return chairLocations;
+    public ArrayList<Chair> getChairs() {
+        return chairList;
     }
 }
 

@@ -74,7 +74,6 @@ public class Target {
 
         JsonReader reader;
         reader = Json.createReader(getClass().getResourceAsStream("/Tilemap.json"));
-//        System.out.println(Json.createReader(getClass().getResourceAsStream("/" + filename)));
         JsonObject root = reader.readObject();
 
         layers = root.getJsonArray("layers").getJsonObject(4).getJsonArray("objects");

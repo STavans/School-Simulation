@@ -36,13 +36,13 @@ public class PathfindLogic {
             }
 
             if (target.getWidth(classroomCodesArrayList.indexOf(classroom)) == 224) {
-                ArrayList<DistanceMap> distanceMaps = new ArrayList<>();
+                ArrayList<Chair> chairs = new ArrayList<>();
                 for (int y = 0; y < 4; y++) {
                     for (int x = 0; x < 3; x++) {
-                        distanceMaps.add(new DistanceMap(get2DArrayCollisionLayer(), targetX + (3 * x), targetY + y));
+                        chairs.add(new Chair(new DistanceMap(get2DArrayCollisionLayer(), targetX + (3 * x), targetY + y)));
                     }
                 }
-                classroomArrayList.get(classroomCodesArrayList.indexOf(classroom)).setChairDistanceMaps(distanceMaps);
+                classroomArrayList.get(classroomCodesArrayList.indexOf(classroom)).setChairs(chairs);
                 System.out.println(classroomArrayList.get(classroomCodesArrayList.indexOf(classroom)) + " Initialized");
             }
         }
@@ -70,7 +70,7 @@ public class PathfindLogic {
         return null;
     }
     public DistanceMap getDistanceMap(){
-        return classroomArrayList.get(5).getChairDistanceMaps().get(4);
+        return classroomArrayList.get(5).getChairs().get(4).getDistanceMap();
     }
 
     public Point2D getPath(Point2D position, String target){

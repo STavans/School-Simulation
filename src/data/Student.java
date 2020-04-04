@@ -14,6 +14,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
 
 @SuppressWarnings("Duplicates")
 public class Student extends Person implements Serializable {
@@ -58,41 +59,6 @@ public class Student extends Person implements Serializable {
         this.speed = 2;
         this.target = new Point2D.Double(300, 500);
         this.rotationSpeed = 1;
-
-        try {
-            if (this.genderTBST.get().equals("Female")) {
-                image = ImageIO.read(getClass().getResource("/Female.png"));
-            } else {
-                image = ImageIO.read(getClass().getResource("/Male.png"));
-            }
-
-            tiles = new BufferedImage[35];
-            for (int i = 0; i < 35; i++) {
-                tiles[i] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
-            }
-
-            up = new BufferedImage[9];
-            for (int i = 1; i < 9; i++) {
-                up[i - 1] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
-            }
-
-            left = new BufferedImage[9];
-            for (int i = 10; i < 18; i++) {
-                left[i - 10] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
-            }
-
-            down = new BufferedImage[9];
-            for (int i = 19; i < 27; i++) {
-                down[i - 19] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
-            }
-
-            right = new BufferedImage[9];
-            for (int i = 28; i < 36; i++) {
-                right[i - 28] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public Group getStudentGroup() { return group;}
@@ -184,8 +150,7 @@ public class Student extends Person implements Serializable {
 
     }
 
-    @Override
-    public void update(ArrayList<Person> students) {
+    public void update(ArrayList<Student> students, ArrayList<Lesson> lessons, ArrayList<Classroom> classroomList, int hour, int minute, PathfindLogic pathfindLogic, ArrayList<String> classroomCodesList) {
         double targetAngle = Math.atan2(this.target.getY() - this.position.getY(),
                 this.target.getX() - this.position.getX());
 
@@ -234,7 +199,29 @@ public class Student extends Person implements Serializable {
         } else {
             counter = 0;
         }
+
+        for (Lesson lesson : lessons) {
+            int beginTime[] = lesson.getBeginLesson();
+            int endTime[] = lesson.getEndLesson();
+            String locationS = lesson.getClassroom().getClassNumber() + "s";
+
+
+
+            if (hour >= beginTime[0] && minute >= beginTime[1] && hour <= endTime[0] && minute <= endTime[1]) {
+//                if (!ranOnce) {
+//                    chairIndex = new Random().nextInt(12);
+//                    System.out.println("NEXT FUCKING INT" + chairIndex);
+//                    ranOnce = true;
+//                }
+                this.setTarget(pathfindLogic.getPath(this.getPosition(), classroomList.get(classroomCodesList.indexOf(locationS)).getChairs().get(1).getDistanceMap()));
+            } else {
+                this.setTarget(pathfindLogic.getPath(this.getPosition(), "canteen"));
+            }
+        }
+
+
     }
+
 
     @Override
     public void draw(Graphics2D g) {
