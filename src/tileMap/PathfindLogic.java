@@ -11,7 +11,8 @@ public class PathfindLogic {
     private Target target;
     private HashMap<String, DistanceMap> distanceHashMaps = new HashMap<>();
     private HashMap<String, Integer> classroomHashMap;
-    private ArrayList classroomsArrayList;
+    private ArrayList classroomCodesArrayList;
+    private ArrayList<Classroom> classroomArrayList;
     private String fileName;
     private Point2D[][] tileTargets = new Point2D[60][32];
 
@@ -19,18 +20,30 @@ public class PathfindLogic {
         this.fileName = fileName;
         this.target = new Target(fileName);
         this.classroomHashMap = target.getClassroomsHashMap();
-        this.classroomsArrayList = target.getClassroomList();
+        this.classroomCodesArrayList = target.getClassroomCodesList();
+        this.classroomArrayList = target.getClassroomsList();
     }
     public void generate(){
         for (String classroom: classroomHashMap.keySet()) {
-            int targetX = target.getX(classroomsArrayList.indexOf(classroom)) / 32;
-            int targetY = target.getY(classroomsArrayList.indexOf(classroom)) / 32;
+            int targetX = target.getX(classroomCodesArrayList.indexOf(classroom)) / 32;
+            int targetY = target.getY(classroomCodesArrayList.indexOf(classroom)) / 32;
             distanceHashMaps.put(classroom, new DistanceMap(get2DArrayCollisionLayer(), targetX, targetY));
 
             for (int y = 0; y < 32; y++){
                 for (int x = 0; x < 60; x++){
                     tileTargets[x][y] = new Point2D.Double(x * 32 + 16, y * 32 + 16);
                 }
+            }
+
+            if (target.getWidth(classroomCodesArrayList.indexOf(classroom)) == 224) {
+                ArrayList<Chair> chairs = new ArrayList<>();
+                for (int y = 0; y < 4; y++) {
+                    for (int x = 0; x < 3; x++) {
+                        chairs.add(new Chair(new DistanceMap(get2DArrayCollisionLayer(), targetX + (3 * x), targetY + y)));
+                    }
+                }
+                classroomArrayList.get(classroomCodesArrayList.indexOf(classroom)).setChairs(chairs);
+                System.out.println(classroomArrayList.get(classroomCodesArrayList.indexOf(classroom)) + " Initialized");
             }
         }
     }
@@ -57,27 +70,40 @@ public class PathfindLogic {
         return null;
     }
     public DistanceMap getDistanceMap(){
-        return distanceHashMaps.get("106s");
+        return classroomArrayList.get(5).getChairs().get(4).getDistanceMap();
     }
+
     public Point2D getPath(Point2D position, String target){
+        DistanceMap targetField = distanceHashMaps.get(target);
+       return calculatePath(position, targetField);
+    }
+
+    public Point2D getPath(Point2D position, DistanceMap distanceMap){
+        DistanceMap targetField = distanceMap;
+        return calculatePath(position, targetField);
+    }
+
+    private Point2D calculatePath(Point2D position, DistanceMap targetField){
         int currentTileX = (int) Math.floor((position.getX()) / 32);
         int currentTileY = (int) Math.floor((position.getY()) / 32);
-        DistanceMap targetField = distanceHashMaps.get(target);
         double currentDistance = targetField.getDistanceMap()[currentTileX][currentTileY];
-
-        if (currentDistance > targetField.getDistanceMap()[currentTileX + 1][currentTileY] && targetField.getDistanceMap()[currentTileX + 1][currentTileY] != 2.147483647E9) {
+        if (currentDistance > targetField.getDistanceMap()[currentTileX + 1][currentTileY] && targetField.getDistanceMap()[currentTileX + 1][currentTileY] != Integer.MAX_VALUE) {
             return tileTargets[currentTileX + 1][currentTileY];
         }
 
-        if (currentDistance > targetField.getDistanceMap()[currentTileX][currentTileY + 1] && targetField.getDistanceMap()[currentTileX][currentTileY + 1] != 2.147483647E9) {
+        if (currentDistance > targetField.getDistanceMap()[currentTileX][currentTileY + 1] && targetField.getDistanceMap()[currentTileX][currentTileY + 1] != Integer.MAX_VALUE) {
             return tileTargets[currentTileX][currentTileY + 1];
         }
-        if (currentDistance > targetField.getDistanceMap()[currentTileX -1][currentTileY] && targetField.getDistanceMap()[currentTileX - 1][currentTileY] != 2.147483647E9) {
+        if (currentDistance > targetField.getDistanceMap()[currentTileX -1][currentTileY] && targetField.getDistanceMap()[currentTileX - 1][currentTileY] != Integer.MAX_VALUE) {
             return tileTargets[currentTileX - 1][currentTileY];
         }
-        if (currentDistance > targetField.getDistanceMap()[currentTileX][currentTileY -1] && targetField.getDistanceMap()[currentTileX][currentTileY - 1] != 2.147483647E9) {
+        if (currentDistance > targetField.getDistanceMap()[currentTileX][currentTileY -1] && targetField.getDistanceMap()[currentTileX][currentTileY - 1] != Integer.MAX_VALUE) {
             return tileTargets[currentTileX][currentTileY -1];
         }
         return tileTargets[currentTileX][currentTileY - 1];
+    }
+
+    public ArrayList<Classroom> getClassroomArrayList() {
+        return classroomArrayList;
     }
 }

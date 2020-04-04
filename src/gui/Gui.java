@@ -133,7 +133,7 @@ public class Gui implements Initializable {
     private ObservableList<String> comboStudentGender = observableArrayList("Male", "Female");
 
     //Settings
-    private ObservableList<String> comboTimeSetting = observableArrayList("x0,5", "x1", "x2", "x4", "x8");
+    private ObservableList<String> comboTimeSetting = observableArrayList("x0.5", "x1", "x2", "x4", "x8");
 
     //Roster
     private ObservableList<Teacher> comboTeacherNameList = observableArrayList();
@@ -401,10 +401,10 @@ public class Gui implements Initializable {
 
         if (studentNameField.getText().matches(".*[^a-zA-Z].*")) {
             errorMessage.showError("Student name contains non Alphabetic characters: please use only alphabetic characters ");
-        } else if (Studentsize.size() >= 72) {
-            errorMessage.showError("Sorry to much students!");
-        } else if (A >= 6 || B >= 6 || C >= 6 || D >= 6 || E >= 6 || F >= 6) {
-            errorMessage.showError("Sorry to much students in the group!");
+//        } else if (Studentsize.size() >= 72) {
+//            errorMessage.showError("Sorry to much students!");
+//        } else if (A >= 6 || B >= 6 || C >= 6 || D >= 6 || E >= 6 || F >= 6) {
+//            errorMessage.showError("Sorry to much students in the group!");
         } else if (studentNameField.getText().isEmpty()) {
             errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
         } else if (StudentGender.isEmpty()) {

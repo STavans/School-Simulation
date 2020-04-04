@@ -24,6 +24,7 @@ public class Main extends Application {
             Gui gui = loader.getController();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
+            primaryStage.setTitle("School Simulation");
             primaryStage.show();
 
             gui.setTeacherSubjectBox();
