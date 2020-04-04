@@ -59,6 +59,8 @@ public class Gui implements Initializable {
     private ComboBox<String> endTimeBox;//8
     @FXML
     private ComboBox<Classroom> classRoomBox;//8
+    @FXML
+    private ComboBox<String> simulationSettingTimeCombo;//9
 
     //new privates colums Teacher
     @FXML
@@ -120,6 +122,9 @@ public class Gui implements Initializable {
     private ObservableList<Group> comboStudentGroup = observableArrayList(groupA, groupB, groupC, groupD, groupE, groupF);
     private ObservableList<String> comboStudentGender = observableArrayList("Male", "Female");
 
+    //Settings
+    private ObservableList<String> comboTimeSetting = observableArrayList("x0,5", "x1", "x2", "x4", "x8");
+
     //Roster
     private ObservableList<Teacher> comboTeacherNameList = observableArrayList();
     private ObservableList<Group> comboStudentGroupRoster = observableArrayList();
@@ -154,6 +159,9 @@ public class Gui implements Initializable {
         teacherGenderBox.setItems(comboTeacherGender);
         studentGroupBox.setItems(comboStudentGroup);
         studentGenderBox.setItems(comboStudentGender);
+
+        //Settings
+        simulationSettingTimeCombo.setItems(comboTimeSetting);
 
         //Roster
         teacherAllNameBox.setItems(teachersTable.getItems());
@@ -264,6 +272,34 @@ public class Gui implements Initializable {
             BeginTime = observable.getValue();
             System.out.println(BeginTime);
         });
+    }
+
+    private String TimeSetting = "";
+    private double timeSettingValue = 1.0;
+
+    public void setSimulationSettingTimeCombo() {
+        simulationSettingTimeCombo.valueProperty().addListener((observable, oldValue, newValue) -> {
+            TimeSetting = observable.getValue();
+            System.out.println(TimeSetting);
+
+            if(TimeSetting.equals("x0,5")){
+                timeSettingValue = 0.5;
+            } else if (TimeSetting.equals("x2")) {
+                timeSettingValue = 2.0;
+            } else if (TimeSetting.equals("x4")) {
+                timeSettingValue = 4.0;
+            } else if (TimeSetting.equals("x8")) {
+                timeSettingValue = 8.0;
+            } else {
+                timeSettingValue = 1.0;
+            }
+            System.out.println(timeSettingValue);
+        });
+    }
+
+    public double getTimeSettingValue() {
+
+        return this.timeSettingValue;
     }
 
     private String EndTime = "";

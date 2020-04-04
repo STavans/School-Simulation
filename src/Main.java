@@ -35,6 +35,7 @@ public class Main extends Application {
             gui.setBeginTimeBox();
             gui.setEndTimeBox();
             gui.setClassRoomBox();
+            gui.setSimulationSettingTimeCombo();
             primaryStage.setOnCloseRequest(event ->
                     gui.save());
         } catch (IOException e) {

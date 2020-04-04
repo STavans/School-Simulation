@@ -4,6 +4,7 @@ import data.Lesson;
 import data.Person;
 import data.Student;
 import gui.FileIO;
+import gui.Gui;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -32,7 +33,7 @@ public class SimulationController {
 
     private int hour = 8;
     private int minute = 5;
-    private int periodTime = 1000;
+    private int periodTime = 1000; //* gui.getTimeSettingValue;
     private PathfindLogic pathfindLogic = new PathfindLogic("Tilemap.json");
     private double[][] distanceMap;
 

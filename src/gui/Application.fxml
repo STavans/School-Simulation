@@ -166,14 +166,13 @@
                         <Font size="25.0" />
                      </font>
                   </Button>
-                  <Label layoutX="346.0" layoutY="68.0" text="SETTINGS">
+                  <Label layoutX="330.0" layoutY="74.0" text="Time Setting">
                      <font>
                         <Font size="25.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="326.0" layoutY="128.0" />
-                  <TextField layoutX="326.0" layoutY="173.0" />
-                  <ComboBox layoutX="325.0" layoutY="224.0" prefWidth="150.0" />
+                  <ComboBox fx:id="simulationSettingTimeCombo" layoutX="322.0" layoutY="210.0" prefWidth="150.0" promptText="1x" />
+                  <Label layoutX="238.0" layoutY="178.0" text="1x speed equals 1 second in real life = 1 minute in simulation" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                </children>
             </AnchorPane>
         </content>
