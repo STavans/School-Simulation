@@ -340,18 +340,12 @@ public class Gui implements Initializable {
         Random random = new Random();
         String randomGender = comboTeacherGender.get(random.nextInt(comboTeacherGender.size()));
 
-        //Person name
-        String fileName = (randomGender == "Male") ? "src/namesBoys.txt" : "src/namesGirls.txt";
-        File namesFile = new File(fileName);
-        String randomName = this.getRandomNameFromFile(namesFile);
-
         //Subject
         String randomSubject = comboTeacherSubject.get(random.nextInt(comboTeacherSubject.size()));
 
-        teacherNameField.setText(randomName);
+        teacherNameField.setText(generateName(randomGender));
         teacherSubjectBox.setValue(randomSubject);
         teacherGenderBox.setValue(randomGender);
-
     }
 
     //Student
@@ -440,17 +434,19 @@ public class Gui implements Initializable {
         Random random = new Random();
         String randomGender = comboStudentGender.get(random.nextInt(comboStudentGender.size()));
 
-        //Person name
-        String fileName = (randomGender == "Male") ? "src/namesBoys.txt" : "src/namesGirls.txt";
-        File namesFile = new File(fileName);
-        String randomName = this.getRandomNameFromFile(namesFile);
-
         //Group
         Group randomGroup = comboStudentGroup.get(random.nextInt(comboStudentGroup.size()));
 
-        studentNameField.setText(randomName);
+        studentNameField.setText(generateName(randomGender));
         studentGroupBox.setValue(randomGroup);
         studentGenderBox.setValue(randomGender);
+    }
+
+    public String generateName(String gender) throws FileNotFoundException {
+        String fileName = (gender == "Male") ? "src/namesBoys.txt" : "src/namesGirls.txt";
+        File namesFile = new File(fileName);
+        String randomName = this.getRandomNameFromFile(namesFile);
+        return randomName;
     }
 
     public String getRandomNameFromFile(File f) throws FileNotFoundException
