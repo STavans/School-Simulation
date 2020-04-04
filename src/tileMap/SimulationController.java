@@ -54,10 +54,6 @@ public class SimulationController {
 
         periodTime = 1000 / timeSettingValue;
 
-        if(periodTime == 5000){
-            periodTime = 500;
-        }
-
         timer = new Timer();
         timer.schedule(
                 new TimerTask() {
@@ -114,7 +110,7 @@ public class SimulationController {
         classroomList = pathfindLogic.getClassroomArrayList();
         for (Classroom cla :
                 pathfindLogic.getClassroomArrayList()) {
-            System.out.println("Added: " +  cla.getClassNumber() + " Active: " + cla.getChairs());
+//            System.out.println("Added: " +  cla.getClassNumber() + " Active: " + cla.getChairs());
         }
         try {
             this.students = new ArrayList<>(fileIO.getStudents());
@@ -128,7 +124,6 @@ public class SimulationController {
 
         for (Student student : this.students) {
             student.setPathfindLogic(this.pathfindLogic);
-            System.out.println(timeSettingValue);
             student.setSpeed(timeSettingValue);
             for (Lesson lesson: this.lessons) {
                 if (lesson.getGroup().getCode().equals(student.getStudentGroup().getCode()))
@@ -143,7 +138,6 @@ public class SimulationController {
                 if (teacher.getLastName().equals(lesson.getTeacher().getLastName()))
                     teacher.addLesson(lesson);
             }
-            System.out.println(teacher.getLastName() + " Lesson Size: "  + teacher.getLessons().size());
         }
 
         for (int i = 0; i < this.students.size(); i++) {

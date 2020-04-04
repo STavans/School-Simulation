@@ -6,9 +6,11 @@ public class Chair {
     private boolean isTaken;
     private DistanceMap distanceMap;
     private Student reservedStudent;
+    private boolean towardsEast;
 
-    public Chair(DistanceMap distanceMap) {
+    public Chair(DistanceMap distanceMap, boolean towardsEast) {
         this.distanceMap = distanceMap;
+        this.towardsEast = towardsEast;
     }
 
     public boolean isTaken() {
@@ -16,8 +18,12 @@ public class Chair {
     }
 
     public void setTaken(boolean taken, Student student) {
-        isTaken = taken;
-        reservedStudent = student;
+        this.isTaken = taken;
+        this.reservedStudent = student;
+    }
+
+    public boolean isTowardsEast() {
+        return towardsEast;
     }
 
     public Student getReservedStudent() {

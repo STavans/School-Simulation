@@ -157,6 +157,7 @@ public class Student extends Person implements Serializable {
         searchForChair.addListener( (observable, oldValue, newValue) ->
                                     chairIndex = new Random().nextInt(12));
         this.lessons = new ArrayList<>();
+        this.chairIndex = new Random().nextInt(64);
     }
 
     public void update(ArrayList<Student> students, ArrayList<Classroom> classroomList, int hour, int minute, PathfindLogic pathfindLogic, ArrayList<String> classroomCodesList) {
@@ -214,19 +215,24 @@ public class Student extends Person implements Serializable {
             int endTime[] = lesson.getEndLesson();
             String locationS = lesson.getClassroom().getClassNumber() + "s";
 
-            ArrayList<Chair> chairArrayList = classroomList.get(classroomCodesList.indexOf(locationS)).getChairs();
+            ArrayList<Chair> classroomChairsList = classroomList.get(classroomCodesList.indexOf(locationS)).getChairs();
+            ArrayList<Chair> canteenChairsList = classroomList.get(classroomCodesList.indexOf("canteen")).getChairs();
+
 
             if (hour >= beginTime[0] && minute >= beginTime[1] && hour <= endTime[0] && minute <= endTime[1] && this.group.getCode().equals(lesson.getGroup().getCode())) {
+                canteenChairsList.get(chairIndex).setTaken(false, null);
                 searchForChair.set(true);
-                while (chairArrayList.get(chairIndex).isTaken() && this != chairArrayList.get(chairIndex).getReservedStudent())
+                while (classroomChairsList.get(chairIndex).isTaken() && this != classroomChairsList.get(chairIndex).getReservedStudent())
                     chairIndex = new Random().nextInt(12);
-                chairArrayList.get(chairIndex).setTaken(true, this);
-                this.setTarget(pathfindLogic.getPath(this.getPosition(), chairArrayList.get(chairIndex).getDistanceMap()));
+                classroomChairsList.get(chairIndex).setTaken(true, this);
+                this.setTarget(pathfindLogic.getPath(this.getPosition(), classroomChairsList.get(chairIndex).getDistanceMap()));
 
             } else {
-                chairArrayList.get(chairIndex).setTaken(false, null);
+                if (chairIndex <= 12)
+                classroomChairsList.get(chairIndex).setTaken(false, null);
                 searchForChair.set(false);
-                this.setTarget(pathfindLogic.getPath(this.getPosition(), "canteen"));
+                this.setTarget(pathfindLogic.getPath(this.getPosition(), canteenChairsList.get(chairIndex).getDistanceMap()));
+                canteenChairsList.get(chairIndex).setTaken(true, this);
             }
         }
     }
