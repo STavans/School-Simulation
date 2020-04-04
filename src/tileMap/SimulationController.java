@@ -6,6 +6,10 @@ import gui.Gui;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import org.jfree.fx.FXGraphics2D;
 import org.jfree.fx.ResizableCanvas;
@@ -42,6 +46,7 @@ public class SimulationController {
     private ArrayList<Classroom> classroomList = new ArrayList<>();
     private ArrayList classroomCodesArrayList = new ArrayList();
     private double timeSettingValue;
+    private double speedModifier = 1;
 
     public void start() throws Exception {
         Stage stage = new Stage();
@@ -51,6 +56,41 @@ public class SimulationController {
         mainPane.setCenter(canvas);
         FXGraphics2D g2d = new FXGraphics2D(canvas.getGraphicsContext2D());
 
+        Image image1 = new Image(getClass().getResourceAsStream("/ff.png"));
+        ImageView imageView1 = new ImageView(image1);
+        imageView1.setFitHeight(40);
+        imageView1.setFitWidth(40);
+
+        Image image2 = new Image(getClass().getResourceAsStream("/Slow.png"));
+        ImageView imageView2 = new ImageView(image2);
+        imageView2.setFitHeight(40);
+        imageView2.setFitWidth(40);
+
+        Image image3 = new Image(getClass().getResourceAsStream("/Pause.png"));
+        ImageView imageView3 = new ImageView(image3);
+        imageView3.setFitHeight(40);
+        imageView3.setFitWidth(40);
+
+        HBox hBox = new HBox();
+        Button ff = new Button("",imageView1);
+        Button sd = new Button("",imageView2);
+        Button pause = new Button("", imageView3);
+
+        ff.setOnAction(actionEvent -> {
+            speedModifier = 2.0;
+        });
+
+        sd.setOnAction(actionEvent -> {
+            speedModifier = 0.5;
+        });
+
+        pause.setOnAction(actionEvent -> {
+            speedModifier = 0;
+        });
+
+        hBox.getChildren().addAll(sd, pause, ff);
+
+        mainPane.getChildren().add(hBox);
 
         periodTime = 1000 / timeSettingValue;
 
