@@ -285,4 +285,11 @@ public class Teacher extends Person implements Serializable {
     public ArrayList<Lesson> getLessons() {
         return this.lessons;
     }
+
+    @Override
+    public void setSpeed(double speedFactor) {
+        this.speed *= speedFactor;
+    }
+
+
 }

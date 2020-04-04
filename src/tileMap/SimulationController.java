@@ -41,11 +41,7 @@ public class SimulationController {
     private Timer timer;
     private ArrayList<Classroom> classroomList = new ArrayList<>();
     private ArrayList classroomCodesArrayList = new ArrayList();
-    private Boolean ranOnce = false;
-    private int chairIndex = 0;
-
-
-//    private int tileTargetSwitchTime = 0;
+    private double timeSettingValue;
 
     public void start() throws Exception {
         Stage stage = new Stage();
@@ -54,7 +50,7 @@ public class SimulationController {
         canvas = new ResizableCanvas(g -> draw(g), mainPane);
         mainPane.setCenter(canvas);
         FXGraphics2D g2d = new FXGraphics2D(canvas.getGraphicsContext2D());
-        double timeSettingValue = fileIO.getTimeSettingValue();
+
 
         periodTime /= timeSettingValue;
 
@@ -88,7 +84,6 @@ public class SimulationController {
                 update((now - last) / 1000000000.0);
                 last = now;
                 draw(g2d);
-//                System.out.println(now);
             }
         };
 
@@ -103,14 +98,15 @@ public class SimulationController {
         canvas.setOnMouseClicked(event ->
                 getMouseLocation());
         draw(g2d);
-
     }
 
-    public void init() {
+    public void init() throws IOException, ClassNotFoundException {
         map = new TiledMap("/Tilemap.json");
         target = new Target("/Tilemap.json");
         hour = 8;
         minute = 6;
+
+        timeSettingValue = fileIO.getTimeSettingValue();
 
         pathfindLogic.generate();
         this.distanceMap = pathfindLogic.getDistanceMap().getDistanceMap();
@@ -132,22 +128,23 @@ public class SimulationController {
 
         for (Student student : this.students) {
             student.setPathfindLogic(this.pathfindLogic);
+            System.out.println(timeSettingValue);
+            student.setSpeed(timeSettingValue);
             for (Lesson lesson: this.lessons) {
                 if (lesson.getGroup().getCode().equals(student.getStudentGroup().getCode()))
                     student.addLesson(lesson);
             }
-
         }
 
         for (Person teacher : this.teachers) {
             teacher.setPathfindLogic(pathfindLogic);
+            teacher.setSpeed(timeSettingValue);
             for (Lesson lesson: this.lessons) {
                 if (teacher.getLastName().equals(lesson.getTeacher().getLastName()))
                     teacher.addLesson(lesson);
             }
             System.out.println(teacher.getLastName() + " Lesson Size: "  + teacher.getLessons().size());
         }
-
 
         for (int i = 0; i < this.students.size(); i++) {
 //            this.students.get(i).setPosition(new Point2D.Double(1090, 1040 + (i * 64)));
@@ -159,7 +156,6 @@ public class SimulationController {
             this.teachers.get(i).setPosition(new Point2D.Double(1040, 1008 - 32));
 
         }
-
     }
 
     public void draw(Graphics2D g) {

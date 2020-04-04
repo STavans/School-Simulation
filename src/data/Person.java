@@ -45,5 +45,7 @@ public abstract class Person implements Serializable, Drawable {
 
     public abstract ArrayList<Lesson> getLessons();
 
+    public abstract void setSpeed(double speedFactor);
+
 }
 
