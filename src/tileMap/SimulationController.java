@@ -1,8 +1,6 @@
 package tileMap;
 
-import data.Lesson;
-import data.Person;
-import data.Student;
+import data.*;
 import gui.FileIO;
 import gui.Gui;
 import javafx.animation.AnimationTimer;
@@ -17,6 +15,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -26,8 +25,8 @@ public class SimulationController {
     private FileIO fileIO = new FileIO();
     private TiledMap map;
     private ResizableCanvas canvas;
-    private ArrayList<Person> students;
-    private ArrayList<Person> teachers;
+    private ArrayList<Student> students;
+    private ArrayList<Teacher> teachers;
     private ArrayList<Lesson> lessons;
     private Target target;
 
@@ -40,7 +39,11 @@ public class SimulationController {
 
     private AnimationTimer animationTimer;
     private Timer timer;
-    private ArrayList classrooms;
+    private ArrayList<Classroom> classroomList = new ArrayList<>();
+    private ArrayList classroomCodesArrayList = new ArrayList();
+    private Boolean ranOnce = false;
+    private int chairIndex = 0;
+
 
 //    private int tileTargetSwitchTime = 0;
 
@@ -109,8 +112,14 @@ public class SimulationController {
         hour = 8;
         minute = 6;
 
-        classrooms = target.getClassroomList();
-
+        pathfindLogic.generate();
+        this.distanceMap = pathfindLogic.getDistanceMap().getDistanceMap();
+        classroomCodesArrayList = target.getClassroomCodesList();
+        classroomList = pathfindLogic.getClassroomArrayList();
+        for (Classroom cla :
+                pathfindLogic.getClassroomArrayList()) {
+            System.out.println("Added: " +  cla.getClassNumber() + " Active: " + cla.getChairs());
+        }
         try {
             this.students = new ArrayList<>(fileIO.getStudents());
             this.teachers = new ArrayList<>(fileIO.getTeachers());
@@ -121,15 +130,24 @@ public class SimulationController {
             e.printStackTrace();
         }
 
-        for (Person student : this.students) {
-            student.setPathfindLogic(pathfindLogic);
+        for (Student student : this.students) {
+            student.setPathfindLogic(this.pathfindLogic);
+            for (Lesson lesson: this.lessons) {
+                if (lesson.getGroup().getCode().equals(student.getStudentGroup().getCode()))
+                    student.addLesson(lesson);
+            }
+
         }
 
         for (Person teacher : this.teachers) {
             teacher.setPathfindLogic(pathfindLogic);
+            for (Lesson lesson: this.lessons) {
+                if (teacher.getLastName().equals(lesson.getTeacher().getLastName()))
+                    teacher.addLesson(lesson);
+            }
+            System.out.println(teacher.getLastName() + " Lesson Size: "  + teacher.getLessons().size());
         }
-        pathfindLogic.generate();
-        this.distanceMap = pathfindLogic.getDistanceMap().getDistanceMap();
+
 
         for (int i = 0; i < this.students.size(); i++) {
 //            this.students.get(i).setPosition(new Point2D.Double(1090, 1040 + (i * 64)));
@@ -173,38 +191,13 @@ public class SimulationController {
     }
 
     public void update(double deltaTime) {
-        for (Person student : this.students) {
-            student.update(this.students);
-            for (Lesson lesson : lessons) {
-                int beginTime[] = lesson.getBeginLesson();
-                int endTime[] = lesson.getEndLesson();
-                String locationS = lesson.getClassroom().getClassNumber() + "s";
-
-                if (hour >= beginTime[0] && minute >= beginTime[1] && hour <= endTime[0] && minute <= endTime[1]) {
-                    student.setTarget(pathfindLogic.getPath(student.getPosition(), locationS));
-                } else {
-                    student.setTarget(pathfindLogic.getPath(student.getPosition(), "canteen"));
-                }
-            }
+        for (Student student : this.students) {
+            student.update(this.students, classroomList, hour, minute, pathfindLogic, classroomCodesArrayList);
         }
 
-        for (Person teacher : this.teachers) {
-            teacher.update(this.teachers);
-
-            for (Lesson lesson : lessons) {
-                int beginTime[] = lesson.getBeginLesson();
-                int endTime[] = lesson.getEndLesson();
-
-                String locationT = lesson.getClassroom().getClassNumber() + "t";
-
-                if (hour >= beginTime[0] && minute >= beginTime[1] && hour <= endTime[0] && minute <= endTime[1]) {
-                    teacher.setTarget(pathfindLogic.getPath(teacher.getPosition(), locationT));
-                } else {
-                    teacher.setTarget(pathfindLogic.getPath(teacher.getPosition(), "teacherroom"));
-                }
-            }
+        for (Teacher teacher : this.teachers) {
+            teacher.update(this.teachers, hour, minute, pathfindLogic);
         }
-//        tileTargetSwitchTime++;
     }
 
     public void getMouseLocation() {

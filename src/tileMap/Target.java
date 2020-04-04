@@ -30,32 +30,50 @@ public class Target {
     private Classroom toilets = new Classroom("toilets");
 
     private JsonArray layers;
-    private ArrayList<String> classrooms;
+    private ArrayList<String> classroomCodesList;
     private HashMap<String, Integer> hashMap;
+    private ArrayList<Classroom> classroomsList;
 
     public Target(String filename){
-        classrooms = new ArrayList<>();
+        classroomCodesList = new ArrayList<>();
         hashMap = new HashMap();
 
-        classrooms.add(cantine.getClassNumber());
-        classrooms.add(teacherRoom.getClassNumber());
-        classrooms.add(classroom101t.getClassNumber());
-        classrooms.add(classroom102t.getClassNumber());
-        classrooms.add(classroom101s.getClassNumber());
-        classrooms.add(classroom102s.getClassNumber());
-        classrooms.add(classroom103s.getClassNumber());
-        classrooms.add(classroom104s.getClassNumber());
-        classrooms.add(classroom103t.getClassNumber());
-        classrooms.add(classroom104t.getClassNumber());
-        classrooms.add(classroom105t.getClassNumber());
-        classrooms.add(classroom105s.getClassNumber());
-        classrooms.add(classroom106t.getClassNumber());
-        classrooms.add(classroom106s.getClassNumber());
-        classrooms.add(toilets.getClassNumber());
+        classroomsList = new ArrayList<>();
+
+        classroomsList.add(cantine);
+        classroomsList.add(teacherRoom);
+        classroomsList.add(classroom101t);
+        classroomsList.add(classroom102t);
+        classroomsList.add(classroom101s);
+        classroomsList.add(classroom102s);
+        classroomsList.add(classroom103s);
+        classroomsList.add(classroom104s);
+        classroomsList.add(classroom103t);
+        classroomsList.add(classroom104t);
+        classroomsList.add(classroom105t);
+        classroomsList.add(classroom105s);
+        classroomsList.add(classroom106t);
+        classroomsList.add(classroom106s);
+        classroomsList.add(toilets);
+
+        classroomCodesList.add(cantine.getClassNumber());
+        classroomCodesList.add(teacherRoom.getClassNumber());
+        classroomCodesList.add(classroom101t.getClassNumber());
+        classroomCodesList.add(classroom102t.getClassNumber());
+        classroomCodesList.add(classroom101s.getClassNumber());
+        classroomCodesList.add(classroom102s.getClassNumber());
+        classroomCodesList.add(classroom103s.getClassNumber());
+        classroomCodesList.add(classroom104s.getClassNumber());
+        classroomCodesList.add(classroom103t.getClassNumber());
+        classroomCodesList.add(classroom104t.getClassNumber());
+        classroomCodesList.add(classroom105t.getClassNumber());
+        classroomCodesList.add(classroom105s.getClassNumber());
+        classroomCodesList.add(classroom106t.getClassNumber());
+        classroomCodesList.add(classroom106s.getClassNumber());
+        classroomCodesList.add(toilets.getClassNumber());
 
         JsonReader reader;
         reader = Json.createReader(getClass().getResourceAsStream("/Tilemap.json"));
-//        System.out.println(Json.createReader(getClass().getResourceAsStream("/" + filename)));
         JsonObject root = reader.readObject();
 
         layers = root.getJsonArray("layers").getJsonObject(4).getJsonArray("objects");
@@ -63,7 +81,7 @@ public class Target {
         for(int i = 0; i < layers.size(); i++) {
             int id = layers.getJsonObject(i).getInt("id");
 
-            hashMap.put(classrooms.get(i), id);
+            hashMap.put(classroomCodesList.get(i), id);
         }
         reader.close();
     }
@@ -88,8 +106,12 @@ public class Target {
         return new Point2D.Float((float) (getX(location) + (getWidth(location) / 2.0)), getY(location) + (float) (getHeight(location) / 2.0));
     }
 
-    public ArrayList getClassroomList(){
-        return classrooms;
+    public ArrayList getClassroomCodesList(){
+        return classroomCodesList;
+    }
+
+    public ArrayList<Classroom> getClassroomsList(){
+        return classroomsList;
     }
 
     public HashMap<String, Integer> getClassroomsHashMap() {
