@@ -143,8 +143,7 @@ public class Gui implements Initializable {
     private ObservableList<String> comboEndTime = observableArrayList("9:30", "10:30", "11:30", "12:30", "13:30", "14:30", "15:30");
 
 
-    //to get something out the combobox PersonManager
-    private String TeacherSubject = "";
+
 
     @SuppressWarnings("Duplicates")
     @Override
@@ -212,6 +211,9 @@ public class Gui implements Initializable {
             studentGroupBoxs.setItems(comboStudentGroupRoster);
         });
     }
+
+    //to get something out the combobox PersonManager
+    private String TeacherSubject = "";
 
     public void setTeacherSubjectBox() {
         teacherSubjectBox.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -306,11 +308,7 @@ public class Gui implements Initializable {
             System.out.println(timeSettingValue);
         });
     }
-
-    public double getSimulationSettingTimeCombo() {
-        return this.timeSettingValue;
-    }
-
+    
     private String EndTime = "";
 
     public void setEndTimeBox() {
@@ -362,8 +360,17 @@ public class Gui implements Initializable {
     }
 
     @FXML
-    void teacherGenerateButton() {
+    void teacherGenerateButton() throws FileNotFoundException {
+        //Gender
+        Random random = new Random();
+        String randomGender = comboTeacherGender.get(random.nextInt(comboTeacherGender.size()));
 
+        //Subject
+        String randomSubject = comboTeacherSubject.get(random.nextInt(comboTeacherSubject.size()));
+
+        teacherNameField.setText(generateName(randomGender));
+        teacherSubjectBox.setValue(randomSubject);
+        teacherGenderBox.setValue(randomGender);
     }
 
     //Student
@@ -430,14 +437,46 @@ public class Gui implements Initializable {
     }
 
     @FXML
-    void studentGenerateButton() {
-        System.out.println("StudentGenerate");
+    void studentGenerateButton() throws FileNotFoundException {
+        //Gender
+        Random random = new Random();
+        String randomGender = comboStudentGender.get(random.nextInt(comboStudentGender.size()));
+        //Group
+
+        Group randomGroup = comboStudentGroup.get(random.nextInt(comboStudentGroup.size()));
+
+        studentNameField.setText(generateName(randomGender));
+        studentGenderBox.setValue(randomGender);
+        studentGroupBox.setValue(randomGroup);
+    }
+
+    public String generateName(String gender) throws FileNotFoundException {
+        String fileName = (gender == "Male") ? "src/namesBoys.txt" : "src/namesGirls.txt";
+        File namesFile = new File(fileName);
+        String randomName = this.getRandomNameFromFile(namesFile);
+        return randomName;
+    }
+
+    public String getRandomNameFromFile(File f) throws FileNotFoundException
+    {
+        String result = null;
+        Random rand = new Random();
+        int n = 0;
+        for(Scanner sc = new Scanner(f); sc.hasNext(); )
+        {
+            ++n;
+            String line = sc.nextLine();
+            if(rand.nextInt(n) == 0)
+                result = line;
+        }
+
+        return result;
     }
 
     //generate
     @FXML
-    void generateMaxButton() {
-        System.out.println("GenerateMax");
+    void generateMaxButton()  {
+
     }
 
     //Button Roster
