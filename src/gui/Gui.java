@@ -275,15 +275,15 @@ public class Gui implements Initializable {
     }
 
     private String TimeSetting = "";
-    private int timeSettingValue = 1;
+    private double timeSettingValue = 1;
 
     public void setSimulationSettingTimeCombo() {
         simulationSettingTimeCombo.valueProperty().addListener((observable, oldValue, newValue) -> {
             TimeSetting = observable.getValue();
             System.out.println(TimeSetting);
 
-            if(TimeSetting.equals("x0,5")){
-                timeSettingValue = 5;
+            if(TimeSetting.equals("x0.5")){
+                timeSettingValue = 0.5;
             } else if (TimeSetting.equals("x2")) {
                 timeSettingValue = 2;
             } else if (TimeSetting.equals("x4")) {
@@ -297,7 +297,7 @@ public class Gui implements Initializable {
         });
     }
 
-    public int getSimulationSettingTimeCombo() {
+    public double getSimulationSettingTimeCombo() {
         return this.timeSettingValue;
     }
 
@@ -531,7 +531,7 @@ public class Gui implements Initializable {
 
     public void save() {
         try {
-            fileIO.writeAll(studentsTable.getItems(), teachersTable.getItems(), rosterTable.getItems());
+            fileIO.writeAll(studentsTable.getItems(), teachersTable.getItems(), rosterTable.getItems(), timeSettingValue);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }

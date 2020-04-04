@@ -38,7 +38,7 @@ public class SimulationController {
     private int hour = 8;
     private int minute = 5;
 
-    private int periodTime = 1000;
+    private double periodTime = 1000;
     private PathfindLogic pathfindLogic = new PathfindLogic("Tilemap.json");
     private double[][] distanceMap;
 
@@ -56,8 +56,9 @@ public class SimulationController {
         canvas = new ResizableCanvas(g -> draw(g), mainPane);
         mainPane.setCenter(canvas);
         FXGraphics2D g2d = new FXGraphics2D(canvas.getGraphicsContext2D());
+        double timeSettingValue = fileIO.getTimeSettingValue();
 
-        periodTime *= gui.getSimulationSettingTimeCombo();
+        periodTime /= timeSettingValue;
 
         if(periodTime == 5000){
             periodTime = 500;
@@ -77,17 +78,18 @@ public class SimulationController {
 
                         }
                     }
-                }, 0, periodTime);
+                }, 0, (int) periodTime);
 
         animationTimer = new AnimationTimer() {
             long last = -1;
             @Override
             public void handle(long now) {
-                if (last == -1)
+                if (last == -1.0)
                     last = now;
                 update((now - last) / 1000000000.0);
                 last = now;
                 draw(g2d);
+//                System.out.println(now);
             }
         };
 
