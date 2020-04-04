@@ -32,7 +32,7 @@ public class SimulationController {
 
     private int hour;
     private int minute;
-    private double periodTime = 1000;
+    private double periodTime;
     private PathfindLogic pathfindLogic = new PathfindLogic("Tilemap.json");
     private double[][] distanceMap;
 
@@ -52,7 +52,7 @@ public class SimulationController {
         FXGraphics2D g2d = new FXGraphics2D(canvas.getGraphicsContext2D());
 
 
-        periodTime /= timeSettingValue;
+        periodTime = 1000 / timeSettingValue;
 
         if(periodTime == 5000){
             periodTime = 500;
