@@ -275,7 +275,7 @@ public class Gui implements Initializable {
     }
 
     private String TimeSetting = "";
-    private double timeSettingValue = 1.0;
+    private int timeSettingValue = 1;
 
     public void setSimulationSettingTimeCombo() {
         simulationSettingTimeCombo.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -283,22 +283,21 @@ public class Gui implements Initializable {
             System.out.println(TimeSetting);
 
             if(TimeSetting.equals("x0,5")){
-                timeSettingValue = 0.5;
+                timeSettingValue = 5;
             } else if (TimeSetting.equals("x2")) {
-                timeSettingValue = 2.0;
+                timeSettingValue = 2;
             } else if (TimeSetting.equals("x4")) {
-                timeSettingValue = 4.0;
+                timeSettingValue = 4;
             } else if (TimeSetting.equals("x8")) {
-                timeSettingValue = 8.0;
+                timeSettingValue = 8;
             } else {
-                timeSettingValue = 1.0;
+                timeSettingValue = 1;
             }
             System.out.println(timeSettingValue);
         });
     }
 
-    public double getTimeSettingValue() {
-
+    public int getSimulationSettingTimeCombo() {
         return this.timeSettingValue;
     }
 
