@@ -121,12 +121,22 @@ public class SimulationController {
             e.printStackTrace();
         }
 
-        for (Person student : this.students) {
-            student.setPathfindLogic(pathfindLogic);
+        for (Student student : this.students) {
+            student.setPathfindLogic(this.pathfindLogic);
+            for (Lesson lesson: this.lessons) {
+                if (lesson.getGroup().getCode().equals(student.getStudentGroup().getCode()))
+                    student.addLesson(lesson);
+            }
+
         }
 
         for (Person teacher : this.teachers) {
             teacher.setPathfindLogic(pathfindLogic);
+            for (Lesson lesson: this.lessons) {
+                if (teacher.getLastName().equals(lesson.getTeacher().getLastName()))
+                    teacher.addLesson(lesson);
+            }
+            System.out.println(teacher.getLastName() + " Lesson Size: "  + teacher.getLessons().size());
         }
 
 
@@ -173,11 +183,11 @@ public class SimulationController {
 
     public void update(double deltaTime) {
         for (Student student : this.students) {
-            student.update(this.students, lessons, classroomList, hour, minute, pathfindLogic, classroomCodesArrayList);
+            student.update(this.students, classroomList, hour, minute, pathfindLogic, classroomCodesArrayList);
         }
 
         for (Teacher teacher : this.teachers) {
-            teacher.update(this.teachers, lessons, hour, minute, pathfindLogic);
+            teacher.update(this.teachers, hour, minute, pathfindLogic);
         }
     }
 

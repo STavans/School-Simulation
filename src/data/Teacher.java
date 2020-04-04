@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class Teacher extends Person implements Serializable {
 
     private String subject;
+    private ArrayList<Lesson> lessons;
     private transient SimpleStringProperty subjectTB;
     private transient SimpleStringProperty genderTB;
     private transient SimpleStringProperty lastNameTB;
@@ -164,9 +165,10 @@ public class Teacher extends Person implements Serializable {
         for (int i = 28; i < 36; i++) {
             right[i - 28] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
         }
+        this.lessons = new ArrayList<>();
     }
 
-    public void update(ArrayList<Teacher> teachers, ArrayList<Lesson> lessons, int hour, int minute, PathfindLogic pathfindLogic) {
+    public void update(ArrayList<Teacher> teachers, int hour, int minute, PathfindLogic pathfindLogic) {
         double targetAngle = Math.atan2(this.target.getY() - this.position.getY(),
                 this.target.getX() - this.position.getX());
 
@@ -267,5 +269,20 @@ public class Teacher extends Person implements Serializable {
 
     public Point2D getTarget() {
         return this.target;
+    }
+
+    @Override
+    public void setLessons(ArrayList<Lesson> lessons) {
+        this.lessons = lessons;
+    }
+
+    @Override
+    public void addLesson(Lesson lesson) {
+        this.lessons.add(lesson);
+    }
+
+    @Override
+    public ArrayList<Lesson> getLessons() {
+        return this.lessons;
     }
 }

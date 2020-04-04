@@ -1,8 +1,11 @@
 package tileMap;
 
+import data.Student;
+
 public class Chair {
     private boolean isTaken;
     private DistanceMap distanceMap;
+    private Student reservedStudent;
 
     public Chair(DistanceMap distanceMap) {
         this.distanceMap = distanceMap;
@@ -12,8 +15,13 @@ public class Chair {
         return isTaken;
     }
 
-    public void setTaken(boolean taken) {
+    public void setTaken(boolean taken, Student student) {
         isTaken = taken;
+        reservedStudent = student;
+    }
+
+    public Student getReservedStudent() {
+        return reservedStudent;
     }
 
     public DistanceMap getDistanceMap() {

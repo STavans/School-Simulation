@@ -39,5 +39,11 @@ public abstract class Person implements Serializable, Drawable {
 
     public abstract Point2D getTarget();
 
+    public abstract void setLessons(ArrayList<Lesson> lessons);
+
+    public abstract void addLesson(Lesson lesson);
+
+    public abstract ArrayList<Lesson> getLessons();
+
 }
 

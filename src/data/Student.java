@@ -3,6 +3,7 @@ package data;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import tileMap.Chair;
 import tileMap.PathfindLogic;
 
 import javax.imageio.ImageIO;
@@ -22,6 +23,7 @@ import java.util.Random;
 public class Student extends Person implements Serializable {
 
     private Group group;
+    private transient ArrayList<Lesson> lessons;
     private transient SimpleObjectProperty groupTBST;
     private transient SimpleStringProperty genderTBST;
     private transient SimpleStringProperty lastNameTBST;
@@ -154,9 +156,10 @@ public class Student extends Person implements Serializable {
         }
         searchForChair.addListener( (observable, oldValue, newValue) ->
                                     chairIndex = new Random().nextInt(12));
+        this.lessons = new ArrayList<>();
     }
 
-    public void update(ArrayList<Student> students, ArrayList<Lesson> lessons, ArrayList<Classroom> classroomList, int hour, int minute, PathfindLogic pathfindLogic, ArrayList<String> classroomCodesList) {
+    public void update(ArrayList<Student> students, ArrayList<Classroom> classroomList, int hour, int minute, PathfindLogic pathfindLogic, ArrayList<String> classroomCodesList) {
         double targetAngle = Math.atan2(this.target.getY() - this.position.getY(),
                 this.target.getX() - this.position.getX());
 
@@ -211,18 +214,21 @@ public class Student extends Person implements Serializable {
             int endTime[] = lesson.getEndLesson();
             String locationS = lesson.getClassroom().getClassNumber() + "s";
 
+            ArrayList<Chair> chairArrayList = classroomList.get(classroomCodesList.indexOf(locationS)).getChairs();
 
-
-            if (hour >= beginTime[0] && minute >= beginTime[1] && hour <= endTime[0] && minute <= endTime[1]) {
+            if (hour >= beginTime[0] && minute >= beginTime[1] && hour <= endTime[0] && minute <= endTime[1] && this.group.getCode().equals(lesson.getGroup().getCode())) {
                 searchForChair.set(true);
-                this.setTarget(pathfindLogic.getPath(this.getPosition(), classroomList.get(classroomCodesList.indexOf(locationS)).getChairs().get(chairIndex).getDistanceMap()));
+                while (chairArrayList.get(chairIndex).isTaken() && this != chairArrayList.get(chairIndex).getReservedStudent())
+                    chairIndex = new Random().nextInt(12);
+                chairArrayList.get(chairIndex).setTaken(true, this);
+                this.setTarget(pathfindLogic.getPath(this.getPosition(), chairArrayList.get(chairIndex).getDistanceMap()));
+
             } else {
+                chairArrayList.get(chairIndex).setTaken(false, null);
                 searchForChair.set(false);
                 this.setTarget(pathfindLogic.getPath(this.getPosition(), "canteen"));
             }
         }
-
-
     }
 
 
@@ -264,5 +270,20 @@ public class Student extends Person implements Serializable {
 
     public void setPathfindLogic(PathfindLogic pathfindLogic) {
         this.pathfindLogic = pathfindLogic;
+    }
+
+    @Override
+    public void setLessons(ArrayList<Lesson> lessons) {
+        this.lessons = lessons;
+    }
+
+    @Override
+    public void addLesson(Lesson lesson) {
+        this.lessons.add(lesson);
+    }
+
+    @Override
+    public ArrayList<Lesson> getLessons() {
+        return this.lessons;
     }
 }
