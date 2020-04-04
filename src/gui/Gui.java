@@ -133,7 +133,7 @@ public class Gui implements Initializable {
     private ObservableList<String> comboStudentGender = observableArrayList("Male", "Female");
 
     //Settings
-    private ObservableList<String> comboTimeSetting = observableArrayList("x0,5", "x1", "x2", "x4", "x8");
+    private ObservableList<String> comboTimeSetting = observableArrayList("x0.5", "x1", "x2", "x4", "x8");
 
     //Roster
     private ObservableList<Teacher> comboTeacherNameList = observableArrayList();
