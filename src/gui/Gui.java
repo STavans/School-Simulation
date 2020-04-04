@@ -418,14 +418,44 @@ public class Gui implements Initializable {
     }
 
     @FXML
-    void studentGenerateButton() {
-        System.out.println("StudentGenerate");
+    void studentGenerateButton() throws FileNotFoundException {
+        //Gender
+        Random random = new Random();
+        String randomGender = comboStudentGender.get(random.nextInt(comboStudentGender.size()));
+
+        //Person name
+        String fileName = (randomGender == "Male") ? "src/namesBoys.txt" : "src/namesGirls.txt";
+        File namesFile = new File(fileName);
+        String randomName = this.getRandomNameFromFile(namesFile);
+
+        //Group
+        Group randomGroup = comboStudentGroup.get(random.nextInt(comboStudentGroup.size()));
+
+        studentNameField.setText(randomName);
+        studentGroupBox.setValue(randomGroup);
+        studentGenderBox.setValue(randomGender);
+    }
+
+    public String getRandomNameFromFile(File f) throws FileNotFoundException
+    {
+        String result = null;
+        Random rand = new Random();
+        int n = 0;
+        for(Scanner sc = new Scanner(f); sc.hasNext(); )
+        {
+            ++n;
+            String line = sc.nextLine();
+            if(rand.nextInt(n) == 0)
+                result = line;
+        }
+
+        return result;
     }
 
     //generate
     @FXML
-    void generateMaxButton() {
-        System.out.println("GenerateMax");
+    void generateMaxButton()  {
+
     }
 
     //Button Roster
