@@ -3,6 +3,7 @@ package data;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import tileMap.Chair;
 import tileMap.PathfindLogic;
 
@@ -155,7 +156,7 @@ public class Student extends Person implements Serializable {
             right[i - 28] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
         }
         searchForChair.addListener( (observable, oldValue, newValue) ->
-                                    chairIndex = new Random().nextInt(12));
+                                    setRandomChairIndex(observable, oldValue, newValue));
         this.lessons = new ArrayList<>();
         this.chairIndex = new Random().nextInt(64);
     }
@@ -296,5 +297,12 @@ public class Student extends Person implements Serializable {
     @Override
     public void setSpeed(double speedFactor) {
         this.speed *= speedFactor;
+    }
+
+    private void setRandomChairIndex(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue){
+        if (newValue)
+            chairIndex = new Random().nextInt(12);
+        else
+            chairIndex = new Random().nextInt(64);
     }
 }
