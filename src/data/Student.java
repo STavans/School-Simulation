@@ -1,10 +1,12 @@
 package data;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import tileMap.PathfindLogic;
 
 import javax.imageio.ImageIO;
+import javax.xml.bind.Marshaller;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
@@ -31,6 +33,8 @@ public class Student extends Person implements Serializable {
     private transient BufferedImage[] right;
 
     private PathfindLogic pathfindLogic;
+    private int chairIndex;
+    private transient SimpleBooleanProperty searchForChair;
 
     private Point2D position;
     private double angle;
@@ -116,6 +120,7 @@ public class Student extends Person implements Serializable {
         groupTBST = new SimpleObjectProperty(ois.readObject());
         genderTBST = new SimpleStringProperty(ois.readUTF());
         lastNameTBST = new SimpleStringProperty(ois.readUTF());
+        searchForChair = new SimpleBooleanProperty(false);
 
         if (this.genderTBST.get().equals("Female")) {
                 image = ImageIO.read(getClass().getResource("/Female.png"));
@@ -147,7 +152,8 @@ public class Student extends Person implements Serializable {
         for (int i = 28; i < 36; i++) {
             right[i - 28] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
         }
-
+        searchForChair.addListener( (observable, oldValue, newValue) ->
+                                    chairIndex = new Random().nextInt(12));
     }
 
     public void update(ArrayList<Student> students, ArrayList<Lesson> lessons, ArrayList<Classroom> classroomList, int hour, int minute, PathfindLogic pathfindLogic, ArrayList<String> classroomCodesList) {
@@ -208,13 +214,10 @@ public class Student extends Person implements Serializable {
 
 
             if (hour >= beginTime[0] && minute >= beginTime[1] && hour <= endTime[0] && minute <= endTime[1]) {
-//                if (!ranOnce) {
-//                    chairIndex = new Random().nextInt(12);
-//                    System.out.println("NEXT FUCKING INT" + chairIndex);
-//                    ranOnce = true;
-//                }
-                this.setTarget(pathfindLogic.getPath(this.getPosition(), classroomList.get(classroomCodesList.indexOf(locationS)).getChairs().get(1).getDistanceMap()));
+                searchForChair.set(true);
+                this.setTarget(pathfindLogic.getPath(this.getPosition(), classroomList.get(classroomCodesList.indexOf(locationS)).getChairs().get(chairIndex).getDistanceMap()));
             } else {
+                searchForChair.set(false);
                 this.setTarget(pathfindLogic.getPath(this.getPosition(), "canteen"));
             }
         }
