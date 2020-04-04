@@ -128,8 +128,7 @@ public class Gui implements Initializable {
     private ObservableList<String> comboEndTime = observableArrayList("9:30", "10:30", "11:30", "12:30", "13:30", "14:30", "15:30");
 
 
-    //to get something out the combobox PersonManager
-    private String TeacherSubject = "";
+
 
     @SuppressWarnings("Duplicates")
     @Override
@@ -194,6 +193,9 @@ public class Gui implements Initializable {
             studentGroupBoxs.setItems(comboStudentGroupRoster);
         });
     }
+
+    //to get something out the combobox PersonManager
+    private String TeacherSubject = "";
 
     public void setTeacherSubjectBox() {
         teacherSubjectBox.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -333,8 +335,23 @@ public class Gui implements Initializable {
     }
 
     @FXML
-    void teacherGenerateButton() {
-        System.out.println("TeacherGenerate");
+    void teacherGenerateButton() throws FileNotFoundException {
+        //Gender
+        Random random = new Random();
+        String randomGender = comboTeacherGender.get(random.nextInt(comboTeacherGender.size()));
+
+        //Person name
+        String fileName = (randomGender == "Male") ? "src/namesBoys.txt" : "src/namesGirls.txt";
+        File namesFile = new File(fileName);
+        String randomName = this.getRandomNameFromFile(namesFile);
+
+        //Subject
+        String randomSubject = comboTeacherSubject.get(random.nextInt(comboTeacherSubject.size()));
+
+        teacherNameField.setText(randomName);
+        teacherSubjectBox.setValue(randomSubject);
+        teacherGenderBox.setValue(randomGender);
+
     }
 
     //Student
