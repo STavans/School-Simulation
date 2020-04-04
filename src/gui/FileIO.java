@@ -23,7 +23,7 @@ public class FileIO {
 
     }
 
-    public void writeAll(ObservableList<Student> obStudents, ObservableList<Teacher> obTeachers, ObservableList<Lesson> obLessons) throws IOException, ClassNotFoundException {
+    public void writeAll(ObservableList<Student> obStudents, ObservableList<Teacher> obTeachers, ObservableList<Lesson> obLessons, double timeSettingValue) throws IOException, ClassNotFoundException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("src/SaveFile.txt"));
 
         ArrayList<Student> allStudents = new ArrayList<>(obStudents);
@@ -33,6 +33,7 @@ public class FileIO {
         oos.writeObject(allStudents);
         oos.writeObject(allTeachers);
         oos.writeObject(allLessons);
+        oos.writeDouble(timeSettingValue);
 
         oos.close();
     }
@@ -63,5 +64,15 @@ public class FileIO {
         ObservableList<Lesson> ObsLessons = observableArrayList(loadedLessons);
         ois.close();
         return ObsLessons;
+    }
+
+    public double getTimeSettingValue() throws IOException, ClassNotFoundException {
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("src/SaveFile.txt"));
+        ois.readObject();
+        ois.readObject();
+        ois.readObject();
+        double timeSettingValue = ois.readDouble();
+        ois.close();
+        return timeSettingValue;
     }
 }
