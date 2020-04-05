@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<TabPane id="applicationScene" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="501.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GuiController">
+  <tabs>
+      <Tab text="Roster">
+         <content>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <VBox prefHeight="341.0" prefWidth="816.0">
+                     <children>
+                        <TableView id="rosterTable" fx:id="rosterTable" prefHeight="351.0" prefWidth="816.0">
+                           <columns>
+                              <TableColumn fx:id="rosterTeacherColumn" editable="false" prefWidth="157.0" resizable="false" sortable="false" text="Name" />
+                              <TableColumn fx:id="rosterSubjectColumn" editable="false" prefWidth="156.0" text="Subject" />
+                              <TableColumn fx:id="rosterGroupColumn" editable="false" prefWidth="114.0" text="Group" />
+                              <TableColumn fx:id="rosterClassroomColumn" editable="false" prefWidth="118.0" text="Classroom" />
+                              <TableColumn fx:id="rosterBeginTimeColumn" editable="false" prefWidth="129.0" text="Begin time" />
+                              <TableColumn fx:id="rosterEndTimeColumn" editable="false" prefWidth="125.0" text="End time" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" translateX="5.0" translateY="10.0">
+                     <children>
+                        <ComboBox id="teacherBox" fx:id="teacherAllNameBox" onAction="#setrosterTeacherColumn1" prefWidth="150.0" promptText="Teacher" />
+                        <ComboBox id="groupBox" fx:id="studentGroupBoxs" onAction="#setStudentGroupBoxs" prefWidth="150.0" promptText="Group" />
+                        <ComboBox id="classroomBox" fx:id="classRoomBox" onAction="#setClassRoomBox" prefWidth="150.0" promptText="Classroom" />
+                        <ComboBox id="classroomBox" fx:id="beginTimeBox" onAction="#setBeginTimeBox" prefWidth="150.0" promptText="BeginTime" />
+                        <ComboBox id="classroomBox" fx:id="endTimeBox" onAction="#setEndTimeBox" prefWidth="150.0" promptText="EndTime" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" translateX="5.0">
+                     <children>
+                        <Button id="rosterAddButton" fx:id="rosterAddButtonBox" mnemonicParsing="false" onAction="#rosterAddButton" text="Add" />
+                        <Button id="rosterEditButton" fx:id="rosterEditButton" mnemonicParsing="false" onAction="#rosterEditButton" text="Edit" />
+                        <Button id="rosterDeleteButton" fx:id="rosterDeleteButton" mnemonicParsing="false" onAction="#rosterDeleteButton" text="Delete" />
+                        <Button fx:id="rosterClearButton" mnemonicParsing="false" onAction="#rosterClearButton" text="Clear" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </content>
+      </Tab>
+    <Tab text="PersonManager">
+         <content>
+            <VBox prefHeight="460.0" prefWidth="643.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="350.0" prefWidth="651.0" spacing="5.0">
+                     <children>
+                        <VBox prefHeight="375.0" prefWidth="348.0" translateX="10.0">
+                           <children>
+                              <Label text="Teachers">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                              <TableView id="teachersTable" fx:id="teachersTable" prefHeight="208.0" prefWidth="300.0">
+                                 <columns>
+                                    <TableColumn fx:id="teacherNameColumn" prefWidth="174.0" text="Name" />
+                                    <TableColumn fx:id="teacherSubjectColumn" prefWidth="86.0" text="Subject" />
+                                    <TableColumn fx:id="teacherGenderColumn" prefWidth="87.0" text="Gender" />
+                                 </columns>
+                              </TableView>
+                              <HBox prefHeight="26.0" prefWidth="231.0" spacing="5.0">
+                                 <children>
+                                    <TextField fx:id="teacherNameField" onAction="#teacherName" promptText="Name" />
+                                    <VBox>
+                                       <children>
+                                          <ComboBox fx:id="teacherSubjectBox" onAction="#setTeacherSubjectBox" prefWidth="150.0" promptText="Subject" />
+                                       </children>
+                                    </VBox>
+                                    <ComboBox fx:id="teacherGenderBox" onAction="#setTeacherGenderBox" prefWidth="150.0" promptText="Gender" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <Button fx:id="teacherGenerateButton" mnemonicParsing="false" onAction="#teacherGenerateButton" text="Generate Random">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                                 <children>
+                                    <Button fx:id="teacherAddButton" mnemonicParsing="false" onAction="#teacherAddButton" text="Add" />
+                                    <Button fx:id="teacherEditButton" mnemonicParsing="false" onAction="#teacherEditButton" text="Edit" />
+                                    <Button fx:id="teacherDeleteButton" mnemonicParsing="false" onAction="#teacherDeleteButton" text="Delete" />
+                                    <Button fx:id="teacherClearButton" mnemonicParsing="false" onAction="#teacherClearButton" text="Clear" />
+                                 </children>
+                              </HBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox prefHeight="375.0" prefWidth="348.0" translateX="75.0">
+                           <children>
+                              <Label text="Students">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                              <TableView id="studentsTable" fx:id="studentsTable" prefHeight="208.0" prefWidth="300.0">
+                                 <columns>
+                                    <TableColumn fx:id="studentNameColumn" prefWidth="174.0" text="Name" />
+                                    <TableColumn fx:id="studentGroupColumn" prefWidth="86.0" text="Group" />
+                                    <TableColumn fx:id="studentGenderColumn" prefWidth="87.0" text="Gender" />
+                                 </columns>
+                              </TableView>
+                              <HBox prefHeight="26.0" prefWidth="231.0" spacing="5.0">
+                                 <children>
+                                    <TextField fx:id="studentNameField" onAction="#studentName" promptText="Name" />
+                                    <ComboBox fx:id="studentGroupBox" onAction="#setStudentGroupBox" prefWidth="150.0" promptText="Group" />
+                                    <ComboBox fx:id="studentGenderBox" onAction="#setStudentGenderBox" prefWidth="150.0" promptText="Gender" />
+
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <Button fx:id="studentGenerateButton" mnemonicParsing="false" onAction="#studentGenerateButton" text="Generate Random">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                                 <children>
+                                    <Button fx:id="studentAddButton" mnemonicParsing="false" onAction="#studentAddButton" text="Add" />
+                                    <Button fx:id="studentEditButton" mnemonicParsing="false" onAction="#studentEditButton" text="Edit" />
+                                    <Button fx:id="studentDeleteButton" mnemonicParsing="false" onAction="#studentDeleteButton" text="Delete" />
+                                    <Button fx:id="studentClearButton" mnemonicParsing="false" onAction="#studentClearButton" text="Clear" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="generateMaxButton" mnemonicParsing="false" onAction="#generateMaxButton" text="Generate To Max" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </content></Tab>
+      <Tab text="Simulation">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="simulationStartButton" layoutX="348.0" layoutY="318.0" mnemonicParsing="false" onAction="#simulationStartButton" text="START">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="330.0" layoutY="74.0" text="Time Setting">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="simulationSettingTimeCombo" layoutX="322.0" layoutY="210.0" prefWidth="150.0" promptText="1x" />
+                  <Label layoutX="238.0" layoutY="178.0" text="1x speed equals 1 second in real life = 1 minute in simulation" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+  </tabs>
+</TabPane>
