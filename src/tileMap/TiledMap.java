@@ -67,7 +67,7 @@ public class TiledMap {
 		}
 	}
 
-	void draw(Graphics2D g2d)
+	public void draw(Graphics2D g2d)
 	{
 		for(TiledLayer layer : this.layers) {
 			layer.draw(g2d, tiles);

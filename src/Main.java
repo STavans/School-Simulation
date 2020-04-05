@@ -1,4 +1,4 @@
-import gui.Gui;
+import gui.GuiController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,27 +18,27 @@ public class Main extends Application {
 
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Gui.class.getResource("Application.fxml"));
+            loader.setLocation(GuiController.class.getResource("Application.fxml"));
 
             Parent root = loader.load();
-            Gui gui = loader.getController();
+            GuiController guiController = loader.getController();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("School Simulation");
             primaryStage.show();
 
-            gui.setTeacherSubjectBox();
-            gui.setTeacherGenderBox();
-            gui.setStudentGroupBox();
-            gui.setStudentGenderBox();
-            gui.setrosterTeacherColumn1();
-            gui.setStudentGroupBoxs();
-            gui.setBeginTimeBox();
-            gui.setEndTimeBox();
-            gui.setClassRoomBox();
-            gui.setSimulationSettingTimeCombo();
+            guiController.setTeacherSubjectBox();
+            guiController.setTeacherGenderBox();
+            guiController.setStudentGroupBox();
+            guiController.setStudentGenderBox();
+            guiController.setrosterTeacherColumn1();
+            guiController.setStudentGroupBoxs();
+            guiController.setBeginTimeBox();
+            guiController.setEndTimeBox();
+            guiController.setClassRoomBox();
+            guiController.setSimulationSettingTimeCombo();
             primaryStage.setOnCloseRequest(event ->
-                    gui.save());
+                    guiController.save());
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,6 +1,6 @@
 package data;
 
-import tileMap.PathfindLogic;
+import pathFinding.PathfindLogic;
 
 import java.awt.geom.Point2D;
 import java.io.Serializable;

@@ -1,4 +1,4 @@
-package tileMap;
+package pathFinding;
 
 import java.awt.*;
 import java.util.*;

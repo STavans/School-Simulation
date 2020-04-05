@@ -1,8 +1,7 @@
-package tileMap;
+package gui;
 
 import data.*;
 import gui.FileIO;
-import gui.Gui;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -13,13 +12,15 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import org.jfree.fx.FXGraphics2D;
 import org.jfree.fx.ResizableCanvas;
+import pathFinding.PathfindLogic;
+import tileMap.Target;
+import tileMap.TiledMap;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 

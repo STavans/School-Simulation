@@ -20,16 +20,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import tileMap.SimulationController;
-import warningSign.ErrorMessage;
 
+import javax.swing.*;
 import java.io.*;
 import java.net.URL;
 import java.util.*;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
-public class Gui implements Initializable {
+public class GuiController implements Initializable {
     int i = 0;
     int A = 0;
     int B = 0;
@@ -37,8 +36,7 @@ public class Gui implements Initializable {
     int D = 0;
     int E = 0;
     int F = 0;
-    SimulationController simulationController = new SimulationController();
-    ErrorMessage errorMessage = new ErrorMessage();
+    private SimulationController simulationController = new SimulationController();
     ArrayList<String> Teachersize = new ArrayList<>();
     ArrayList<String> Studentsize = new ArrayList<>();
     ArrayList<String> Groupsize = new ArrayList<>();
@@ -324,17 +322,17 @@ public class Gui implements Initializable {
         ObservableList<Teacher> list = observableArrayList(new data.Teacher(teacherNameField.getText(), TeacherGender, TeacherSubject, null));
         data.Teacher TeacherTotal = new data.Teacher(teacherNameField.getText(), TeacherGender, TeacherSubject, null);
         if (teacherNameField.getText().isEmpty()) {
-            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+            showError("Not all attributes are filled. Please make sure all attributes are filled.");
         } else if (Teachersize.size() >= 6) {
-            errorMessage.showError("Sorry to much!");
+            showError("Sorry to much!");
         } else if (Teachersize.contains(teacherNameField.getText())) {
-            errorMessage.showError("This teacher already exist ");
+            showError("This teacher already exist ");
         } else if (teacherNameField.getText().matches(".*[^a-zA-Z].*")) {
-            errorMessage.showError("Teacher name contains non Alphabetic characters: please use only Alphabetic characters ");
+            showError("Teacher name contains non Alphabetic characters: please use only Alphabetic characters ");
         } else if (TeacherGender.isEmpty()) {
-            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+            showError("Not all attributes are filled. Please make sure all attributes are filled.");
         } else if (TeacherSubject.isEmpty()) {
-            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+            showError("Not all attributes are filled. Please make sure all attributes are filled.");
         } else {
             teachersTable.getItems().addAll(list);
             Teachersize.add(teacherNameField.getText());
@@ -400,17 +398,17 @@ public class Gui implements Initializable {
         }
 
         if (studentNameField.getText().matches(".*[^a-zA-Z].*")) {
-            errorMessage.showError("Student name contains non Alphabetic characters: please use only alphabetic characters ");
+            showError("Student name contains non Alphabetic characters: please use only alphabetic characters ");
 //        } else if (Studentsize.size() >= 72) {
-//            errorMessage.showError("Sorry to much students!");
+//            showError("Sorry to much students!");
 //        } else if (A >= 6 || B >= 6 || C >= 6 || D >= 6 || E >= 6 || F >= 6) {
-//            errorMessage.showError("Sorry to much students in the group!");
+//            showError("Sorry to much students in the group!");
         } else if (studentNameField.getText().isEmpty()) {
-            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+            showError("Not all attributes are filled. Please make sure all attributes are filled.");
         } else if (StudentGender.isEmpty()) {
-            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+            showError("Not all attributes are filled. Please make sure all attributes are filled.");
         } else if (StudentGroup == null) {
-            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+            showError("Not all attributes are filled. Please make sure all attributes are filled.");
         } else {
             studentsTable.getItems().addAll(list1);
             Studentsize.add(studentNameField.getText());
@@ -485,17 +483,17 @@ public class Gui implements Initializable {
         ObservableList<Lesson> list = observableArrayList(new data.Lesson(rosterTeacherColumn1, StudentGroups, ClassRoom, BeginTime, EndTime));
         System.out.println(rosterTeacherColumn1 + " " + StudentGroups + " " + ClassRoom + " " + BeginTime + " " + EndTime);
         if (comboEndTime.indexOf(EndTime) < comboBeginTime.indexOf(BeginTime)) {
-            errorMessage.showError("Can't add a new lesson: please select a chronological time order.");
+            showError("Can't add a new lesson: please select a chronological time order.");
         } else if (rosterTeacherColumn1 == null) {
-            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+            showError("Not all attributes are filled. Please make sure all attributes are filled.");
         } else if (StudentGroups == null) {
-            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+            showError("Not all attributes are filled. Please make sure all attributes are filled.");
         } else if (ClassRoom == null) {
-            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+            showError("Not all attributes are filled. Please make sure all attributes are filled.");
         } else if (BeginTime.isEmpty()) {
-            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+            showError("Not all attributes are filled. Please make sure all attributes are filled.");
         } else if (EndTime.isEmpty()) {
-            errorMessage.showError("Not all attributes are filled. Please make sure all attributes are filled.");
+            showError("Not all attributes are filled. Please make sure all attributes are filled.");
         } else {
             rosterTable.getItems().addAll(list);
         }
@@ -647,7 +645,7 @@ public class Gui implements Initializable {
 
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Gui.class.getResource("Application.fxml"));
+        loader.setLocation(GuiController.class.getResource("Application.fxml"));
         stage.initOwner(loader.getController());
         stage.initModality(Modality.APPLICATION_MODAL);
 
@@ -737,11 +735,17 @@ public class Gui implements Initializable {
 
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Gui.class.getResource("Application.fxml"));
+        loader.setLocation(GuiController.class.getResource("Application.fxml"));
         stage.initOwner(loader.getController());
         stage.initModality(Modality.APPLICATION_MODAL);
 
         stage.show();
         stage.setAlwaysOnTop(true);
+    }
+
+    public void showError(String errorMessage) {
+        final JPanel panel = new JPanel();
+        JOptionPane.showMessageDialog(panel, errorMessage, "Error",
+                JOptionPane.WARNING_MESSAGE);
     }
 }
