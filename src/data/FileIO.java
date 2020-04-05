@@ -1,4 +1,4 @@
-package gui;
+package data;
 
 import data.Student;
 import data.Teacher;
