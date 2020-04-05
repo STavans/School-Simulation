@@ -18,6 +18,7 @@ import tileMap.Target;
 import tileMap.TiledMap;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.io.IOException;
@@ -86,7 +87,7 @@ public class SimulationController {
             }
 
             for (Person teacher : teachers){
-                teacher.setSpeed(timeSettingValue );
+                teacher.setSpeed(timeSettingValue);
             }
             label.setText(Double.toString(timeSettingValue));
         });
@@ -227,18 +228,14 @@ public class SimulationController {
             teacher.draw(g);
         }
 
-        String distanceMapString;
-        for (int y = 0; y < 32; y++) {
-            for (int x = 0; x < 60; x++) {
-                if ((int) distanceMap[x][y] > 1000) {
-                    continue;
-                } else {
-                    distanceMapString = String.valueOf((int) distanceMap[x][y]);
-                    g.setColor(Color.yellow);
-                    g.drawString(distanceMapString, x * 32 + 16, y * 32 + 16);
-                }
-            }
-        }
+
+        Font font = new Font("Stencil", Font.BOLD, 30);
+
+        g.setFont(font);
+        g.setColor(Color.BLACK);
+
+        String timeString = hour + ":" + minute;
+        g.drawString(timeString,1800, 50);
     }
 
     public void update(double deltaTime) {
@@ -258,5 +255,9 @@ public class SimulationController {
     public void stopSimulation() {
         timer.cancel();
         animationTimer.stop();
+    }
+
+    private void forward(ActionEvent e){
+
     }
 }
