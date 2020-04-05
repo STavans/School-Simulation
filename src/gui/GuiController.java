@@ -159,7 +159,6 @@ public class GuiController implements Initializable {
         }
         comboStudentGroupRoster.setAll(groupSet);
         studentGroupBoxs.setItems(comboStudentGroupRoster);
-        System.out.println(groupSet);
 
         //PersonManager
         teacherSubjectBox.setItems(comboTeacherSubject);
@@ -175,7 +174,6 @@ public class GuiController implements Initializable {
         classRoomBox.setItems(comboClassroom);
         beginTimeBox.setItems(comboBeginTime);
         endTimeBox.setItems(comboEndTime);
-        System.out.println("Comboboxes Initialised");
 
         //Table view working TB = tableview
         teacherGenderColumn.setCellValueFactory(new PropertyValueFactory<>("genderTB"));
@@ -216,7 +214,6 @@ public class GuiController implements Initializable {
     public void setTeacherSubjectBox() {
         teacherSubjectBox.valueProperty().addListener((observable, oldValue, newValue) -> {
             TeacherSubject = observable.getValue();
-            System.out.println(TeacherSubject);
         });
     }
 
@@ -225,7 +222,6 @@ public class GuiController implements Initializable {
     public void setTeacherGenderBox() {
         teacherGenderBox.valueProperty().addListener((observable, oldValue, newValue) -> {
             TeacherGender = observable.getValue();
-            System.out.println(TeacherGender);
         });
     }
 
@@ -234,7 +230,6 @@ public class GuiController implements Initializable {
     public void setStudentGroupBox() {
         studentGroupBox.valueProperty().addListener((observable, oldValue, newValue) -> {
             StudentGroup = observable.getValue();
-            System.out.println(StudentGroup);
         });
     }
 
@@ -243,7 +238,6 @@ public class GuiController implements Initializable {
     public void setStudentGenderBox() {
         studentGenderBox.valueProperty().addListener((observable, oldValue, newValue) -> {
             StudentGender = observable.getValue();
-            System.out.println(StudentGender);
         });
     }
 
@@ -253,7 +247,6 @@ public class GuiController implements Initializable {
     public void setrosterTeacherColumn1() {
         teacherAllNameBox.valueProperty().addListener((observable, oldValue, newValue) -> {
             rosterTeacherColumn1 = observable.getValue();
-            System.out.println(rosterTeacherColumn1);
         });
     }
 
@@ -262,7 +255,6 @@ public class GuiController implements Initializable {
     public void setStudentGroupBoxs() {
         studentGroupBoxs.valueProperty().addListener((observable, oldValue, newValue) -> {
             StudentGroups = observable.getValue();
-            System.out.println(StudentGroups);
         });
     }
 
@@ -271,7 +263,6 @@ public class GuiController implements Initializable {
     public void setClassRoomBox() {
         classRoomBox.valueProperty().addListener((observable, oldValue, newValue) -> {
             ClassRoom = observable.getValue();
-            System.out.println(ClassRoom);
         });
     }
 
@@ -280,7 +271,6 @@ public class GuiController implements Initializable {
     public void setBeginTimeBox() {
         beginTimeBox.valueProperty().addListener((observable, oldValue, newValue) -> {
             BeginTime = observable.getValue();
-            System.out.println(BeginTime);
         });
     }
 
@@ -290,7 +280,6 @@ public class GuiController implements Initializable {
     public void setSimulationSettingTimeCombo() {
         simulationSettingTimeCombo.valueProperty().addListener((observable, oldValue, newValue) -> {
             TimeSetting = observable.getValue();
-            System.out.println(TimeSetting);
 
             if(TimeSetting.equals("x0.5")){
                 timeSettingValue = 0.5;
@@ -303,7 +292,6 @@ public class GuiController implements Initializable {
             } else {
                 timeSettingValue = 1;
             }
-            System.out.println(timeSettingValue);
         });
     }
     
@@ -312,7 +300,6 @@ public class GuiController implements Initializable {
     public void setEndTimeBox() {
         endTimeBox.valueProperty().addListener((observable, oldValue, newValue) -> {
             EndTime = observable.getValue();
-            System.out.println(EndTime);
         });
     }
 
@@ -481,7 +468,6 @@ public class GuiController implements Initializable {
     @FXML
     void rosterAddButton() {
         ObservableList<Lesson> list = observableArrayList(new data.Lesson(rosterTeacherColumn1, StudentGroups, ClassRoom, BeginTime, EndTime));
-        System.out.println(rosterTeacherColumn1 + " " + StudentGroups + " " + ClassRoom + " " + BeginTime + " " + EndTime);
         if (comboEndTime.indexOf(EndTime) < comboBeginTime.indexOf(BeginTime)) {
             showError("Can't add a new lesson: please select a chronological time order.");
         } else if (rosterTeacherColumn1 == null) {

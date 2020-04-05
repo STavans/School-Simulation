@@ -39,7 +39,6 @@ public class PathfindLogic {
                     tileTargets[x][y] = new Point2D.Double(x * 32 + 16, y * 32 + 16);
                 }
             }
-//            System.out.println(target.getName(location).equals("canteen"));
             if (target.getWidth(location) == 224) {
                 ArrayList<Chair> chairs = new ArrayList<>();
                 for (int y = 0; y < 4; y++) {
@@ -52,7 +51,6 @@ public class PathfindLogic {
                     }
                 }
                 classroomArrayList.get(location).setChairs(chairs);
-                System.out.println(classroomArrayList.get(location) + " Initialized");
             } else if (target.getName(location).equals("Canteen")) {
                 ArrayList<Chair> chairs = new ArrayList<>();
 

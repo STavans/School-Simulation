@@ -73,8 +73,6 @@ public class SimulationController {
         Button sd = new Button("",imageView2);
         TextArea label = new TextArea(Double.toString(timeSettingValue));
 
-        System.out.println(timeSettingValue);
-
         ff.setOnAction(actionEvent -> {
             if (timeSettingValue < 4.0){
                 timeSettingValue *= 2.0;
@@ -122,8 +120,7 @@ public class SimulationController {
                     @Override
                     public void run() {
                         minute++;
-                        System.out.println(hour + ":" + minute);
-                        if (minute >= 20) {
+                        if (minute >= 60) {
                             minute = 0;
                             hour++;
 
@@ -172,7 +169,6 @@ public class SimulationController {
         classroomList = pathfindLogic.getClassroomArrayList();
         for (Classroom cla :
                 pathfindLogic.getClassroomArrayList()) {
-//            System.out.println("Added: " +  cla.getClassNumber() + " Active: " + cla.getChairs());
         }
         try {
             this.students = new ArrayList<>(fileIO.getStudents());
@@ -255,9 +251,5 @@ public class SimulationController {
     public void stopSimulation() {
         timer.cancel();
         animationTimer.stop();
-    }
-
-    private void forward(ActionEvent e){
-
     }
 }
