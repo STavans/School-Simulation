@@ -47,7 +47,6 @@ public class SimulationController {
     private ArrayList<Classroom> classroomList = new ArrayList<>();
     private ArrayList classroomCodesArrayList = new ArrayList();
     private double timeSettingValue;
-    private double speedModifier = 1;
 
     public void start() throws Exception {
         Stage stage = new Stage();
@@ -72,24 +71,62 @@ public class SimulationController {
         imageView3.setFitHeight(40);
         imageView3.setFitWidth(40);
 
+        Image image4 = new Image(getClass().getResourceAsStream("/Resume.png"));
+        ImageView imageView4 = new ImageView(image4);
+        imageView4.setFitHeight(40);
+        imageView4.setFitWidth(40);
+
         HBox hBox = new HBox();
         Button ff = new Button("",imageView1);
         Button sd = new Button("",imageView2);
         Button pause = new Button("", imageView3);
+        Button resume = new Button("", imageView4);
 
         ff.setOnAction(actionEvent -> {
-            speedModifier = 2.0;
+            for (Person student : students) {
+                student.setSpeed(timeSettingValue * 2);
+            }
+
+            for (Person teacher : teachers){
+                teacher.setSpeed(timeSettingValue * 2);
+            }
         });
 
         sd.setOnAction(actionEvent -> {
-            speedModifier = 0.5;
+            for (Person student : students) {
+                student.setSpeed(timeSettingValue * 0.5);
+            }
+
+            for (Person teacher : teachers){
+                teacher.setSpeed(timeSettingValue * 0.5);
+            }
         });
 
         pause.setOnAction(actionEvent -> {
-            speedModifier = 0;
+            animationTimer.stop();
+            timer.cancel();
+
         });
 
-        hBox.getChildren().addAll(sd, pause, ff);
+        resume.setOnAction(actionEvent -> {
+            animationTimer.start();
+            timer.schedule(
+                    new TimerTask() {
+
+                        @Override
+                        public void run() {
+                            minute++;
+                            System.out.println(hour + ":" + minute);
+                            if (minute >= 20) {
+                                minute = 0;
+                                hour++;
+
+                            }
+                        }
+                    }, 0, (int) periodTime);
+        });
+
+        hBox.getChildren().addAll(sd, pause, resume, ff);
 
         mainPane.getChildren().add(hBox);
 
