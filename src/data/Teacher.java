@@ -1,7 +1,7 @@
 package data;
 
 import javafx.beans.property.SimpleStringProperty;
-import tileMap.PathfindLogic;
+import pathFinding.PathfindLogic;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

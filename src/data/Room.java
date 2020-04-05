@@ -1,6 +1,6 @@
 package data;
 
-import tileMap.DistanceMap;
+import pathFinding.DistanceMap;
 
 import java.io.Serializable;
 import java.util.ArrayList;

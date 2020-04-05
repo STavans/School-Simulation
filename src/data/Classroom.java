@@ -1,7 +1,6 @@
 package data;
 
-import tileMap.Chair;
-import tileMap.DistanceMap;
+import pathFinding.Chair;
 
 import java.io.Serializable;
 import java.util.ArrayList;

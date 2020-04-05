@@ -1,6 +1,9 @@
-package tileMap;
+package pathFinding;
 
 import data.Classroom;
+import pathFinding.Chair;
+import pathFinding.DistanceMap;
+import tileMap.Target;
 
 import javax.json.*;
 import java.awt.geom.Point2D;

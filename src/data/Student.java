@@ -4,11 +4,10 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
-import tileMap.Chair;
-import tileMap.PathfindLogic;
+import pathFinding.Chair;
+import pathFinding.PathfindLogic;
 
 import javax.imageio.ImageIO;
-import javax.xml.bind.Marshaller;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;

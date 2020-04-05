@@ -1,6 +1,7 @@
-package tileMap;
+package pathFinding;
 
 import data.Student;
+import pathFinding.DistanceMap;
 
 public class Chair {
     private boolean isTaken;
