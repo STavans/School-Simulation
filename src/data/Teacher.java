@@ -1,6 +1,8 @@
 package data;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import pathFinding.PathfindLogic;
 
 import javax.imageio.ImageIO;
@@ -46,6 +48,8 @@ public class Teacher extends Person implements Serializable {
     private boolean walkingUp = false;
     private boolean walkingDown = true;
     private boolean collision = false;
+    private transient SimpleBooleanProperty nextLessonBegins;
+    private double currentLesson;
 
     public Teacher (String lastName,String gender,String TeacherSubject, Point2D position) {
         super(gender, lastName);
@@ -166,6 +170,15 @@ public class Teacher extends Person implements Serializable {
             right[i - 28] = image.getSubimage(64 * (i % 9), 64 * (i / 9), 64, 64);
         }
         this.lessons = new ArrayList<>();
+
+        this.nextLessonBegins = new SimpleBooleanProperty();
+        currentLesson = 0;
+        nextLessonBegins.addListener( (observable, oldValue, newValue) ->
+                triggerNextLesson(observable, oldValue, newValue));
+    }
+
+    private void triggerNextLesson(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+        currentLesson += 0.5;
     }
 
     public void update(ArrayList<Teacher> teachers, int hour, int minute, PathfindLogic pathfindLogic) {
@@ -218,18 +231,22 @@ public class Teacher extends Person implements Serializable {
             counter = 0;
         }
 
-        for (Lesson lesson : lessons) {
+        if (this.lessons.size() > currentLesson){
+            Lesson lesson = lessons.get((int) currentLesson);
             int[] beginTime = lesson.getBeginLesson();
             int[] endTime = lesson.getEndLesson();
 
             String locationT = lesson.getClassroom().getClassNumber() + "t";
 
             if (hour >= beginTime[0] && minute >= beginTime[1] && hour <= endTime[0] && minute <= endTime[1]) {
+                nextLessonBegins.set(true);
                 this.setTarget(this.pathfindLogic.getPath(this.getPosition(), locationT));
             } else {
+                nextLessonBegins.set(false);
                 this.setTarget(this.pathfindLogic.getPath(this.getPosition(), "teacherroom"));
             }
-        }
+        } else
+            this.setTarget(this.pathfindLogic.getPath(this.getPosition(), "teacherroom"));
     }
 
     @Override
