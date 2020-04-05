@@ -235,7 +235,7 @@ public class Student extends Person implements Serializable {
                 this.setTarget(pathfindLogic.getPath(this.getPosition(), classroomChairsList.get(chairIndex).getDistanceMap()));
 
             } else {
-                if (chairIndex <= 12)
+                if (chairIndex < 12)
                 classroomChairsList.get(chairIndex).setTaken(false, null);
                 searchForChair.set(false);
                 if (this.lessons.size() > currentLesson) {
