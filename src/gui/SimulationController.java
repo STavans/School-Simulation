@@ -4,6 +4,7 @@ import data.*;
 import data.FileIO;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -66,67 +67,48 @@ public class SimulationController {
         imageView2.setFitHeight(40);
         imageView2.setFitWidth(40);
 
-        Image image3 = new Image(getClass().getResourceAsStream("/Pause.png"));
-        ImageView imageView3 = new ImageView(image3);
-        imageView3.setFitHeight(40);
-        imageView3.setFitWidth(40);
-
-        Image image4 = new Image(getClass().getResourceAsStream("/Resume.png"));
-        ImageView imageView4 = new ImageView(image4);
-        imageView4.setFitHeight(40);
-        imageView4.setFitWidth(40);
-
         HBox hBox = new HBox();
         Button ff = new Button("",imageView1);
         Button sd = new Button("",imageView2);
-        Button pause = new Button("", imageView3);
-        Button resume = new Button("", imageView4);
+        TextArea label = new TextArea(Double.toString(timeSettingValue));
+
+        System.out.println(timeSettingValue);
 
         ff.setOnAction(actionEvent -> {
+            if (timeSettingValue < 4.0){
+                timeSettingValue *= 2.0;
+            }else {
+                timeSettingValue *= 1.0;
+            }
+
             for (Person student : students) {
-                student.setSpeed(timeSettingValue * 2);
+                student.setSpeed(timeSettingValue);
             }
 
             for (Person teacher : teachers){
-                teacher.setSpeed(timeSettingValue * 2);
+                teacher.setSpeed(timeSettingValue );
             }
+            label.setText(Double.toString(timeSettingValue));
         });
 
         sd.setOnAction(actionEvent -> {
+            if (timeSettingValue > 0.1) {
+                timeSettingValue *= 0.5;
+            }else{
+                timeSettingValue *= 1.0;
+            }
+
             for (Person student : students) {
-                student.setSpeed(timeSettingValue * 0.5);
+                student.setSpeed(timeSettingValue);
             }
 
             for (Person teacher : teachers){
-                teacher.setSpeed(timeSettingValue * 0.5);
+                teacher.setSpeed(timeSettingValue);
             }
+            label.setText(Double.toString(timeSettingValue));
         });
 
-        pause.setOnAction(actionEvent -> {
-            animationTimer.stop();
-            timer.cancel();
-
-        });
-
-        resume.setOnAction(actionEvent -> {
-            animationTimer.start();
-            timer.schedule(
-                    new TimerTask() {
-
-                        @Override
-                        public void run() {
-                            minute++;
-                            System.out.println(hour + ":" + minute);
-                            if (minute >= 20) {
-                                minute = 0;
-                                hour++;
-
-                            }
-                        }
-                    }, 0, (int) periodTime);
-        });
-
-        hBox.getChildren().addAll(sd, pause, resume, ff);
+        hBox.getChildren().addAll(sd, ff, label);
 
         mainPane.getChildren().add(hBox);
 
@@ -168,6 +150,7 @@ public class SimulationController {
         );
         stage.setScene(new Scene(mainPane));
         stage.setTitle("School Simulation");
+//        stage.setFullScreen(true);
         stage.show();
         canvas.setOnMouseClicked(event ->
                 getMouseLocation());
