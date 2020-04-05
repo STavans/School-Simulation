@@ -1,7 +1,7 @@
 package gui;
 
 import data.*;
-import gui.FileIO;
+import data.FileIO;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
