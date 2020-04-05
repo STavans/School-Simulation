@@ -37,6 +37,7 @@ public class Student extends Person implements Serializable {
     private PathfindLogic pathfindLogic;
     private int chairIndex;
     private transient SimpleBooleanProperty searchForChair;
+    private Classroom lastRoom;
 
     private Point2D position;
     private double angle;
@@ -52,6 +53,7 @@ public class Student extends Person implements Serializable {
     private boolean walkingUp = false;
     private boolean walkingDown = true;
     private boolean collision = false;
+    private double currentLesson;
 
     public Student(String lastName, Group group, String gender, Point2D position) {
         super(gender,lastName);
@@ -158,6 +160,9 @@ public class Student extends Person implements Serializable {
                                     setRandomChairIndex(observable, oldValue, newValue));
         this.lessons = new ArrayList<>();
         this.chairIndex = new Random().nextInt(64);
+
+        currentLesson = 0;
+        lastRoom = null;
     }
 
     public void update(ArrayList<Student> students, ArrayList<Classroom> classroomList, int hour, int minute, PathfindLogic pathfindLogic, ArrayList<String> classroomCodesList) {
@@ -210,14 +215,16 @@ public class Student extends Person implements Serializable {
             counter = 0;
         }
 
-        for (Lesson lesson : lessons) {
-            int beginTime[] = lesson.getBeginLesson();
-            int endTime[] = lesson.getEndLesson();
+        if (this.lessons.size() > currentLesson){
+            Lesson lesson = lessons.get((int) currentLesson);
+            int[] beginTime = lesson.getBeginLesson();
+            int[] endTime = lesson.getEndLesson();
             String locationS = lesson.getClassroom().getClassNumber() + "s";
 
             ArrayList<Chair> classroomChairsList = classroomList.get(classroomCodesList.indexOf(locationS)).getChairs();
             ArrayList<Chair> canteenChairsList = classroomList.get(classroomCodesList.indexOf("canteen")).getChairs();
 
+            lastRoom = classroomList.get(classroomCodesList.indexOf(locationS));
 
             if (hour >= beginTime[0] && minute >= beginTime[1] && hour <= endTime[0] && minute <= endTime[1] && this.group.getCode().equals(lesson.getGroup().getCode())) {
                 canteenChairsList.get(chairIndex).setTaken(false, null);
@@ -231,9 +238,22 @@ public class Student extends Person implements Serializable {
                 if (chairIndex <= 12)
                 classroomChairsList.get(chairIndex).setTaken(false, null);
                 searchForChair.set(false);
-                this.setTarget(pathfindLogic.getPath(this.getPosition(), canteenChairsList.get(chairIndex).getDistanceMap()));
-                canteenChairsList.get(chairIndex).setTaken(true, this);
+                if (this.lessons.size() > currentLesson) {
+                    this.setTarget(pathfindLogic.getPath(this.getPosition(), canteenChairsList.get(chairIndex).getDistanceMap()));
+                    canteenChairsList.get(chairIndex).setTaken(true, this);
+                }
             }
+        } else {
+//            if (lastRoom != null){
+//                lastRoom.getChairs().get(chairIndex).setTaken(false, null);
+//            }
+            ArrayList<Chair> canteenChairsList = classroomList.get(classroomCodesList.indexOf("canteen")).getChairs();
+            if (chairIndex > 12) {
+                searchForChair.set(true);
+                searchForChair.set(false);
+            }
+            this.setTarget(pathfindLogic.getPath(this.getPosition(), canteenChairsList.get(chairIndex).getDistanceMap()));
+            canteenChairsList.get(chairIndex).setTaken(true, this);
         }
     }
 
@@ -303,5 +323,9 @@ public class Student extends Person implements Serializable {
             chairIndex = new Random().nextInt(12);
         else
             chairIndex = new Random().nextInt(64);
+
+        System.out.println("Before: " + (int) currentLesson);
+        currentLesson += 0.5;
+        System.out.println("After: " + (int) currentLesson);
     }
 }
