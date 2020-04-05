@@ -1090,7 +1090,6 @@ Hanford
 Hank
 Hannibal
 Hans
-Hans-Peter
 Hansel
 Hanson
 Harald
@@ -1291,13 +1290,6 @@ Jasper
 Javier
 Jay
 Jean
-Jean-Christophe
-Jean-Francois
-Jean-Lou
-Jean-Luc
-Jean-Marc
-Jean-Paul
-Jean-Pierre
 Jeb
 Jed
 Jedediah
@@ -1364,8 +1356,6 @@ Johan
 Johann
 Johannes
 John
-John-David
-John-Patrick
 Johnathan
 Johnathon
 Johnnie
